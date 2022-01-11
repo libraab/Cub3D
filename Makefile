@@ -69,6 +69,8 @@ $(NAME):	${OBJ}
 			@printf $(magenta)
 			$(MAKE_EXT) ./libft
 			@$(COMPIL)
+			@printf $(cyan)
+			@printf 🎮 YOUR GAME IS READY 🎮\n"
 			@printf $(reset)
 
 all:		${NAME}
