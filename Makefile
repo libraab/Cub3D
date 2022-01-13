@@ -6,11 +6,11 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/13 16:47:58 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/01/13 17:52:30 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				= cub3d
+NAME				= cub3D
 
 # ███████╗    ██╗    ██╗         ███████╗    ███████╗
 # ██╔════╝    ██║    ██║         ██╔════╝    ██╔════╝
@@ -44,7 +44,7 @@ OBJS				= ${SRC:.c=.o}
 #  ╚═════╝     ╚═════╝     ╚═╝     ╚═╝    ╚═╝         ╚═╝    ╚══════╝
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror
+CFLAGS  			= -Wall -Wextra -Werror #-g -fsanitize=address
 RM					= rm -rf
 MAKE_EXT			= @make -s --no-print-directory -C
 

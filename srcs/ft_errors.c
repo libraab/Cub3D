@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:27:51 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 15:37:51 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:50:16 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	ft_error(t_data *cub, int x)
 		write(2, "Error : Hole in the wall\n", 25);
 	//ft_free_double(cub.map);
 	(void) cub;
+	while(1);
 	exit(EXIT_FAILURE);
 }

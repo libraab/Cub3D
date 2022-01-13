@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 17:16:45 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:58:26 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	ft_valid_walls(t_data *cub)
 	}
 }
 
-int	ft_check_error(t_data *cub, char **av)
+void	ft_parse(t_data *cub, char **av)
 {
 	ft_valid_file(cub, av[1]);
 	ft_stock_map(cub, av[1]);
 	ft_valid_chars(cub);
 	ft_valid_walls(cub);
-	return (1);
+	printf("let's parse now\n");
 }

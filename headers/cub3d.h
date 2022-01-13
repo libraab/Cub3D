@@ -51,7 +51,7 @@ void	ft_free_double(char **tab);
 void	ft_valid_file(t_data *cub, char *file);
 void	ft_valid_chars(t_data *cub);
 void	ft_valid_walls(t_data *cub);
-int		ft_check_error(t_data *cub, char **av);
+void	ft_parse(t_data *cub, char **av);
 //======================================================//
 //						* E R R O R S *					//
 //======================================================//

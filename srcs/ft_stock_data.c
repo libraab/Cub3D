@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 14:29:52 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:05:12 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	ft_stock_map(t_data *cub, char *file)
 			|| line[0] == 'E' || line[0] == 'W'
 			|| line[0] == 'F' || line[0] == 'C'
 			|| line[0] == '\n' || line[0] == '\0')
+		{
+			free (line);
 			continue ;
-		cub->map[i] = ft_calloc(sizeof(char), ft_strlen(line));
+		}
 		cub->map[i++] = ft_strdup(line);
 		free (line);
 	}

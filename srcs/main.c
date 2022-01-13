@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 14:46:44 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:00:54 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac > 2)
 		ft_error(&cub, 0);
 	cub.map = ft_calloc(sizeof(char *), ft_get_height(av[1]) + 1);
-	ft_check_error(&cub, av);
-	//if (ft_check_error(cub, av))
-		//ft_parse(cub);
+	ft_parse(&cub, av);
+	while (1);
 	return (0);
 }
