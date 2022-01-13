@@ -6,13 +6,13 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:27:51 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 17:50:16 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:14:15 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void	ft_error(t_data *cub, int x)
+void	ft_error(int x)
 {
 	if (x == 0)
 		write(2, "Error : Wrong argument number\n", 30);
@@ -28,8 +28,7 @@ void	ft_error(t_data *cub, int x)
 		write(2, "Error : Only one direction\n", 27);
 	if (x == 6)
 		write(2, "Error : Hole in the wall\n", 25);
-	//ft_free_double(cub.map);
-	(void) cub;
-	while(1);
+	if (x == 7)
+		write(2, "Error : File not properly read\n", 32);
 	exit(EXIT_FAILURE);
 }

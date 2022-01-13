@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 18:00:54 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:18:24 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,18 @@ int	ft_get_height(char *file)
 	int		i;
 	char	*line;
 
-	i = 0;
+	i = ft_strlen(file) - 1;
+	if (file[i] != 'b' && file[i - 1] != 'u'
+		&& file[i - 2] != 'c'
+		&& file[i - 3] != '.')
+		ft_error(1);
+	fd = open(file, O_DIRECTORY);
+	if (fd != -1)
+		ft_error(2);
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		ft_error(7);
+	i = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		i++;
@@ -37,9 +47,8 @@ int	main(int ac, char **av)
 
 	ft_init_data(&cub);
 	if (ac < 2 || ac > 2)
-		ft_error(&cub, 0);
+		ft_error(0);
 	cub.map = ft_calloc(sizeof(char *), ft_get_height(av[1]) + 1);
 	ft_parse(&cub, av);
-	while (1);
 	return (0);
 }
