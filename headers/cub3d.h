@@ -14,61 +14,51 @@
 
 # define CUB3D_H
 
-# include "mlx.h"
+# include "../headers/mlx_keycode.h"
 # include "../libft/libft.h"
-# include "../header/mlx_keycode.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+# include "mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_data
 {
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
-typedef struct s_sprite
-{
-	void	*img;
-	int		wi;
-	int		he;
-}	t_sprite;
-
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}	t_pos;
-
-typedef struct s_main
-{
 	void		*mlx_ptr;
 	void		*win_ptr;
-	int			step;
-	t_pos		p_pos;
-	t_sprite	ground;
-	t_sprite	wall;
-	t_sprite	exit;
-	t_sprite	exit2;
-	t_sprite	p_up;
-	t_sprite	p_down;
-	t_sprite	p_l;
-	t_sprite	p_l2;
-	t_sprite	p_r;
-	t_sprite	p_r2;
-	t_sprite	map_img;
-	int			linelen;
-	int			one_p;
-	int			all_step;
 	char		**map;
-	int			victory;
-	int			state_pose;
-}				t_main;
+	int			map_height;
+	int			map_lengh;
+}				t_data;
 
+//======================================================//
+//						* M A I N *						//
+//======================================================//
+int		ft_get_height(char *file);
+//======================================================//
+//						* M E M O R Y *					//
+//======================================================//
+void	ft_free(char *str);
+void	ft_free_double(char **tab);
+//======================================================//
+//						* P A R S I N G *				//
+//======================================================//
+int		ft_check_error(t_data *cub, char **av);
+void	ft_valid_chars(t_data *cub);
+void	ft_valid_file(t_data *cub, char *file);
+//======================================================//
+//						* E R R O R S *					//
+//======================================================//
+void	ft_error(t_data *cub, int x);
+//======================================================//
+//				* S T O C K * D A T A *					//
+//======================================================//
+void	ft_stock_map(t_data *cub, char *file);
+void	ft_init_data(t_data *cub);
 
 #endif
