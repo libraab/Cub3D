@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:01:52 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 13:04:54 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 15:44:21 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_free_double(char **tab)
 	int	i;
 
 	i = 0;
-	
 	while (tab[i])
 	{
 		if (tab[i] != NULL)

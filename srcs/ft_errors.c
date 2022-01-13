@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:27:51 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 14:50:20 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/13 15:37:51 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_error(t_data *cub, int x)
 		write(2, "Error : No direction\n", 21);
 	if (x == 5)
 		write(2, "Error : Only one direction\n", 27);
+	if (x == 6)
+		write(2, "Error : Hole in the wall\n", 25);
 	//ft_free_double(cub.map);
 	(void) cub;
 	exit(EXIT_FAILURE);

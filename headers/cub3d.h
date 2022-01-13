@@ -48,9 +48,10 @@ void	ft_free_double(char **tab);
 //======================================================//
 //						* P A R S I N G *				//
 //======================================================//
-int		ft_check_error(t_data *cub, char **av);
-void	ft_valid_chars(t_data *cub);
 void	ft_valid_file(t_data *cub, char *file);
+void	ft_valid_chars(t_data *cub);
+void	ft_valid_walls(t_data *cub);
+int		ft_check_error(t_data *cub, char **av);
 //======================================================//
 //						* E R R O R S *					//
 //======================================================//
@@ -60,5 +61,12 @@ void	ft_error(t_data *cub, int x);
 //======================================================//
 void	ft_stock_map(t_data *cub, char *file);
 void	ft_init_data(t_data *cub);
+//======================================================//
+//				* W A L L S *							//
+//======================================================//
+int		ft_north_wall(char **map, int i, int j);
+int		ft_south_wall(char **map, int i, int j);
+int		ft_east_wall(char **map, int i, int j);
+int		ft_west_wall(char **map, int i, int j);
 
 #endif
