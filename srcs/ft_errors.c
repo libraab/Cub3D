@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:27:51 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 18:14:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/17 11:11:22 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	ft_error(int x)
 		write(2, "Error : Hole in the wall\n", 25);
 	if (x == 7)
 		write(2, "Error : File not properly read\n", 32);
+	if (x == 8)
+		write(2, "Error : Wrong parameter\n", 24);
 	exit(EXIT_FAILURE);
 }

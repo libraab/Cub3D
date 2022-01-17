@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/13 17:52:30 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/01/17 13:45:11 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,12 @@ FOLDER				= srcs/
 HEADER_FILE 		= cub3d.h
 
 SRCS				= 	main.c \
-						ft_parsing.c \
-						ft_memory.c \
 						ft_errors.c \
+						ft_memory.c \
+						ft_parsing.c \
+						ft_print.c \
 						ft_stock_data.c \
+						ft_textures.c \
 						ft_walls.c \
 
 SRC					= $(addprefix ${FOLDER},${SRCS})

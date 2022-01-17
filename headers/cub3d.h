@@ -34,6 +34,7 @@ typedef struct s_data
 	char		**map;
 	int			map_height;
 	int			map_lengh;
+	char		**tex;
 }				t_data;
 
 //======================================================//
@@ -50,7 +51,17 @@ void	ft_free_double(char **tab);
 //======================================================//
 void	ft_valid_chars(t_data *cub);
 void	ft_valid_walls(t_data *cub);
+void	ft_valid_texture(t_data *cub);
+void	ft_check_digits(char *str, int j);
 void	ft_parse(t_data *cub, char **av);
+//======================================================//
+//					* T E X T U R E S *					//
+//======================================================//
+int		ft_skip_spaces(char *str, int i, int reverse);
+int		ft_end_of_texture(char *line);
+void	ft_check_file(char *str, int j);
+void	ft_check_fc(char **tb);
+void	ft_valid_texture_file(t_data *cub, int i, int j);
 //======================================================//
 //						* E R R O R S *					//
 //======================================================//
@@ -58,8 +69,9 @@ void	ft_error(int x);
 //======================================================//
 //				* S T O C K * D A T A *					//
 //======================================================//
-void	ft_stock_map(t_data *cub, char *file);
 void	ft_init_data(t_data *cub);
+void	ft_stock_map(t_data *cub, char *file);
+void	ft_stock_texture(t_data *cub, char *file);
 //======================================================//
 //				* W A L L S *							//
 //======================================================//
@@ -67,5 +79,10 @@ int		ft_north_wall(char **map, int i, int j);
 int		ft_south_wall(char **map, int i, int j);
 int		ft_east_wall(char **map, int i, int j);
 int		ft_west_wall(char **map, int i, int j);
+//======================================================//
+//					* P R I N T *						//
+//======================================================//
+void	ft_print_map(t_data *cub);
+void	ft_print_texture(t_data *cub);
 
 #endif

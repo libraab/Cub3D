@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 18:18:24 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:11:37 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	main(int ac, char **av)
 		ft_error(0);
 	cub.map = ft_calloc(sizeof(char *), ft_get_height(av[1]) + 1);
 	ft_parse(&cub, av);
+	ft_free_double(cub.tex);
+	ft_free_double(cub.map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/13 18:05:12 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:11:22 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,34 @@ void	ft_stock_map(t_data *cub, char *file)
 		free (line);
 	}
 	close (fd);
-	//******************************************************
-	printf("* * * M A P * * * \n");
-	printf("------------------\n\n");
-	for (int i = 0; cub->map[i]; i++)
-		printf("[%s]\n", cub->map[i]);
-	printf("\n------------------\n");
-	//******************************************************
+	ft_print_map(cub);
+}
+
+void	ft_stock_texture(t_data *cub, char *file)
+{
+	int		i;
+	int		fd;
+	int		ret;
+	char	*line;
+
+	i = 0;
+	ret = 1;
+	fd = open(file, O_RDONLY);
+	cub->tex = ft_calloc(sizeof(char *), 7);
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &line);
+		if (ft_end_of_texture(line))
+		{
+			free (line);
+			break ;
+		}
+		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E'
+			|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
+			cub->tex[i++] = ft_strdup(line);
+		free (line);
+	}
+	close (fd);
+	ft_valid_texture(cub);
+	ft_print_texture(cub);
 }
