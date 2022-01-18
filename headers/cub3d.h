@@ -63,10 +63,6 @@ void	ft_valid_texture_file(char *str, int j);
 void	ft_check_fc(char **tb, int f, int c);
 void	ft_valid_texture(t_data *cub, int i, int j);
 //======================================================//
-//						* E R R O R S *					//
-//======================================================//
-void	ft_error(int x);
-//======================================================//
 //				* S T O C K * D A T A *					//
 //======================================================//
 void	ft_init_data(t_data *cub);
@@ -75,6 +71,7 @@ void	ft_stock_texture(t_data *cub, char *file);
 //======================================================//
 //				* W A L L S *							//
 //======================================================//
+void	ft_error(int x);
 int		ft_north_wall(char **map, int i, int j);
 int		ft_south_wall(char **map, int i, int j);
 int		ft_east_wall(char **map, int i, int j);
