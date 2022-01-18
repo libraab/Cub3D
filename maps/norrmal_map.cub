@@ -1,7 +1,7 @@
-NO ./texture/abc.xpm
-SO ./texture/def.xpm
-WE ./texture/ghi.xpm                                  
-EA ./texture/mnb.xpm
+NO ./texture/mur1.xpm
+SO ./texture/mur2.xpm
+WE ./texture/pillar1.xpm                                  
+EA ./texture/pillar2.xpm
 
 F 255, 100, 0
 C 225, 255, 255

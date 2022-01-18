@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/17 14:11:22 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:15:27 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void	ft_stock_texture(t_data *cub, char *file)
 		}
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E'
 			|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
-			cub->tex[i++] = ft_strdup(line);
+			cub->tex[i++] = ft_strtrim(ft_strdup(line), " ");
 		free (line);
 	}
 	close (fd);
-	ft_valid_texture(cub);
+	ft_check_double_texture(cub, -1, -1, 0);
 	ft_print_texture(cub);
 }

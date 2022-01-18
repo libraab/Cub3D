@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/17 16:16:43 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:18:52 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,33 @@ void	ft_valid_walls(t_data *cub)
 	}
 }
 
-void	ft_valid_texture(t_data *cub)
+void	ft_check_double_texture(t_data *cub, int i, int j, int e)
 {
-	int		i;
-	int		j;
-	char	c;
+	int	n;
+	int	s;
+	int	w;
 
-	i = 0;
-	while (cub->tex[i])
+	n = 0;
+	s = 0;
+	w = 0;
+	while (cub->tex[++i])
 	{
-		j = 1;
-		c = cub->tex[i][0];
-		while (cub->tex[i + j])
+		j = -1;
+		while (cub->tex[i][++j])
 		{
-			if (cub->tex[i + j][0] == c)
-				ft_error(8);
-			j++;
+			if (cub->tex[i][j] == 'N' && cub->tex[i][j + 1] == 'O')
+				n++;
+			else if (cub->tex[i][j] == 'S' && cub->tex[i][j + 1] == 'O')
+				s++;
+			else if (cub->tex[i][j] == 'E' && cub->tex[i][j + 1] == 'A')
+				e++;
+			else if (cub->tex[i][j] == 'W' && cub->tex[i][j + 1] == 'E')
+				w++;
 		}
-		i++;
 	}
-	i = 0;
-	while (cub->tex[i])
-		i++;
-	if (i != 6)
+	if (i != 6 || n != 1 || s != 1 || w != 1 || e != 1)
 		ft_error(8);
-	ft_valid_texture_file(cub, -1, -1);
+	ft_valid_texture(cub, -1, -1);
 }
 
 void	ft_check_digits(char *str, int j)

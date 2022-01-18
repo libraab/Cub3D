@@ -51,7 +51,7 @@ void	ft_free_double(char **tab);
 //======================================================//
 void	ft_valid_chars(t_data *cub);
 void	ft_valid_walls(t_data *cub);
-void	ft_valid_texture(t_data *cub);
+void	ft_check_double_texture(t_data *cub, int i, int j, int e);
 void	ft_check_digits(char *str, int j);
 void	ft_parse(t_data *cub, char **av);
 //======================================================//
@@ -59,9 +59,9 @@ void	ft_parse(t_data *cub, char **av);
 //======================================================//
 int		ft_skip_spaces(char *str, int i, int reverse);
 int		ft_end_of_texture(char *line);
-void	ft_check_file(char *str, int j);
-void	ft_check_fc(char **tb);
-void	ft_valid_texture_file(t_data *cub, int i, int j);
+void	ft_valid_texture_file(char *str, int j);
+void	ft_check_fc(char **tb, int f, int c);
+void	ft_valid_texture(t_data *cub, int i, int j);
 //======================================================//
 //						* E R R O R S *					//
 //======================================================//

@@ -1,7 +1,7 @@
-NO ./texture
-SO ./texture
-WE ./texture
-EA ./texture
+NO ./textures/mur1.xpm
+SO                                     ./textures/mur2.xpm
+WE ./textures/pillar1.xpm                                  
+EA ./textures/pillar2.xpm
 F 255 , 100 , 0
 C 225 , 255, 255
 111
