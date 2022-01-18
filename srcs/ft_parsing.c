@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/18 17:18:52 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:47:06 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,14 @@ void	ft_parse(t_data *cub, char **av)
 	ft_stock_texture(cub, av[1]);
 	ft_valid_chars(cub);
 	ft_valid_walls(cub);
-	printf("let's parse now\n");
+	printf("parsing done\n");
+	//ft_define_img(cub);
+	cub->mlx_ptr = mlx_init();
+	cub->win_ptr = mlx_new_window(cub->mlx_ptr, 1000, 1000, "cub3D");
+	//ft_print_map(win);
+	// mlx_hook(cub->win_ptr, 17, 0, ft_exit, cub);
+	// mlx_hook(cub->win_ptr, 2, 1L << 0, ft_deal_key, cub);
+	// mlx_hook(cub->win_ptr, 3, 1L << 1, ft_release_key, cub);
+	//ft_camera(cub);
+	mlx_loop(cub->mlx_ptr);
 }
