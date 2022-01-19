@@ -27,20 +27,37 @@
 # include <fcntl.h>
 # include <math.h>
 
+typedef struct s_info
+{
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_len;
+	int		endian;
+}				t_info;
+
+typedef struct s_img
+{
+	void		*img;
+	int			width;
+	int			height;
+	t_info		info;
+}				t_img;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	char		**map;
-	int			map_height;
-	int			map_lengh;
 	char		**tex;
+	int			player_x;
+	int			player_y;
 }				t_data;
 
 //======================================================//
 //						* M A I N *						//
 //======================================================//
 int		ft_get_height(char *file);
+int		ft_exit(int keycode, t_data *win);
 //======================================================//
 //						* M E M O R Y *					//
 //======================================================//
@@ -81,5 +98,9 @@ int		ft_west_wall(char **map, int i, int j);
 //======================================================//
 void	ft_print_map(t_data *cub);
 void	ft_print_texture(t_data *cub);
+//======================================================//
+//					* P R I N T *						//
+//======================================================//
+void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
 #endif
