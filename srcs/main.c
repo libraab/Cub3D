@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/20 13:15:41 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/20 13:18:14 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,10 @@ int	main(int ac, char **av)
 	cub.mlx_ptr = mlx_init();
 	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "cub3D");
 	ft_draw_frame(&cub);
+	ft_draw_minimap(&cub);
 	mlx_hook(cub.win_ptr, 17, 0, ft_exit, &cub);
-	/*
-	mlx_hook(win->win_ptr, 2, 1L << 0, ft_deal_key, win);
-	mlx_hook(win->win_ptr, 3, 1L << 1, ft_release_key, win);
-	*/
+	//mlx_hook(cub.win_ptr, 2, 1L << 0, ft_deal_key, cub);
+	//mlx_hook(cub.win_ptr, 3, 1L << 1, ft_release_key, cub);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
