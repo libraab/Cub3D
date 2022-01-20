@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/18 18:36:14 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:36:06 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,4 @@ void	ft_stock_texture(t_data *cub, char *file)
 	}
 	close (fd);
 	ft_check_double_texture(cub, -1, -1, 0);
-	//ft_print_texture(cub);
 }

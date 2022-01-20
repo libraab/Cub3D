@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/19 14:55:04 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:35:06 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	main(int ac, char **av)
 	ft_parse(&cub, av);
 	mlx_hook(cub.win_ptr, 17, 0, ft_exit, &cub);
 	mini.info.addr = mlx_get_data_addr(mini.img, &mini.info.bits_per_pixel, &mini.info.line_len, &mini.info.endian);
-	ft_draw_pixel(cub.mlx_ptr, cub.win_ptr, 100, 1000, 0x00FF0000);
-	mlx_put_image_to_window(cub.mlx_ptr, cub.win_ptr, cub.mini.img, 0, 0);
+	//ft_draw_pixel(cub.mlx_ptr, cub.win_ptr, 100, 1000, 0x00FF0000);
+	mlx_put_image_to_window(cub.mlx_ptr, cub.win_ptr, mini.img, 0, 0);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
