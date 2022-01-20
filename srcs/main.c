@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/20 10:35:06 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:24:52 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,30 @@ int	ft_exit(int keycode, t_data *win)
 	return (0);
 }
 
+void draw_line(t_data *cub, int x, int y, int z, int color)
+{
+	int i = -1;
+	while (++i < z)
+	{
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, x + i, y, color);
+	}
+}
+void ft_draw_minimap(t_data *cub)
+{
+	int	i;
+
+	i = 0;
+	while(i < 100)
+	{
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 100 + i, 100, 0xFFFFFF);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 100, 100 + i, 0xFFFFFF);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	cub;
-	t_img	mini;
+	//t_img	mini;
 
 	ft_init_data(&cub);
 	if (ac < 2 || ac > 2)
@@ -61,12 +81,18 @@ int	main(int ac, char **av)
 	cub.map = ft_calloc(sizeof(char *), ft_get_height(av[1]) + 1);
 	cub.mlx_ptr = mlx_init();
 	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1000, 1000, "cub3D");
-	mini.img = mlx_new_image(cub.mlx_ptr, 100, 100);
-	ft_parse(&cub, av);
+	ft_draw_minimap(&cub);
+		
 	mlx_hook(cub.win_ptr, 17, 0, ft_exit, &cub);
-	mini.info.addr = mlx_get_data_addr(mini.img, &mini.info.bits_per_pixel, &mini.info.line_len, &mini.info.endian);
-	//ft_draw_pixel(cub.mlx_ptr, cub.win_ptr, 100, 1000, 0x00FF0000);
-	mlx_put_image_to_window(cub.mlx_ptr, cub.win_ptr, mini.img, 0, 0);
+	
+    //draw_line(cub.mlx_ptr, cub.win_ptr, 640, 360, 0, 0, 0xFFFFFF);
+	
+	/*
+	win->map_img.img = mlx_new_image(win->mlx_ptr, win->map_img.wi + 50, win->map_img.he + 50);
+	ft_print_map(win);
+	mlx_hook(win->win_ptr, 2, 1L << 0, ft_deal_key, win);
+	mlx_hook(win->win_ptr, 3, 1L << 1, ft_release_key, win);
+	*/
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
