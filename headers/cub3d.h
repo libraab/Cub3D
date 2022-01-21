@@ -40,7 +40,6 @@ typedef struct s_img
 	void		*img;
 	int			width;
 	int			height;
-	t_info		info;
 }				t_img;
 
 typedef struct s_data
@@ -49,8 +48,14 @@ typedef struct s_data
 	void		*win_ptr;
 	char		**map;
 	char		**tex;
-	int			player_x;
-	int			player_y;
+	t_img		wall_north;
+	t_img		wall_south;
+	t_img		wall_east;
+	t_img		wall_west;
+	t_img		mini;
+	t_img		player;
+	int			pos_x;
+	int			pos_y;
 }				t_data;
 
 //======================================================//
