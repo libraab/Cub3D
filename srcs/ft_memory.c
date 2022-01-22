@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:01:52 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/22 16:29:52 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/22 17:04:38 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(char **str)
 {
-	free(str);
+	free(*str);
 	*str = NULL;
 }
 
@@ -25,7 +25,7 @@ void	ft_free_double(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_free(tab[i]);
+		ft_free(&tab[i]);
 		i++;
 	}
 	free (tab);
