@@ -6,15 +6,33 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/21 16:10:54 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/22 17:18:24 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
+void	ft_init_img(t_img *img)
+{
+	img->img = NULL;
+	img->width = 0;
+	img->height = 0;
+}
+
 void	ft_init_data(t_data *cub)
 {
+	cub->mlx_ptr = NULL;
+	cub->win_ptr = NULL;
 	cub->map = NULL;
+	cub->tex = NULL;
+	ft_init_img(&cub->wall_north);
+	ft_init_img(&cub->wall_south);
+	ft_init_img(&cub->wall_east);
+	ft_init_img(&cub->wall_west);
+	ft_init_img(&cub->mini);
+	ft_init_img(&cub->player);
+	cub->pos_x = 0;
+	cub->pos_y = 0;
 }
 
 void	ft_stock_map(t_data *cub, char *file)
