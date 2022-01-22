@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 16:47:15 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/18 18:26:35 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/22 16:03:51 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_error(int x)
 {
+	
 	if (x == 0)
 		write(2, "Error : Wrong argument number\n", 30);
 	if (x == 1)
