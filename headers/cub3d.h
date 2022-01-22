@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/22 17:04:14 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/22 18:42:37 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+
+typedef struct s_camera
+{
+	int	fov;
+	int	dist_to_plane;
+
+}				t_camera;
 
 typedef struct s_info
 {
