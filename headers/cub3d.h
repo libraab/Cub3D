@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/22 18:42:37 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/24 03:27:33 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,26 @@
 # include <fcntl.h>
 # include <math.h>
 
-typedef struct s_camera
-{
-	int	fov;
-	int	dist_to_plane;
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
+# define FOV (4 * M_PI) / 9
+# define ANGLE_PER_PIXEL FOV / 1600
 
-}				t_camera;
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define GOLD 0xFFD700
+
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
 
 typedef struct s_info
 {
@@ -69,7 +83,7 @@ typedef struct s_data
 //						* M A I N *						//
 //======================================================//
 int		ft_get_height(char *file);
-int		ft_exit(int keycode, t_data *win);
+int		ft_exit(void);
 //======================================================//
 //						* M E M O R Y *					//
 //======================================================//

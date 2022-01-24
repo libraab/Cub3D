@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/21 16:02:18 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/24 03:25:52 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,16 @@ int	ft_get_height(char *file)
 	return (i);
 }
 
-int	ft_exit(int keycode, t_data *win)
+int	ft_exit(void)
 {
-	(void)keycode;
-	(void)win;
 	write(1, "Bye Bye!\n", 9);
 	exit(0);
+}
+
+int	key_release(int keycode)
+{
+	if (keycode == KEY_ECHAP)
+		ft_exit();
 	return (0);
 }
 
@@ -55,24 +59,23 @@ void ft_draw_frame(t_data *cub)
 	int	i;
 	int	j;
 
-	i = -1;
-	while(++i < 200)
+	i = 49;
+	while(++i < 250)
 	{
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50 + i, 50, 0xff0000);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50 + i, 51, 0xff0000);
-		j = -1;
-		while(++j < 150)
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 52 + i, 50 + j, 0xffd700);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50 + i, 200, 0xff0000);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50 + i, 199, 0xff0000);
-	}
-	i = -1;
-	while(++i < 150)
-	{
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50, 50 + i, 0xff0000);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 51, 50 + i, 0xff0000);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 250, 50 + i, 0xff0000);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 251, 50 + i, 0xff0000);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 50, RED);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 51, RED);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 199, RED);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 200, RED);
+		if (i < 201)
+		{
+			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50, i, RED);
+			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 51, i, RED);
+			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 250, i, RED);
+			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 251, i, RED);
+		}
+		j = 51;
+		while(++j < 199)
+			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, j, GOLD);
 	}
 }
 
@@ -86,13 +89,12 @@ int	main(int ac, char **av)
 		ft_error(0);
 	cub.map = ft_calloc(sizeof(char *), ft_get_height(av[1]) + 1);
 	cub.mlx_ptr = mlx_init();
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr, 1500, 1000, "cub3D");
-	cub.mini.img = mlx_new_image(cub.mlx_ptr, 1500, 1000);
+	cub.win_ptr = mlx_new_window(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	cub.mini.img = mlx_new_image(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	ft_draw_frame(&cub);
 	//ft_draw_minimap(&cub);
-	mlx_hook(cub.win_ptr, 17, 0, ft_exit, &cub);
-	//mlx_hook(cub.win_ptr, 2, 1L << 0, ft_deal_key, cub);
-	//mlx_hook(cub.win_ptr, 3, 1L << 1, ft_release_key, cub);
+	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
+	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
