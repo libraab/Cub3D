@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/21 16:10:08 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/01/24 04:23:07 by bleotard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FOLDER				= srcs/
 HEADER_FILE 		= cub3d.h
 
 SRCS				= 	main.c \
+						math.c \
 						ft_define_img.c \
 						ft_memory.c \
 						ft_mini_map.c \

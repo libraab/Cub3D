@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/24 03:27:33 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/24 06:16:42 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define FOV (4 * M_PI) / 9
-# define ANGLE_PER_PIXEL FOV / 1600
+# define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -48,20 +48,26 @@ enum
 	ON_DESTROY = 17
 };
 
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}			t_vector;
+
 typedef struct s_info
 {
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-}				t_info;
+}			t_info;
 
 typedef struct s_img
 {
-	void		*img;
-	int			width;
-	int			height;
-}				t_img;
+	void	*img;
+	int		width;
+	int		height;
+}			t_img;
 
 typedef struct s_data
 {
@@ -128,5 +134,7 @@ void	ft_print_texture(t_data *cub);
 //					* P R I N T *						//
 //======================================================//
 void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+
+t_vector	*cast_rays(t_vector direction);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/24 03:25:52 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/24 06:16:24 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,27 @@ void ft_draw_frame(t_data *cub)
 	}
 }
 
+void	draw_fov(t_vector *rays, t_data *cub)
+{
+	t_vector	center;
+	int			i;
+
+	center.x = 800;
+	center.y = 450;
+	i = 0;
+	while (i < WIN_WIDTH)
+	{
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, center.x + rays[i].x * 200, center.y + rays[i].y * 200, GREEN);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	cub;
 	//t_img	mini;
+	t_vector	direction;
+	t_vector	*rays;
 
 	ft_init_data(&cub);
 	if (ac < 2 || ac > 2)
@@ -92,10 +109,15 @@ int	main(int ac, char **av)
 	cub.win_ptr = mlx_new_window(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	cub.mini.img = mlx_new_image(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	ft_draw_frame(&cub);
+	direction.x = 0;
+	direction.y = -1;
+	rays = cast_rays(direction);
+	draw_fov(rays, &cub);
 	//ft_draw_minimap(&cub);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_loop(cub.mlx_ptr);
+	free(rays);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
 	return (0);
