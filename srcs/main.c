@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/24 06:16:24 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/25 04:38:55 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main(int ac, char **av)
 {
 	t_data	cub;
 	//t_img	mini;
-	t_vector	direction;
 	t_vector	*rays;
 
 	ft_init_data(&cub);
@@ -108,11 +107,11 @@ int	main(int ac, char **av)
 	cub.mlx_ptr = mlx_init();
 	cub.win_ptr = mlx_new_window(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	cub.mini.img = mlx_new_image(cub.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	ft_draw_frame(&cub);
-	direction.x = 0;
-	direction.y = -1;
-	rays = cast_rays(direction);
+	cub.player = init_player(cub.map);
+	printf("start x: %f, start y: %f, dir x: %f, dir y: %f\n", cub.player.position.x, cub.player.position.y, cub.player.direction.x, cub.player.direction.y);
+	rays = cast_rays(cub.player.direction);
 	draw_fov(rays, &cub);
+	ft_draw_frame(&cub);
 	//ft_draw_minimap(&cub);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);

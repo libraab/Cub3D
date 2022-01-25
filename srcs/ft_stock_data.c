@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/24 06:17:39 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/25 04:20:11 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,33 @@ void	ft_init_img(t_img *img)
 	img->img = NULL;
 	img->width = 0;
 	img->height = 0;
+}
+
+t_player	init_player(char **map)
+{
+	int			i;
+	int			j;
+	t_player	newborn;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S' \
+					|| map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				newborn.position.y = i;
+				newborn.position.x = j;
+				newborn.direction = starting_direction(map[i][j]);
+			}
+			j++;
+		}
+		i++;
+	}
+	ft_init_img(&newborn.img);
+	return (newborn);
 }
 
 void	ft_init_data(t_data *cub)
@@ -30,9 +57,7 @@ void	ft_init_data(t_data *cub)
 	ft_init_img(&cub->wall_east);
 	ft_init_img(&cub->wall_west);
 	ft_init_img(&cub->mini);
-	ft_init_img(&cub->player);
-	cub->pos_x = 0;
-	cub->pos_y = 0;
+	ft_init_img(&cub->player.img);
 }
 
 void	ft_stock_map(t_data *cub, char *file)

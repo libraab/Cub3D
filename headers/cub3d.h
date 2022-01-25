@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/24 06:16:42 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/25 04:21:45 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ typedef struct s_img
 	int		height;
 }			t_img;
 
+typedef	struct s_player
+{
+	t_vector	position;
+	t_vector	direction;
+	t_img		img;
+}				t_player;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -80,9 +87,7 @@ typedef struct s_data
 	t_img		wall_east;
 	t_img		wall_west;
 	t_img		mini;
-	t_img		player;
-	int			pos_x;
-	int			pos_y;
+	t_player	player;
 }				t_data;
 
 //======================================================//
@@ -136,5 +141,7 @@ void	ft_print_texture(t_data *cub);
 void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
 t_vector	*cast_rays(t_vector direction);
+t_vector	starting_direction(char player_character);
+t_player	init_player(char **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:24:24 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/22 21:45:44 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/25 04:01:13 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_define_img(t_data *cub)
 	cub->wall_south.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_south.xpm", &cub->wall_south.width, &cub->wall_south.height);
 	cub->wall_east.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_east.xpm", &cub->wall_east.width, &cub->wall_east.height);
 	cub->wall_west.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_west.xpm", &cub->wall_west.width, &cub->wall_west.height);
-	cub->player.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/player.xpm", &cub->player.width, &cub->player.height);
+	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/player.xpm", &cub->player.img.width, &cub->player.img.height);
 }
 
 static void	ft_pixel_put(t_info *data, int x, int y, int color)
