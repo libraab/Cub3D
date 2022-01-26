@@ -1,18 +1,24 @@
 #include "../headers/cub3d.h"
 
-float	calc_step_x(t_vector ray_direction)
+float	calc_step_x(t_vector ray_direction, float x_component)
 {
 	float	step;
 
-	step = sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
+	if (ray_direction.x != 0)
+		step = x_component * sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
+	else
+		step = FLT_MAX;
 	return (step);
 }
 
-float	calc_step_y(t_vector ray_direction)
+float	calc_step_y(t_vector ray_direction, float y_component)
 {
 	float	step;
 
-	step = sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
+	if (ray_direction.y != 0)
+		step = y_component * sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
+	else
+		step = FLT_MAX;
 	return (step);
 }
 
@@ -67,4 +73,34 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction)
 		rays[i].step_y = calc_step_y(rays[i].direction);
 		i++;
 	}
+}
+
+float	first_step_to_x_axis(t_player player, t_vector ray_direction)
+{
+	float	offset;
+	float	first_step;
+
+	if (ray_direction.y == 0)
+		return (FLT_MAX);
+	else if (ray_direction.y > 0)
+		offset = ceil(player.position.y) - player.position.y;
+	else
+		offset = player.position.y - floor(player.position.y);
+	first_step = calc_step_y(ray_direction, offset);
+	return (first_step);
+}
+
+float	first_step_to_y_axis(t_player player, t_vector ray_direction)
+{
+	float	offset;
+	float	first_step;
+
+	if (ray_direction.x == 0)
+		return (FLT_MAX);
+	else if (ray_direction.x > 0)
+		offset = ceil(player.position.x) - player.position.x;
+	else
+		offset = player.position.x - floor(player.position.x);
+	first_step = calc_step_x(ray_direction, offset);
+	return (first_step);
 }
