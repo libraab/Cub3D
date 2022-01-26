@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 10:41:27 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/18 18:14:33 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/25 22:20:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,33 +59,38 @@ void	ft_valid_texture_file(char *str, int j)
 	fd = open(&str[j], O_DIRECTORY);
 	if (fd != -1)
 		ft_error(2);
-	printf("[%s]\n", &str[j]);
 	fd = open(&str[j], O_RDONLY);
 	if (fd < 0)
 		ft_error(7);
 }
 
-void	ft_check_fc(char **tb, int f, int c)
+void	ft_check_fc(t_data *cub, int f, int c)
 {
 	int	i;
 	int	j;
 
 	i = 3;
-	while (tb[++i])
+	while (cub->tex[++i])
 	{
 		j = -1;
-		while (tb[i][++j])
+		while (cub->tex[i][++j])
 		{
-			j = ft_skip_spaces(tb[i], j, 0);
-			if ((tb[i][j] != 'F' && tb[i][j] != 'C') || (tb[i][j + 1] != ' '))
+			j = ft_skip_spaces(cub->tex[i], j, 0);
+			if ((cub->tex[i][j] != 'F' && cub->tex[i][j] != 'C') || (cub->tex[i][j + 1] != ' '))
 				ft_error(8);
-			if (tb[i][j] == 'F' || tb[i][j] == 'C')
+			if (cub->tex[i][j] == 'F' || cub->tex[i][j] == 'C')
 			{
-				if (tb[i][j] == 'F')
+				ft_check_digits(cub->tex[i], j + 2);
+				if (cub->tex[i][j] == 'F')
+				{
 					f++;
-				if (tb[i][j] == 'C')
+					cub->floor = get_surface(cub->tex[i]);
+				}
+				if (cub->tex[i][j] == 'C')
+				{
 					c++;
-				ft_check_digits(tb[i], j + 2);
+					cub->ceiling = get_surface(cub->tex[i]);
+				}
 			}
 			break ;
 		}		
@@ -118,5 +123,5 @@ void	ft_valid_texture(t_data *cub, int i, int j)
 			break ;
 		}
 	}
-	ft_check_fc(cub->tex, 0, 0);
+	ft_check_fc(cub, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/25 04:20:11 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 03:10:31 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ t_player	init_player(char **map)
 	return (newborn);
 }
 
-void	ft_init_data(t_data *cub)
+void	ft_init_data(t_data *cub, char **av)
 {
-	cub->mlx_ptr = NULL;
-	cub->win_ptr = NULL;
-	cub->map = NULL;
-	cub->tex = NULL;
+	cub->mlx_ptr = mlx_init();
+	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	cub->mini.img = mlx_new_image(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	ft_stock_map(cub, av[1]);
+	ft_stock_texture(cub, av[1]);
 	ft_init_img(&cub->wall_north);
 	ft_init_img(&cub->wall_south);
 	ft_init_img(&cub->wall_east);
 	ft_init_img(&cub->wall_west);
-	ft_init_img(&cub->mini);
-	ft_init_img(&cub->player.img);
+	cub->player = init_player(cub->map);
+	cast_rays(cub->rays, cub->player.direction);
 }
 
 void	ft_stock_map(t_data *cub, char *file)
@@ -69,6 +70,7 @@ void	ft_stock_map(t_data *cub, char *file)
 
 	i = 0;
 	ret = 1;
+	cub->map = ft_calloc(sizeof(char *), ft_get_height(file) + 1);
 	fd = open(file, O_RDONLY);
 	while (ret > 0)
 	{

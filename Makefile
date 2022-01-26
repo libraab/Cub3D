@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/24 04:23:07 by bleotard         ###   ########.fr        #
+#    Updated: 2022/01/25 22:47:59 by bleotard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ SRCS				= 	main.c \
 						ft_stock_data.c \
 						ft_textures.c \
 						ft_walls.c \
+						draw.c \
+						errors.c \
+						hooks.c
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})

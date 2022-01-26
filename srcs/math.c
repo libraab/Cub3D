@@ -1,5 +1,21 @@
 #include "../headers/cub3d.h"
 
+float	calc_step_x(t_vector ray_direction)
+{
+	float	step;
+
+	step = sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
+	return (step);
+}
+
+float	calc_step_y(t_vector ray_direction)
+{
+	float	step;
+
+	step = sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
+	return (step);
+}
+
 t_vector	starting_direction(char player_character)
 {
 	t_vector	direction;
@@ -38,18 +54,17 @@ t_vector	rotate_vector(t_vector to_rotate, float angle)
 	return (rotated);
 }
 
-t_vector	*cast_rays(t_vector direction)
+void	cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction)
 {
-	t_vector	*rays;
-	int			i;
+	int	i;
 
-	rays = ft_calloc(WIN_WIDTH, sizeof(t_vector));
-	rays[0] = rotate_vector(direction, -(FOV / 2));
+	rays[0].direction = rotate_vector(player_direction, -(FOV / 2));
 	i = 1;
 	while (i < WIN_WIDTH)
 	{
-		rays[i] = rotate_vector(rays[i - 1], ANGLE_PER_PIXEL);
+		rays[i].direction = rotate_vector(rays[i - 1].direction, ANGLE_PER_PIXEL);
+		rays[i].step_x = calc_step_x(rays[i].direction);
+		rays[i].step_y = calc_step_y(rays[i].direction);
 		i++;
 	}
-	return (rays);
 }

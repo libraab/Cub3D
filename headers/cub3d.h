@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/25 04:21:45 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 03:16:40 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <limits.h>
+# include <float.h>
 
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 900
+# define WIN_HEIGHT 600
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 
@@ -76,6 +78,13 @@ typedef	struct s_player
 	t_img		img;
 }				t_player;
 
+typedef struct s_ray
+{
+	t_vector	direction;
+	float		step_x;
+	float		step_y;
+}				t_ray;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -86,8 +95,11 @@ typedef struct s_data
 	t_img		wall_south;
 	t_img		wall_east;
 	t_img		wall_west;
+	int			floor;
+	int			ceiling;
 	t_img		mini;
 	t_player	player;
+	t_ray		rays[WIN_WIDTH];
 }				t_data;
 
 //======================================================//
@@ -107,19 +119,19 @@ void	ft_valid_chars(t_data *cub);
 void	ft_valid_walls(t_data *cub);
 void	ft_check_double_texture(t_data *cub, int i, int j, int e);
 void	ft_check_digits(char *str, int j);
-void	ft_parse(t_data *cub, char **av);
+void	ft_parse(t_data *cub);
 //======================================================//
 //					* T E X T U R E S *					//
 //======================================================//
 int		ft_skip_spaces(char *str, int i, int reverse);
 int		ft_end_of_texture(char *line);
 void	ft_valid_texture_file(char *str, int j);
-void	ft_check_fc(char **tb, int f, int c);
+void	ft_check_fc(t_data *cub, int f, int c);
 void	ft_valid_texture(t_data *cub, int i, int j);
 //======================================================//
 //				* S T O C K * D A T A *					//
 //======================================================//
-void	ft_init_data(t_data *cub);
+void	ft_init_data(t_data *cub, char **av);
 void	ft_stock_map(t_data *cub, char *file);
 void	ft_stock_texture(t_data *cub, char *file);
 //======================================================//
@@ -140,8 +152,15 @@ void	ft_print_texture(t_data *cub);
 //======================================================//
 void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 
-t_vector	*cast_rays(t_vector direction);
+void		cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction);
 t_vector	starting_direction(char player_character);
 t_player	init_player(char **map);
+int			get_surface(char *surface);
+void		draw_fov(t_ray rays[WIN_WIDTH], t_data *cub);
+void		ft_draw_frame(t_data *cub);
+void		draw_floor(t_data *cub);
+void		draw_ceiling(t_data *cub);
+int			key_release(int keycode);
+int			create_rgb(int r, int g, int b);
 
 #endif
