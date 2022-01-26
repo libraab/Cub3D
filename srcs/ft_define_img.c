@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:24:24 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 14:19:46 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:08:37 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	ft_define_img(t_data *cub)
 {
-	cub->wall_north.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_north.width, &cub->wall_north.height);
-	cub->wall_south.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_south.width, &cub->wall_south.height);
-	cub->wall_east.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_east.width, &cub->wall_east.height);
-	cub->wall_west.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_west.width, &cub->wall_west.height);
+	cub->wall.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall.width, &cub->wall.height);
+	cub->frame.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/yellow.xpm", &cub->frame.width, &cub->frame.height);
 	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/red.xpm", &cub->player.img.width, &cub->player.img.height);
 }
 

@@ -29,8 +29,8 @@
 # include <limits.h>
 # include <float.h>
 
-# define WIN_WIDTH 900
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1500
+# define WIN_HEIGHT 1000
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 
@@ -91,11 +91,9 @@ typedef struct s_data
 	void		*win_ptr;
 	char		**map;
 	char		**tex;
-	t_img		wall_north;
-	t_img		wall_south;
-	t_img		wall_east;
-	t_img		wall_west;
+	t_img		wall;
 	t_img		sheet;
+	t_img		frame;
 	int			floor;
 	int			ceiling;
 	t_player	player;

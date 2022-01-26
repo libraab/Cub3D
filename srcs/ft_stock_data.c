@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 11:23:59 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:08:15 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->sheet.img = mlx_new_image(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	ft_stock_map(cub, av[1]);
 	ft_stock_texture(cub, av[1]);
-	ft_init_img(&cub->wall_north);
-	ft_init_img(&cub->wall_south);
-	ft_init_img(&cub->wall_east);
-	ft_init_img(&cub->wall_west);
+	ft_init_img(&cub->wall);
+	ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map);
 	cast_rays(cub->rays, cub->player.direction);
 }
