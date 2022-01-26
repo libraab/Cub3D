@@ -1,29 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/26 09:50:23 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/01/26 14:25:03 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/cub3d.h"
-
-void ft_draw_frame(t_data *cub)
-{
-	int	i;
-	int	j;
-
-	i = 49;
-	while(++i < 250)
-	{
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 50, RED);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 51, RED);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 199, RED);
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, 200, RED);
-		if (i < 201)
-		{
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 50, i, RED);
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 51, i, RED);
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 250, i, RED);
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, 251, i, RED);
-		}
-		j = 51;
-		while(++j < 199)
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, i, j, GOLD);
-	}
-}
 
 void	draw_fov(t_ray rays[WIN_WIDTH], t_data *cub)
 {
@@ -48,14 +35,12 @@ void	draw_floor(t_data *cub)
 	i = WIN_HEIGHT / 2;
 	while (i < WIN_HEIGHT)
 	{
-		j = 0;
-		while (j < WIN_WIDTH)
-		{
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, j, i, cub->floor);
-			j++;
-		}
+		j = - 1;
+		while (++j < WIN_WIDTH)
+			ft_put_img2(&cub->sheet, cub->floor, i, j);
 		i++;
 	}
+    mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
 
 void	draw_ceiling(t_data *cub)
@@ -67,11 +52,9 @@ void	draw_ceiling(t_data *cub)
 	while (i < WIN_HEIGHT / 2)
 	{
 		j = 0;
-		while (j < WIN_WIDTH)
-		{
-			mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, j, i, cub->ceiling);
-			j++;
-		}
+		while (++j < WIN_WIDTH)
+			ft_put_img2(&cub->sheet, cub->ceiling, i, j);
 		i++;
 	}
+    mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }

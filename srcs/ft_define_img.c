@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:24:24 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/25 04:01:13 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:19:46 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_define_img(t_data *cub)
 {
-	cub->wall_north.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_north.xpm", &cub->wall_north.width, &cub->wall_north.height);
-	cub->wall_south.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_south.xpm", &cub->wall_south.width, &cub->wall_south.height);
-	cub->wall_east.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_east.xpm", &cub->wall_east.width, &cub->wall_east.height);
-	cub->wall_west.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/wall_west.xpm", &cub->wall_west.width, &cub->wall_west.height);
-	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/player.xpm", &cub->player.img.width, &cub->player.img.height);
+	cub->wall_north.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_north.width, &cub->wall_north.height);
+	cub->wall_south.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_south.width, &cub->wall_south.height);
+	cub->wall_east.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_east.width, &cub->wall_east.height);
+	cub->wall_west.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall_west.width, &cub->wall_west.height);
+	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/red.xpm", &cub->player.img.width, &cub->player.img.height);
 }
 
 static void	ft_pixel_put(t_info *data, int x, int y, int color)
@@ -51,4 +51,11 @@ void	ft_put_img(t_img *dest, t_img *src, int x, int y)
 		while (++xx < src->width)
 			ft_pixel_put(&img_dst, xx + x, yy + y, ft_pixel_get(&img_src, xx, yy));
 	}
+}
+void	ft_put_img2(t_img *dest, int color, int x, int y)
+{
+	t_info	img_dest;
+
+	img_dest.addr = mlx_get_data_addr(dest->img, &img_dest.bits_per_pixel, &img_dest.line_len, &img_dest.endian);
+	ft_pixel_put(&img_dest, y, x, color);
 }

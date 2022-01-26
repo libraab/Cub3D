@@ -95,9 +95,9 @@ typedef struct s_data
 	t_img		wall_south;
 	t_img		wall_east;
 	t_img		wall_west;
+	t_img		sheet;
 	int			floor;
 	int			ceiling;
-	t_img		mini;
 	t_player	player;
 	t_ray		rays[WIN_WIDTH];
 }				t_data;
@@ -107,6 +107,7 @@ typedef struct s_data
 //======================================================//
 int		ft_get_height(char *file);
 int		ft_exit(void);
+void	ft_define_img(t_data *cub);
 //======================================================//
 //						* M E M O R Y *					//
 //======================================================//
@@ -146,12 +147,12 @@ int		ft_west_wall(char **map, int i, int j);
 //					* P R I N T *						//
 //======================================================//
 void	ft_print_map(t_data *cub);
+void    ft_draw_minimap(t_data *cub);
 void	ft_print_texture(t_data *cub);
 //======================================================//
 //					* P R I N T *						//
 //======================================================//
 void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
-
 void		cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction);
 t_vector	starting_direction(char player_character);
 t_player	init_player(char **map);
@@ -162,5 +163,6 @@ void		draw_floor(t_data *cub);
 void		draw_ceiling(t_data *cub);
 int			key_release(int keycode);
 int			create_rgb(int r, int g, int b);
-
+void		ft_put_img(t_img *dest, t_img *src, int x, int y);
+void		ft_put_img2(t_img *dest, int color, int x, int y);
 #endif

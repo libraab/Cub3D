@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 03:41:25 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:25:56 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ int	ft_get_height(char *file)
 int	main(int ac, char **av)
 {
 	t_data	cub;
-	//t_img	mini;
+	//t_img	sheet;
 
 	if (ac != 2)
 		ft_error(0);
 	ft_init_data(&cub, av);
 	ft_parse(&cub);
+	ft_define_img(&cub);
 	draw_floor(&cub);
-	draw_ceiling(&cub);
-	ft_draw_frame(&cub);
+	draw_ceiling(&cub);	
+	ft_draw_minimap(&cub);
 	//draw_fov(cub.rays, &cub);
-	//ft_draw_minimap(&cub);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_loop(cub.mlx_ptr);
