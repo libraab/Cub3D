@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 18:59:36 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 21:37:59 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 24
+# define PLAYER_STEP 10
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define GOLD 0xFFD700
+# define DEEP_PINK 0xFF1493
 
 enum
 {
@@ -166,4 +168,9 @@ void		ft_put_img(t_img *dest, t_img *src, int x, int y);
 void		ft_put_img2(t_img *dest, int color, int x, int y);
 
 t_vector	rotate_vector(t_vector to_rotate, float angle);
+int			player_movement(int keycode, t_data *cub);
+float		calc_step_x(t_vector ray_direction, float x_component);
+float		calc_step_y(t_vector ray_direction, float y_component);
+int			move_player(int keycode, t_data *cub);
+
 #endif

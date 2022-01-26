@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/26 10:34:35 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/01/26 21:37:11 by bleotard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS				= 	main.c \
 						ft_walls.c \
 						draw.c \
 						errors.c \
-						hooks.c
+						hooks.c \
+						moves.c
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 18:13:19 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 19:37:16 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,36 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	else
 		step = FLT_MAX;
 	return (step);
+}
+
+float	first_step_to_x_axis(t_player player, t_vector ray_direction)
+{
+	float	offset;
+	float	first_step;
+
+	if (ray_direction.y == 0)
+		return (FLT_MAX);
+	else if (ray_direction.y > 0)
+		offset = ceil(player.position.y) - player.position.y;
+	else
+		offset = player.position.y - floor(player.position.y);
+	first_step = calc_step_y(ray_direction, offset);
+	return (first_step);
+}
+
+float	first_step_to_y_axis(t_player player, t_vector ray_direction)
+{
+	float	offset;
+	float	first_step;
+
+	if (ray_direction.x == 0)
+		return (FLT_MAX);
+	else if (ray_direction.x > 0)
+		offset = ceil(player.position.x) - player.position.x;
+	else
+		offset = player.position.x - floor(player.position.x);
+	first_step = calc_step_x(ray_direction, offset);
+	return (first_step);
 }
 
 t_vector	starting_direction(char player_character)
@@ -85,34 +115,4 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction)
 		rays[i].step_y = calc_step_y(rays[i].direction, 1);
 		i++;
 	}
-}
-
-float	first_step_to_x_axis(t_player player, t_vector ray_direction)
-{
-	float	offset;
-	float	first_step;
-
-	if (ray_direction.y == 0)
-		return (FLT_MAX);
-	else if (ray_direction.y > 0)
-		offset = ceil(player.position.y) - player.position.y;
-	else
-		offset = player.position.y - floor(player.position.y);
-	first_step = calc_step_y(ray_direction, offset);
-	return (first_step);
-}
-
-float	first_step_to_y_axis(t_player player, t_vector ray_direction)
-{
-	float	offset;
-	float	first_step;
-
-	if (ray_direction.x == 0)
-		return (FLT_MAX);
-	else if (ray_direction.x > 0)
-		offset = ceil(player.position.x) - player.position.x;
-	else
-		offset = player.position.x - floor(player.position.x);
-	first_step = calc_step_x(ray_direction, offset);
-	return (first_step);
 }

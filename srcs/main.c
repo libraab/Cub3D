@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 18:57:27 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 19:25:34 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,6 @@ int	ft_get_height(char *file)
 	return (i);
 }
 
-int	rotate_player(int keycode, t_data *cub)
-{
-	if (keycode == KEY_ARROW_LEFT)
-	{
-		cub->player.direction = rotate_vector(cub->player.direction, -ROTATION_ANGLE);
-		cast_rays(cub->rays, cub->player.direction);
-		draw_fov(cub->rays, cub, GOLD);
-	}
-	if (keycode == KEY_ARROW_RIGHT)
-	{
-		cub->player.direction = rotate_vector(cub->player.direction, ROTATION_ANGLE);
-		cast_rays(cub->rays, cub->player.direction);
-		draw_fov(cub->rays, cub, BLUE);
-	}
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_data	cub;
@@ -74,7 +57,7 @@ int	main(int ac, char **av)
 	draw_fov(cub.rays, &cub, RED);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
-	mlx_hook(cub.win_ptr, ON_KEYDOWN, 0, rotate_player, &cub);
+	mlx_hook(cub.win_ptr, ON_KEYDOWN, 0, player_movement, &cub);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);

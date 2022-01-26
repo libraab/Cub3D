@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:23 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 18:56:07 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 20:50:18 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour)
 	t_vector	center;
 	int			i;
 
-	center.x = WIN_WIDTH / 2;
-	center.y = WIN_HEIGHT / 2;
+	center.x = cub->player.position.x;
+	center.y = cub->player.position.y;
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, center.x + rays[i].direction.x * 200, center.y + rays[i].direction.y * 200, colour);
+		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, center.x + rays[i].direction.x * 50, center.y + rays[i].direction.y * 50, colour);
 		i++;
 	}
 }
