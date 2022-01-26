@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 03:16:40 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:59:36 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define WIN_HEIGHT 1000
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
+# define ROTATION_ANGLE M_PI / 24
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -150,12 +151,12 @@ void	ft_print_texture(t_data *cub);
 //======================================================//
 //					* P R I N T *						//
 //======================================================//
-void	ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+void		ft_draw_pixel(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 void		cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction);
 t_vector	starting_direction(char player_character);
 t_player	init_player(char **map);
 int			get_surface(char *surface);
-void		draw_fov(t_ray rays[WIN_WIDTH], t_data *cub);
+void		draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour);
 void		ft_draw_frame(t_data *cub);
 void		draw_floor(t_data *cub);
 void		draw_ceiling(t_data *cub);
@@ -163,4 +164,6 @@ int			key_release(int keycode);
 int			create_rgb(int r, int g, int b);
 void		ft_put_img(t_img *dest, t_img *src, int x, int y);
 void		ft_put_img2(t_img *dest, int color, int x, int y);
+
+t_vector	rotate_vector(t_vector to_rotate, float angle);
 #endif

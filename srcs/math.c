@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 09:48:38 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:13:19 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction)
 	while (i < WIN_WIDTH)
 	{
 		rays[i].direction = rotate_vector(rays[i - 1].direction, ANGLE_PER_PIXEL);
-		rays[i].step_x = calc_step_x(rays[i].direction, 0); //<------ added 0 or do not compile
-		rays[i].step_y = calc_step_y(rays[i].direction, 0); //<------ added 0 or do not compile
+		rays[i].step_x = calc_step_x(rays[i].direction, 1);
+		rays[i].step_y = calc_step_y(rays[i].direction, 1);
 		i++;
 	}
 }
