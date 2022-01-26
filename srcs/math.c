@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 19:37:16 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/26 22:47:34 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	return (step);
 }
 
-float	first_step_to_x_axis(t_player player, t_vector ray_direction)
+float	distance_to_x_axis(t_player player, t_vector ray_direction)
 {
 	float	offset;
 	float	first_step;
@@ -49,7 +49,7 @@ float	first_step_to_x_axis(t_player player, t_vector ray_direction)
 	return (first_step);
 }
 
-float	first_step_to_y_axis(t_player player, t_vector ray_direction)
+float	distance_to_y_axis(t_player player, t_vector ray_direction)
 {
 	float	offset;
 	float	first_step;
