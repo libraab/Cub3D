@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_map.c                                      :+:      :+:    :+:   */
+/*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 09:50:52 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:28:34 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
+
+void	ft_update_map(t_data *cub, int x, int y)
+{
+	int	i;
+	int	j;
+	
+	i = -1;
+	while (cub->map[++i])
+	{
+		j = -1;
+		while (cub->map[i][++j])
+		{
+			if (ft_is_direction(cub->map[i][j]))
+			{
+				cub->map[i + x][j + y] = cub->map[i][j];
+				cub->map[i][j] = '0';
+				j++;
+			}
+		}
+	}
+}
 
 void	ft_draw_frame(t_data *cub)
 {
@@ -48,6 +69,4 @@ void	ft_draw_minimap(t_data *cub)
 				ft_put_img(&cub->sheet, &cub->player.img, x * 10, y * 10);
 		}
 	}
-	ft_draw_frame(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }

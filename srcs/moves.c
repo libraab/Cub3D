@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 09:37:50 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:56:31 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,28 @@ void	move_back(t_player *player)
 int	move_player(int keycode, t_data *cub)
 {
 	if (keycode == KEY_W)
+	{
 		move_forward(&cub->player);
+		//ft_update_map(cub, 0, 1);
+	}
 	else if (keycode == KEY_A)
+	{
 		move_left(&cub->player);
+		//ft_update_map(cub, 0, -1);
+	}
 	else if (keycode == KEY_S)
+	{
 		move_back(&cub->player);
+		//ft_update_map(cub, -1, 0);
+	}
 	else if (keycode == KEY_D)
+	{
 		move_right(&cub->player);
+		//ft_update_map(cub, 1, 0);
+	}
+	//ft_print_all(cub);
 	mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, cub->player.position.x, cub->player.position.y, RED);
+	// ft_put_img2(&cub->sheet, RED, cub->player.position.x, cub->player.position.y);
+	// mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
 }

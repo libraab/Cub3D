@@ -129,6 +129,7 @@ void			ft_put_img2(t_img *dest, int color, int x, int y);
 //======================================================//
 //						* D R A W *						//
 //======================================================//
+void			ft_print_all(t_data *cub);
 void			draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour);
 void			draw_floor(t_data *cub);
 void			draw_ceiling(t_data *cub);
@@ -165,6 +166,7 @@ void			ft_free_double(char **tab);
 //======================================================//
 //						* M I N I _ M A P *				//
 //======================================================//
+void			ft_update_map(t_data *cub, int x, int y);
 void			ft_draw_frame(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 //======================================================//
@@ -197,6 +199,7 @@ void			ft_stock_texture(t_data *cub, char *file);
 //======================================================//
 int				ft_is_direction(char c);
 int				create_rgb(int r, int g, int b);
+int				ft_tablen(char **str);
 //======================================================//
 //					* F U N C T I O N S *				//
 //======================================================//

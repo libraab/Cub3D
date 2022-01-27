@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stock_data.c                                    :+:      :+:    :+:   */
+/*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 09:40:48 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:16:47 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void	ft_stock_map(t_data *cub, char *file)
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		if (line[0] == 'N' || line[0] == 'S'
-			|| line[0] == 'E' || line[0] == 'W'
+		if (ft_is_direction(line[0])
 			|| line[0] == 'F' || line[0] == 'C'
 			|| line[0] == '\n' || line[0] == '\0')
 		{
