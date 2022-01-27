@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:23 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 20:50:18 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:09:43 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	draw_floor(t_data *cub)
 	i = WIN_HEIGHT / 2;
 	while (i < WIN_HEIGHT)
 	{
-		j = - 1;
+		j = -1;
 		while (++j < WIN_WIDTH)
 			ft_put_img2(&cub->sheet, cub->floor, i, j);
 		i++;
 	}
-    mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
 
 void	draw_ceiling(t_data *cub)
@@ -56,5 +56,5 @@ void	draw_ceiling(t_data *cub)
 			ft_put_img2(&cub->sheet, cub->ceiling, i, j);
 		i++;
 	}
-    mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }

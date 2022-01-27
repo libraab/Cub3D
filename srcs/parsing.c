@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/25 22:47:02 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:07:50 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,11 @@ void	ft_valid_walls(t_data *cub)
 	}
 }
 
-void	ft_check_double_texture(t_data *cub, int i, int j, int e)
+void	ft_check_double_texture(t_data *cub, int i, int e)
 {
 	int	n;
 	int	s;
 	int	w;
-	(void)j;
 
 	n = 0;
 	s = 0;
@@ -89,15 +88,10 @@ void	ft_check_double_texture(t_data *cub, int i, int j, int e)
 	}
 	if (i != 6 || n != 1 || s != 1 || w != 1 || e != 1)
 		ft_error(8);
-	ft_valid_texture(cub, -1, -1);
+	ft_valid_texture(cub);
 }
 
-int	create_rgb(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
-int		get_surface(char *surface)
+int	get_surface(char *surface)
 {
 	char	**tab;
 	int		colour;
@@ -108,13 +102,14 @@ int		get_surface(char *surface)
 	return (colour);
 }
 
-void	ft_check_digits(char *str, int j)
+void	ft_check_digits(char *str)
 {
 	char	**tab;
 	int		i;
 
+	i = ft_skip_spaces(str, 1, 0);
+	tab = ft_split(&str[i], ',');
 	i = -1;
-	tab = ft_split(&str[j], ',');
 	while (tab[++i])
 	{
 		if (ft_atoi(tab[i]) < 0 || ft_atoi(tab[i]) > 255)
@@ -123,10 +118,4 @@ void	ft_check_digits(char *str, int j)
 	if (i > 3)
 		ft_error(8);
 	ft_free_double(tab);
-}
-
-void	ft_parse(t_data *cub)
-{
-	ft_valid_chars(cub);
-	ft_valid_walls(cub);
 }
