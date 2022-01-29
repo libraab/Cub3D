@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/26 22:18:24 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:06:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_player
 typedef struct s_ray
 {
 	t_vector	direction;
+	t_vector	current_coordinates;
+	float		travelled_distance;
 	float		step_x;
 	float		step_y;
 }				t_ray;
@@ -153,11 +155,11 @@ int				ft_get_height(char *file);
 //======================================================//
 float			calc_step_x(t_vector ray_direction, float x_component);
 float			calc_step_y(t_vector ray_direction, float y_component);
-float			distance_to_x_axis(t_player player, t_vector ray_direction);
-float			distance_to_y_axis(t_player player, t_vector ray_direction);
+float			distance_to_y_axis(t_ray ray);
+float			distance_to_x_axis(t_ray ray);
 t_vector		starting_direction(char player_character);
 t_vector		rotate_vector(t_vector to_rotate, float angle);
-void			cast_rays(t_ray rays[WIN_WIDTH], t_vector player_direction);
+void			cast_rays(t_ray rays[WIN_WIDTH], t_player player);
 //======================================================//
 //						* M E M O R Y *					//
 //======================================================//
@@ -172,7 +174,7 @@ void			ft_draw_minimap(t_data *cub);
 //======================================================//
 //						* M O V E S *					//
 //======================================================//
-void			calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y);
+void			calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y, float distance);
 void			move_forward(t_player *player);
 void			move_left(t_player *player);
 void			move_right(t_player *player);
@@ -200,8 +202,10 @@ void			ft_stock_texture(t_data *cub, char *file);
 int				ft_is_direction(char c);
 int				create_rgb(int r, int g, int b);
 int				ft_tablen(char **str);
+int				ft_tabwidth(char **str);
 //======================================================//
 //					* F U N C T I O N S *				//
 //======================================================//
 
+int				start_dda(t_data *cub);
 #endif

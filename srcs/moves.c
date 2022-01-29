@@ -6,21 +6,21 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 17:56:31 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/28 20:21:38 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cub3d.h"
 
-void	calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y)
+void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float distance)
 {
 	float		step_x;
 	float		step_y;
 
-	step_x = calc_step_x(movement_direction, 1);
-	step_y = calc_step_y(movement_direction, 1);
-	*delta_x = PLAYER_STEP / step_x;
-	*delta_y = PLAYER_STEP / step_y;
+	step_x = calc_step_x(direction, 1);
+	step_y = calc_step_y(direction, 1);
+	*delta_x = distance / step_x;
+	*delta_y = distance / step_y;
 }
 
 void	move_forward(t_player *player)
@@ -30,7 +30,7 @@ void	move_forward(t_player *player)
 	float		delta_y;
 
 	movement_direction = player->direction;
-	calc_deltas(movement_direction, &delta_x, &delta_y);
+	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (movement_direction.x > 0)
 		player->position.x += delta_x;
 	else
@@ -48,7 +48,7 @@ void	move_left(t_player *player)
 	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, -(M_PI / 2));
-	calc_deltas(movement_direction, &delta_x, &delta_y);
+	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (movement_direction.x > 0)
 		player->position.x += delta_x;
 	else
@@ -66,7 +66,7 @@ void	move_right(t_player *player)
 	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, M_PI / 2);
-	calc_deltas(movement_direction, &delta_x, &delta_y);
+	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (movement_direction.x > 0)
 		player->position.x += delta_x;
 	else
@@ -84,7 +84,7 @@ void	move_back(t_player *player)
 	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, M_PI);
-	calc_deltas(movement_direction, &delta_x, &delta_y);
+	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (movement_direction.x > 0)
 		player->position.x += delta_x;
 	else

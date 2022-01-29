@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 16:16:47 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:13:46 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				newborn.position.y = (i * WIN_HEIGHT) / 14;
-				newborn.position.x = (j * WIN_WIDTH) / 33;
+				newborn.position.y = (i * WIN_HEIGHT) / ft_tablen(map);
+				newborn.position.x = (j * WIN_WIDTH) / ft_tabwidth(map);
 				newborn.direction = starting_direction(map[i][j]);
 			}
 			j++;
@@ -56,7 +56,7 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_init_img(&cub->wall);
 	ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map);
-	cast_rays(cub->rays, cub->player.direction);
+	cast_rays(cub->rays, cub->player);
 }
 
 void	ft_stock_map(t_data *cub, char *file)
