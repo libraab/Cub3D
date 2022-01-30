@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 03:40:32 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:49:35 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <limits.h>
 # include <float.h>
 
-# define WIN_WIDTH 300
-# define WIN_HEIGHT 100
+# define WIN_WIDTH 900
+# define WIN_HEIGHT 600
 # define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH

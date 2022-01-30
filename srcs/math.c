@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 04:37:21 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:11:12 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,35 +121,34 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 	}
 }
 
-//the check is not correct yet but IT DOESN'T SEGFAULT IT TOOK THREE DAYS
 int	check_vertical_wall(t_ray ray, char **map)
 {
-	int	map_coordinate_x;
-	int	map_coordinate_y;
+	int	coord_x;
+	int	coord_y;
 
-	map_coordinate_y = (int)ray.current_coordinates.y / TILE_SIZE;
+	coord_y = (int)ray.current_coordinates.y / TILE_SIZE;
 	if (ray.direction.x > 0)
 	{
-		map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
-		if (map[map_coordinate_y][map_coordinate_x] && map[map_coordinate_y][map_coordinate_x] == '1')
+		coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+		if (map[coord_y][coord_x] && map[coord_y][coord_x] == '1')
 			return (1);
 	}	
 	else
-		map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+		coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
 	return (1);
 }
 
 int	check_horizontal_wall(t_ray ray, char **map)
 {
-	int	map_coordinate_x;
-	int	map_coordinate_y;
+	int	coord_x;
+	int	coord_y;
 
 	(void)map;
-	map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+	coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
 	if (ray.direction.y > 0)
-		map_coordinate_y =  (int)ray.current_coordinates.y / TILE_SIZE;
+		coord_y =  (int)ray.current_coordinates.y / TILE_SIZE;
 	else
-		map_coordinate_y =  (int)ray.current_coordinates.y / TILE_SIZE;
+		coord_y =  (int)ray.current_coordinates.y / TILE_SIZE;
 	return (1);
 }
 

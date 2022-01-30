@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 04:37:24 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:20:23 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,43 @@ int	movement_key(int keycode)
 
 int	can_move_vertically(t_vector position, t_vector direction, char **map)
 {
-	if (position.y > 0 && position.y / TILE_SIZE < 1 && direction.y < 0)
-				return (0);
-	if (position.y > 0 && ft_tablen(map) - position.y / TILE_SIZE < 1 && direction.y > 0)
-				return (0);
+	int	coord_x;
+	int	coord_y;
+
+	coord_x = (int)position.x / TILE_SIZE;
+	coord_y = (int)position.y / TILE_SIZE;
+	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
+	{
+		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
+			return (0);
+		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
+			return (0);
+	}
 	return (1);
 }
 
 int	can_move_horizontally(t_vector position, t_vector direction, char **map)
 {
-	int	i;
+	int	coord_x;
+	int	coord_y;
 
-	i = 0;
-	while (i < ft_tablen(map))
+	coord_x = (int)position.x / TILE_SIZE;
+	coord_y = (int)position.y / TILE_SIZE;
+	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
 	{
-		if (((int)position.y / TILE_SIZE) == i)
-		{
-			if (position.x / TILE_SIZE < 1 && direction.x < 0)
-				return (0);
-			if (ft_strlen(map[i]) - position.x / TILE_SIZE < 1 && direction.x > 0)
-				return (0);
-		}
-		i++;
+		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
+			return (0);
+		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
+			return (0);
 	}
 	return (1);
 }
 
 int	player_movement(int keycode, t_data *cub)
 {
+	int	coord_x = (int)cub->player.position.x / TILE_SIZE;
+	int	coord_y = (int)cub->player.position.y / TILE_SIZE;
+	printf("tile %c is at coordinates %d, %d, tile above: %c, tile below: %c, tile to the right: %c, tile to the left: %c\n", cub->map[coord_y][coord_x], coord_x, coord_y, cub->map[coord_y - 1][coord_x], cub->map[coord_y + 1][coord_x], cub->map[coord_y][coord_x + 1], cub->map[coord_y][coord_x - 1]);
 	if (keycode == rotation_key(keycode) || keycode == movement_key(keycode))
 	{
 		if (keycode == rotation_key(keycode))

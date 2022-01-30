@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 17:34:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:49:43 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int ac, char **av)
 	ft_valid_walls(&cub);
 	ft_define_img(&cub);
 	ft_print_all(&cub);
-	draw_fov(cub.rays, &cub, RED);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_hook(cub.win_ptr, ON_KEYDOWN, 0, player_movement, &cub);
