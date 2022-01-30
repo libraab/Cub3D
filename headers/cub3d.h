@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 20:45:32 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:21:07 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ enum
 	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
+};
+
+enum
+{
+	no_wall,
+	wall_below,
+	wall_above,
+	wall_right,
+	wall_left
 };
 
 typedef struct s_vector
@@ -103,7 +112,7 @@ typedef struct s_data
 	int			floor;
 	int			ceiling;
 	int			mouse_x;
-	t_player	player;
+t_player	player;
 	t_ray		rays[WIN_WIDTH];
 }				t_data;
 
@@ -183,8 +192,8 @@ void			move_left(t_player *player, char **map);
 void			move_right(t_player *player, char **map);
 void			move_back(t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
-int				can_move_horizontally(t_vector position, t_vector direction, char **map);
-int				can_move_vertically(t_vector position, t_vector direction, char **map);
+int				check_horizontal_wall(t_vector position, t_vector direction, char **map);
+int				check_vertical_wall(t_vector position, t_vector direction, char **map);
 //======================================================//
 //						* P A R S I N G *				//
 //======================================================//

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 20:44:33 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:19:55 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	mouse_move(int x, int y, t_data *cub)
 	return (0);
 }
 
-int	can_move_vertically(t_vector position, t_vector direction, char **map)
+int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;
@@ -80,14 +80,14 @@ int	can_move_vertically(t_vector position, t_vector direction, char **map)
 	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
 	{
 		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
-			return (0);
+			return (wall_below);
 		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
-			return (0);
+			return (wall_above);
 	}
-	return (1);
+	return (no_wall);
 }
 
-int	can_move_horizontally(t_vector position, t_vector direction, char **map)
+int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;
@@ -97,11 +97,11 @@ int	can_move_horizontally(t_vector position, t_vector direction, char **map)
 	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
 	{
 		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
-			return (0);
+			return (wall_right);
 		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
-			return (0);
+			return (wall_left);
 	}
-	return (1);
+	return (no_wall);
 }
 
 void	print_green_dot(t_data *cub, float x, float y)

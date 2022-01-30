@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 19:43:51 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:30:13 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	ft_draw_frame(t_data *cub)
 	}
 }
 
+int		is_inside_map(char c)
+{
+	if (c == '0' || ft_is_direction(c))
+		return (1);
+	return (0);
+}
+
 void	ft_draw_minimap(t_data *cub)
 {
 	int	x;
@@ -65,9 +72,9 @@ void	ft_draw_minimap(t_data *cub)
 		{
 			if (cub->map[y][x] == '1')
 				ft_put_img(&cub->sheet, &cub->wall, (float)x * 10, (float)y * 10);
-			else if (x != (int)cub->player.position.x / TILE_SIZE || y != (int)cub->player.position.y / TILE_SIZE)
+			else if ((x != (int)cub->player.position.x / TILE_SIZE || y != (int)cub->player.position.y / TILE_SIZE) && is_inside_map(cub->map[y][x]))
 				ft_put_img(&cub->sheet, &cub->frame, (float)x * 10, (float)y * 10);
-			else
+			else if (is_inside_map(cub->map[y][x]))
 				ft_put_img(&cub->sheet, &cub->player.img, (float)x * 10, (float)y * 10);
 		}
 	}

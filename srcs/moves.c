@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 18:55:16 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:19:39 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	move(t_vector movement_direction, t_player *player, char **map)
 	float		delta_y;
 
 	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
-	if (can_move_horizontally(player->position, movement_direction, map) != 0)
+	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
 	{
 		if (movement_direction.x > 0)
 			player->position.x += delta_x;
 		else
 			player->position.x -= delta_x;
 	}
-	if (can_move_vertically(player->position, movement_direction, map) != 0)
+	if (check_horizontal_wall(player->position, movement_direction, map) == no_wall)
 	{
 		if (movement_direction.y > 0)
 			player->position.y += delta_y;

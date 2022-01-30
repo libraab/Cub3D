@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 17:11:12 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:25:37 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,37 +121,6 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 	}
 }
 
-int	check_vertical_wall(t_ray ray, char **map)
-{
-	int	coord_x;
-	int	coord_y;
-
-	coord_y = (int)ray.current_coordinates.y / TILE_SIZE;
-	if (ray.direction.x > 0)
-	{
-		coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
-		if (map[coord_y][coord_x] && map[coord_y][coord_x] == '1')
-			return (1);
-	}	
-	else
-		coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
-	return (1);
-}
-
-int	check_horizontal_wall(t_ray ray, char **map)
-{
-	int	coord_x;
-	int	coord_y;
-
-	(void)map;
-	coord_x =  (int)ray.current_coordinates.x / TILE_SIZE;
-	if (ray.direction.y > 0)
-		coord_y =  (int)ray.current_coordinates.y / TILE_SIZE;
-	else
-		coord_y =  (int)ray.current_coordinates.y / TILE_SIZE;
-	return (1);
-}
-
 void	keep_going(t_ray ray, char **map)
 {
 	int		wall_hit;
@@ -161,8 +130,10 @@ void	keep_going(t_ray ray, char **map)
 
 	initial_distance_to_y = distance_to_y_axis(ray);
 	initial_distance_to_x = distance_to_x_axis(ray);
-	wall_hit = check_vertical_wall(ray, map);
-	wall_hit = check_horizontal_wall(ray, map);
+	//wall_hit = check_vertical_wall(ray.current_coordinates, ray.direction, map);
+	//wall_hit = check_horizontal_wall(ray.current_coordinates, ray.direction, map);
+	wall_hit = 1;
+	(void)map;
 	number_of_steps = 0;
 	while (wall_hit == 0)
 	{
