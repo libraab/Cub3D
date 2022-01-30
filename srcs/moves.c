@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:19:39 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 21:37:41 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,48 +45,19 @@ void	move(t_vector movement_direction, t_player *player, char **map)
 	}
 }
 
-void	move_forward(t_player *player, char **map)
-{
-	t_vector	movement_direction;
-
-	movement_direction = player->direction;
-	move(movement_direction, player, map);
-}
-
-void	move_left(t_player *player, char **map)
-{
-	t_vector	movement_direction;
-
-	movement_direction = rotate_vector(player->direction, -(M_PI / 2));
-	move(movement_direction, player, map);
-}
-
-void	move_right(t_player *player, char **map)
-{
-	t_vector	movement_direction;
-
-	movement_direction = rotate_vector(player->direction, M_PI / 2);
-	move(movement_direction, player, map);
-}
-
-void	move_back(t_player *player, char **map)
-{
-	t_vector	movement_direction;
-
-	movement_direction = rotate_vector(player->direction, M_PI);
-	move(movement_direction, player, map);
-}
-
 int	move_player(int keycode, t_data *cub)
 {
+	t_vector	movement_direction;
+
 	if (keycode == KEY_W)
-		move_forward(&cub->player, cub->map);
+		movement_direction = cub->player.direction;
 	else if (keycode == KEY_A)
-		move_left(&cub->player, cub->map);
+		movement_direction = rotate_vector(cub->player.direction, -(M_PI / 2));
 	else if (keycode == KEY_S)
-		move_back(&cub->player, cub->map);
-	else if (keycode == KEY_D)
-		move_right(&cub->player, cub->map);
+		movement_direction = rotate_vector(cub->player.direction, M_PI);
+	else
+		movement_direction = rotate_vector(cub->player.direction, M_PI / 2);
+	move(movement_direction, &cub->player, cub->map);
 	ft_draw_minimap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
