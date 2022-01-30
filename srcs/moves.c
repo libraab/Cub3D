@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 04:29:05 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:37:20 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float dista
 	*delta_y = distance / step_y;
 }
 
-void	move_forward(t_player *player, char **map)
+void	move(t_vector movement_direction, t_player *player, char **map)
 {
-	t_vector	movement_direction;
 	float		delta_x;
 	float		delta_y;
 
-	movement_direction = player->direction;
 	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (can_move_horizontally(player->position, movement_direction, map) != 0)
 	{
@@ -45,102 +43,54 @@ void	move_forward(t_player *player, char **map)
 		else
 			player->position.y -= delta_y;
 	}
+}
+
+void	move_forward(t_player *player, char **map)
+{
+	t_vector	movement_direction;
+
+	movement_direction = player->direction;
+	move(movement_direction, player, map);
+	//ft_update_map(cub, 0, 1);
 }
 
 void	move_left(t_player *player, char **map)
 {
 	t_vector	movement_direction;
-	float		delta_x;
-	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, -(M_PI / 2));
-	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
-	if (can_move_horizontally(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.x > 0)
-			player->position.x += delta_x;
-		else
-			player->position.x -= delta_x;
-	}
-	if (can_move_vertically(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.y > 0)
-			player->position.y += delta_y;
-		else
-			player->position.y -= delta_y;
-	}
+	move(movement_direction, player, map);
+	//ft_update_map(cub, 0, -1);
 }
 
 void	move_right(t_player *player, char **map)
 {
 	t_vector	movement_direction;
-	float		delta_x;
-	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, M_PI / 2);
-	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
-	if (can_move_horizontally(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.x > 0)
-			player->position.x += delta_x;
-		else
-			player->position.x -= delta_x;
-	}
-	if (can_move_vertically(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.y > 0)
-			player->position.y += delta_y;
-		else
-			player->position.y -= delta_y;
-	}
+	move(movement_direction, player, map);
+	//ft_update_map(cub, 1, 0);
 }
 
 void	move_back(t_player *player, char **map)
 {
 	t_vector	movement_direction;
-	float		delta_x;
-	float		delta_y;
 
 	movement_direction = rotate_vector(player->direction, M_PI);
-	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
-	if (can_move_horizontally(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.x > 0)
-			player->position.x += delta_x;
-		else
-			player->position.x -= delta_x;
-	}
-	if (can_move_vertically(player->position, movement_direction, map) != 0)
-	{
-		if (movement_direction.y > 0)
-			player->position.y += delta_y;
-		else
-			player->position.y -= delta_y;
-	}
+	move(movement_direction, player, map);
+	//ft_update_map(cub, -1, 0);
 }
 
 int	move_player(int keycode, t_data *cub)
 {
 	if (keycode == KEY_W)
-	{
 		move_forward(&cub->player, cub->map);
-		//ft_update_map(cub, 0, 1);
-	}
 	else if (keycode == KEY_A)
-	{
 		move_left(&cub->player, cub->map);
-		//ft_update_map(cub, 0, -1);
-	}
 	else if (keycode == KEY_S)
-	{
 		move_back(&cub->player, cub->map);
-		//ft_update_map(cub, -1, 0);
-	}
 	else if (keycode == KEY_D)
-	{
 		move_right(&cub->player, cub->map);
-		//ft_update_map(cub, 1, 0);
-	}
 	//ft_print_all(cub);
 	// ft_put_img2(&cub->sheet, RED, cub->player.position.x, cub->player.position.y);
 	// mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
