@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 19:25:26 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 19:43:51 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_draw_minimap(t_data *cub)
 				ft_put_img(&cub->sheet, &cub->frame, (float)x * 10, (float)y * 10);
 			else
 				ft_put_img(&cub->sheet, &cub->player.img, (float)x * 10, (float)y * 10);
-		   	//ft_put_img2(&cub->sheet, RED, cub->player.position.y / TILE_SIZE * 10, cub->player.position.x / TILE_SIZE * 10);
 		}
 	}
 }

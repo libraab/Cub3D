@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 18:58:52 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 19:56:47 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,23 @@ int	player_movement(int keycode, t_data *cub)
 	if (keycode == rotation_key(keycode) || keycode == movement_key(keycode))
 	{
 		if (keycode == rotation_key(keycode))
+		{
 			rotate_player(keycode, cub);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
+		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+		}
 		if (keycode == movement_key(keycode))
+		{
 			move_player(keycode, cub);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
+		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
+		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+		}
 		cast_rays(cub->rays, cub->player);
 		start_dda(cub);
 	}
