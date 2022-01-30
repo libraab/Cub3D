@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 17:37:20 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:55:16 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	move_forward(t_player *player, char **map)
 
 	movement_direction = player->direction;
 	move(movement_direction, player, map);
-	//ft_update_map(cub, 0, 1);
 }
 
 void	move_left(t_player *player, char **map)
@@ -60,7 +59,6 @@ void	move_left(t_player *player, char **map)
 
 	movement_direction = rotate_vector(player->direction, -(M_PI / 2));
 	move(movement_direction, player, map);
-	//ft_update_map(cub, 0, -1);
 }
 
 void	move_right(t_player *player, char **map)
@@ -69,7 +67,6 @@ void	move_right(t_player *player, char **map)
 
 	movement_direction = rotate_vector(player->direction, M_PI / 2);
 	move(movement_direction, player, map);
-	//ft_update_map(cub, 1, 0);
 }
 
 void	move_back(t_player *player, char **map)
@@ -78,7 +75,6 @@ void	move_back(t_player *player, char **map)
 
 	movement_direction = rotate_vector(player->direction, M_PI);
 	move(movement_direction, player, map);
-	//ft_update_map(cub, -1, 0);
 }
 
 int	move_player(int keycode, t_data *cub)
@@ -91,8 +87,7 @@ int	move_player(int keycode, t_data *cub)
 		move_back(&cub->player, cub->map);
 	else if (keycode == KEY_D)
 		move_right(&cub->player, cub->map);
-	//ft_print_all(cub);
-	// ft_put_img2(&cub->sheet, RED, cub->player.position.x, cub->player.position.y);
-	// mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+	ft_draw_minimap(cub);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
 }

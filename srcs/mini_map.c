@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 17:28:34 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:55:23 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_draw_minimap(t_data *cub)
 	int	x;
 	int	y;
 
+	printf("player position: %d, %d\n", (int)cub->player.position.x / TILE_SIZE, (int)cub->player.position.y / TILE_SIZE);
 	y = -1;
 	while (cub->map[++y])
 	{
@@ -65,8 +66,10 @@ void	ft_draw_minimap(t_data *cub)
 		{
 			if (cub->map[y][x] == '1')
 				ft_put_img(&cub->sheet, &cub->wall, x * 10, y * 10);
-			if (ft_is_direction(cub->map[y][x]))
+			else if (x == (int)cub->player.position.x / TILE_SIZE && y == (int)cub->player.position.y / TILE_SIZE)
 				ft_put_img(&cub->sheet, &cub->player.img, x * 10, y * 10);
+			else
+				ft_put_img(&cub->sheet, &cub->frame, x * 10, y * 10);
 		}
 	}
 }
