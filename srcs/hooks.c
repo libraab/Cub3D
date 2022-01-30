@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 17:20:23 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:58:52 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ int	can_move_horizontally(t_vector position, t_vector direction, char **map)
 
 int	player_movement(int keycode, t_data *cub)
 {
-	int	coord_x = (int)cub->player.position.x / TILE_SIZE;
-	int	coord_y = (int)cub->player.position.y / TILE_SIZE;
-	printf("tile %c is at coordinates %d, %d, tile above: %c, tile below: %c, tile to the right: %c, tile to the left: %c\n", cub->map[coord_y][coord_x], coord_x, coord_y, cub->map[coord_y - 1][coord_x], cub->map[coord_y + 1][coord_x], cub->map[coord_y][coord_x + 1], cub->map[coord_y][coord_x - 1]);
 	if (keycode == rotation_key(keycode) || keycode == movement_key(keycode))
 	{
 		if (keycode == rotation_key(keycode))

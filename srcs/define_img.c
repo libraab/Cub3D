@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:24:24 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 16:03:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/30 19:09:18 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ unsigned int	ft_pixel_get(t_info *data, int x, int y)
 			+ x * (data->bits_per_pixel / 8))));
 }
 
-void	ft_put_img(t_img *dest, t_img *src, int x, int y)
+void	ft_put_img(t_img *dest, t_img *src, float x, float y)
 {
 	t_info	img_src;
 	t_info	img_dst;

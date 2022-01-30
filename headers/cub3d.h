@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 16:49:35 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 19:26:48 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
-# define PLAYER_STEP 10
+# define PLAYER_STEP 25 
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -127,7 +127,7 @@ int				ft_west_wall(char **map, int i, int j);
 void			ft_define_img(t_data *cub);
 void			ft_pixel_put(t_info *data, int x, int y, int color);
 unsigned int	ft_pixel_get(t_info *data, int x, int y);
-void			ft_put_img(t_img *dest, t_img *src, int x, int y);
+void			ft_put_img(t_img *dest, t_img *src, float x, float y);
 void			ft_put_img2(t_img *dest, int color, int x, int y);
 //======================================================//
 //						* D R A W *						//
