@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/29 02:23:23 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:37:24 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,9 @@ int	key_release(int keycode)
 int	rotate_player(int keycode, t_data *cub)
 {
 	if (keycode == KEY_ARROW_LEFT)
-	{
 		cub->player.direction = rotate_vector(cub->player.direction, -ROTATION_ANGLE);
-		cast_rays(cub->rays, cub->player);
-		draw_fov(cub->rays, cub, GOLD);
-	}
 	if (keycode == KEY_ARROW_RIGHT)
-	{
 		cub->player.direction = rotate_vector(cub->player.direction, ROTATION_ANGLE);
-		cast_rays(cub->rays, cub->player);
-		draw_fov(cub->rays, cub, BLUE);
-	}
 	return (0);
 }
 
@@ -59,6 +51,34 @@ int	movement_key(int keycode)
 		return (0);
 }
 
+int	can_move_vertically(t_vector position, t_vector direction, char **map)
+{
+	if (position.y > 0 && position.y / TILE_SIZE < 1 && direction.y < 0)
+				return (0);
+	if (position.y > 0 && ft_tablen(map) - position.y / TILE_SIZE < 1 && direction.y > 0)
+				return (0);
+	return (1);
+}
+
+int	can_move_horizontally(t_vector position, t_vector direction, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_tablen(map))
+	{
+		if (((int)position.y / TILE_SIZE) == i)
+		{
+			if (position.x / TILE_SIZE < 1 && direction.x < 0)
+				return (0);
+			if (ft_strlen(map[i]) - position.x / TILE_SIZE < 1 && direction.x > 0)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	player_movement(int keycode, t_data *cub)
 {
 	if (keycode == rotation_key(keycode) || keycode == movement_key(keycode))
@@ -67,6 +87,8 @@ int	player_movement(int keycode, t_data *cub)
 			rotate_player(keycode, cub);
 		if (keycode == movement_key(keycode))
 			move_player(keycode, cub);
+		cast_rays(cub->rays, cub->player);
+		start_dda(cub);
 	}
 	return (0);
 }

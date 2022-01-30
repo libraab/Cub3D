@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                          :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/29 01:06:32 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 03:40:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 # include <limits.h>
 # include <float.h>
 
-# define WIN_WIDTH 1500
-# define WIN_HEIGHT 1000
+# define WIN_WIDTH 300
+# define WIN_HEIGHT 100
+# define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
@@ -175,11 +176,13 @@ void			ft_draw_minimap(t_data *cub);
 //						* M O V E S *					//
 //======================================================//
 void			calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y, float distance);
-void			move_forward(t_player *player);
-void			move_left(t_player *player);
-void			move_right(t_player *player);
-void			move_back(t_player *player);
+void			move_forward(t_player *player, char **map);
+void			move_left(t_player *player, char **map);
+void			move_right(t_player *player, char **map);
+void			move_back(t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
+int				can_move_horizontally(t_vector position, t_vector direction, char **map);
+int				can_move_vertically(t_vector position, t_vector direction, char **map);
 //======================================================//
 //						* P A R S I N G *				//
 //======================================================//

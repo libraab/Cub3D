@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/29 00:13:46 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:06:17 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				newborn.position.y = (i * WIN_HEIGHT) / ft_tablen(map);
-				newborn.position.x = (j * WIN_WIDTH) / ft_tabwidth(map);
+				newborn.position.y = (float)i * TILE_SIZE;
+				newborn.position.x = (float)j * TILE_SIZE;
 				newborn.direction = starting_direction(map[i][j]);
 			}
 			j++;

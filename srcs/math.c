@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/29 02:23:58 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:37:21 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,116 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 {
 	int	i;
 
-	rays[0].direction = rotate_vector(player.direction, -(FOV / 2));
-	i = 1;
+	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		rays[i].direction = rotate_vector(rays[i - 1].direction, ANGLE_PER_PIXEL);
+		if (i == 0)
+			rays[i].direction = rotate_vector(player.direction, -(FOV / 2));
+		else
+			rays[i].direction = rotate_vector(rays[i - 1].direction, ANGLE_PER_PIXEL);
 		rays[i].current_coordinates = player.position;
 		rays[i].step_y = distance_to_y_axis(rays[i]);
 		rays[i].step_x = distance_to_x_axis(rays[i]);
-		rays[i].travelled_distance = fmax(rays[i].step_y, rays[i].step_x);
+		rays[i].travelled_distance = 0;
 		i++;
 	}
+}
+
+//the check is not correct yet but IT DOESN'T SEGFAULT IT TOOK THREE DAYS
+int	check_vertical_wall(t_ray ray, char **map)
+{
+	int	map_coordinate_x;
+	int	map_coordinate_y;
+
+	map_coordinate_y = (int)ray.current_coordinates.y / TILE_SIZE;
+	if (ray.direction.x > 0)
+	{
+		map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+		if (map[map_coordinate_y][map_coordinate_x] && map[map_coordinate_y][map_coordinate_x] == '1')
+			return (1);
+	}	
+	else
+		map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+	return (1);
+}
+
+int	check_horizontal_wall(t_ray ray, char **map)
+{
+	int	map_coordinate_x;
+	int	map_coordinate_y;
+
+	(void)map;
+	map_coordinate_x =  (int)ray.current_coordinates.x / TILE_SIZE;
+	if (ray.direction.y > 0)
+		map_coordinate_y =  (int)ray.current_coordinates.y / TILE_SIZE;
+	else
+		map_coordinate_y =  (int)ray.current_coordinates.y / TILE_SIZE;
+	return (1);
+}
+
+void	keep_going(t_ray ray, char **map)
+{
+	int		wall_hit;
+	int		number_of_steps;
+	float	initial_distance_to_y;
+	float	initial_distance_to_x;
+
+	initial_distance_to_y = distance_to_y_axis(ray);
+	initial_distance_to_x = distance_to_x_axis(ray);
+	wall_hit = check_vertical_wall(ray, map);
+	wall_hit = check_horizontal_wall(ray, map);
+	number_of_steps = 0;
+	while (wall_hit == 0)
+	{
+		if (initial_distance_to_y + number_of_steps * ray.step_x < initial_distance_to_x + number_of_steps * ray.step_y)
+		{
+			ray.travelled_distance = initial_distance_to_y + number_of_steps * ray.step_x;
+			number_of_steps++;
+		//	ray.current_coordinates.y++;
+		//	wall_hit = check_vertical_wall(ray);
+		}
+		else
+		{
+			ray.travelled_distance = initial_distance_to_x + number_of_steps * ray.step_y;
+			number_of_steps++;
+		//	ray.current_coordinates.x++;
+		//	wall_hit = check_horizontal_wall(ray);
+		}
+	}
+}
+
+void	first_step(t_ray ray)
+{
+	if (distance_to_x_axis(ray) < distance_to_y_axis(ray))
+	{
+		ray.travelled_distance += distance_to_x_axis(ray);
+		if (ray.direction.y < 0)
+			ray.current_coordinates.y = floor(ray.current_coordinates.y);
+		else
+			ray.current_coordinates.y = ceil(ray.current_coordinates.y);
+	}
+	else
+	{
+		ray.travelled_distance += distance_to_y_axis(ray);
+		if (ray.direction.x < 0)
+			ray.current_coordinates.x = floor(ray.current_coordinates.x);
+		else
+			ray.current_coordinates.x = ceil(ray.current_coordinates.x);
+	}
+	ray.step_x = calc_step_x(ray.direction, 1);
+	ray.step_y = calc_step_y(ray.direction, 1);
+}
+
+int	start_dda(t_data *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < WIN_WIDTH)
+	{ 
+		first_step(cub->rays[i]);
+		keep_going(cub->rays[i], cub->map);
+		i++;
+	}
+	return (0);
 }
