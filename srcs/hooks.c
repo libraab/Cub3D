@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 19:56:47 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 20:44:33 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,25 @@ int	movement_key(int keycode)
 		return (0);
 }
 
+int	mouse_move(int x, int y, t_data *cub)
+{
+	(void)y;
+	if (cub->mouse_x == 0)
+		cub->mouse_x = x;
+	if (x > cub->mouse_x + 10)
+	{
+		rotate_player(KEY_ARROW_RIGHT, cub);
+	cub->mouse_x = x;
+	}
+	else if (x < cub->mouse_x - 10)
+	{
+		rotate_player(KEY_ARROW_LEFT, cub);
+	cub->mouse_x = x;
+	}
+	print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+	return (0);
+}
+
 int	can_move_vertically(t_vector position, t_vector direction, char **map)
 {
 	int	coord_x;
@@ -85,28 +104,24 @@ int	can_move_horizontally(t_vector position, t_vector direction, char **map)
 	return (1);
 }
 
+void	print_green_dot(t_data *cub, float x, float y)
+{
+		ft_put_img2(&cub->sheet, GREEN, x, y);
+		ft_put_img2(&cub->sheet, GREEN, x + 1, y);
+		ft_put_img2(&cub->sheet, GREEN, x, y + 1);
+		ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
+		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+}
+
 int	player_movement(int keycode, t_data *cub)
 {
 	if (keycode == rotation_key(keycode) || keycode == movement_key(keycode))
 	{
 		if (keycode == rotation_key(keycode))
-		{
 			rotate_player(keycode, cub);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
-		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
-		}
 		if (keycode == movement_key(keycode))
-		{
 			move_player(keycode, cub);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
-		ft_put_img2(&cub->sheet, GREEN, (cub->player.position.y / TILE_SIZE * 10) + 1 + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10 + 1);
-		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
-		}
+		print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
 		cast_rays(cub->rays, cub->player);
 		start_dda(cub);
 	}

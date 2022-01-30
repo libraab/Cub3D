@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 19:26:48 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 20:45:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_data
 	t_img		frame;
 	int			floor;
 	int			ceiling;
+	int			mouse_x;
 	t_player	player;
 	t_ray		rays[WIN_WIDTH];
 }				t_data;
@@ -147,6 +148,7 @@ int				ft_exit(void);
 int				key_release(int keycode);
 int				rotate_player(int keycode, t_data *cub);
 int				player_movement(int keycode, t_data *cub);
+int				mouse_move(int x, int y, t_data *cub);
 //======================================================//
 //						* M A I N *						//
 //======================================================//
@@ -211,4 +213,5 @@ int				ft_tabwidth(char **str);
 //======================================================//
 
 int				start_dda(t_data *cub);
+void			print_green_dot(t_data *cub, float x, float y);
 #endif

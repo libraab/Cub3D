@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 01:06:17 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/30 20:45:38 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map);
 	cast_rays(cub->rays, cub->player);
+	cub->mouse_x = 0;
 }
 
 void	ft_stock_map(t_data *cub, char *file)
