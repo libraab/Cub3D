@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 04:39:02 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 00:18:26 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int	mouse_move(int x, int y, t_data *cub)
 	if (x > cub->mouse_x + 10)
 	{
 		rotate_player(KEY_ARROW_RIGHT, cub);
-	cub->mouse_x = x;
+		cub->mouse_x = x;
 	}
 	else if (x < cub->mouse_x - 10)
 	{
 		rotate_player(KEY_ARROW_LEFT, cub);
-	cub->mouse_x = x;
+		cub->mouse_x = x;
 	}
 	print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
 	//cast_rays(cub->rays, cub->player);
@@ -72,35 +72,25 @@ int	mouse_move(int x, int y, t_data *cub)
 	return (0);
 }
 
-int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
+int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map)
 {
-	int	coord_x;
-	int	coord_y;
-
-	coord_x = (int)position.x / TILE_SIZE;
-	coord_y = (int)position.y / TILE_SIZE;
-	if (is_inside_map(map[coord_y][coord_x]))
+	if (is_inside_map(map[position.y / TILE_SIZE][position.x / TILE_SIZE]))
 	{
-		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
+		if (direction.y > 0 && map[position.y / TILE_SIZE + 1][position.x / TILE_SIZE] == '1')
 			return (wall_below);
-		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
+		else if (direction.y < 0 && map[position.y / TILE_SIZE - 1][position.x / TILE_SIZE] == '1')
 			return (wall_above);
 	}
 	return (no_wall);
 }
 
-int	check_vertical_wall(t_vector position, t_vector direction, char **map)
+int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 {
-	int	coord_x;
-	int	coord_y;
-
-	coord_x = (int)position.x / TILE_SIZE;
-	coord_y = (int)position.y / TILE_SIZE;
-	if (is_inside_map(map[coord_y][coord_x]))
+	if (is_inside_map(map[position.y / TILE_SIZE][position.x / TILE_SIZE]))
 	{
-		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
+		if (direction.x > 0 && map[position.y / TILE_SIZE][position.x / TILE_SIZE + 1] == '1')
 			return (wall_right);
-		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
+		else if (direction.x < 0 && map[position.y / TILE_SIZE][position.x / TILE_SIZE - 1] == '1')
 			return (wall_left);
 	}
 	return (no_wall);

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 22:09:20 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 00:34:03 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,24 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	return (step);
 }
 
-float	distance_to_x_axis(int on_x, t_vector position, t_vector direction)
+float	distance_to_x_axis(int on_x, t_coordinates position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
-
 
 	if (on_x == 1)
 		return (0);
 	else if (direction.y == 0)
 		return (FLT_MAX);
-	else if (direction.y > 0)
-		offset = ceil(position.y) - position.y;
+	else if (direction.y < 0)
+		offset = position.y % TILE_SIZE;
 	else
-		offset = position.y - floor(position.y);
+		offset = TILE_SIZE - (position.y % TILE_SIZE);
 	first_step = calc_step_y(direction, offset);
 	return (first_step);
 }
 
-float	distance_to_y_axis(int on_y, t_vector position, t_vector direction)
+float	distance_to_y_axis(int on_y, t_coordinates position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
@@ -61,10 +60,10 @@ float	distance_to_y_axis(int on_y, t_vector position, t_vector direction)
 		return (0);
 	else if (direction.x == 0)
 		return (FLT_MAX);
-	else if (direction.x > 0)
-		offset = ceil(position.x) - position.x;
+	else if (direction.x < 0)
+		offset = position.x % TILE_SIZE;
 	else
-		offset = position.x - floor(position.x);
+		offset = TILE_SIZE - (position.x % TILE_SIZE);
 	first_step = calc_step_x(direction, offset);
 	return (first_step);
 }
@@ -122,10 +121,10 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 			rays[i].direction = player.direction;
 		rays[i].current_coordinates = player.position;
 		rays[i].on_y = 0;
-		if ((int)player.position.x % TILE_SIZE == 0 && (int)player.position.x - player.position.x == 0)
+		if (player.position.x % TILE_SIZE == 0)
 			rays[i].on_y = 1;
 		rays[i].on_x = 0;
-		if ((int)player.position.y % TILE_SIZE == 0 && (int)player.position.y - player.position.y == 0)
+		if (player.position.y % TILE_SIZE == 0)
 			rays[i].on_x = 1;
 		rays[i].step_y = distance_to_y_axis(rays[i].on_y, rays[i].current_coordinates, rays[i].direction);
 		rays[i].step_x = distance_to_x_axis(rays[i].on_x, rays[i].current_coordinates, rays[i].direction);
@@ -133,7 +132,7 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 		i++;
 	}
 	printf("INITIAL RAY STATS:\n");
-	printf("pos: %f, %f, dir: %f, %f on x: %d on y: %d distance to x: %f, distance to y: %f\n", \
+	printf("pos: %d, %d, dir: %f, %f on x: %d on y: %d distance to x: %f, distance to y: %f\n", \
 			  rays[250].current_coordinates.x, rays[250].current_coordinates.y, rays[250].direction.x, rays[250].direction.y,\
 			  rays[250].on_x, rays[250].on_y, rays[250].step_x, rays[250].step_y);
 }
