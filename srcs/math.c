@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 04:12:36 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 22:09:20 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ float	distance_to_x_axis(int on_x, t_vector position, t_vector direction)
 	float	offset;
 	float	first_step;
 
+
 	if (on_x == 1)
 		return (0);
-	if (direction.y == 0)
+	else if (direction.y == 0)
 		return (FLT_MAX);
 	else if (direction.y > 0)
 		offset = ceil(position.y) - position.y;
@@ -58,7 +59,7 @@ float	distance_to_y_axis(int on_y, t_vector position, t_vector direction)
 
 	if (on_y == 1)
 		return (0);
-	if (direction.x == 0)
+	else if (direction.x == 0)
 		return (FLT_MAX);
 	else if (direction.x > 0)
 		offset = ceil(position.x) - position.x;
@@ -120,21 +121,21 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 		else
 			rays[i].direction = player.direction;
 		rays[i].current_coordinates = player.position;
-		rays[i].on_x = 0;
-		if (player.position.x - floor(player.position.x) == 0)
-			rays[i].on_x = 1;
 		rays[i].on_y = 0;
-		if (player.position.y - floor(player.position.y) == 0)
+		if ((int)player.position.x % TILE_SIZE == 0 && (int)player.position.x - player.position.x == 0)
 			rays[i].on_y = 1;
+		rays[i].on_x = 0;
+		if ((int)player.position.y % TILE_SIZE == 0 && (int)player.position.y - player.position.y == 0)
+			rays[i].on_x = 1;
 		rays[i].step_y = distance_to_y_axis(rays[i].on_y, rays[i].current_coordinates, rays[i].direction);
 		rays[i].step_x = distance_to_x_axis(rays[i].on_x, rays[i].current_coordinates, rays[i].direction);
 		rays[i].travelled_distance = 0;
 		i++;
 	}
-//	printf("INITIAL RAY STATS:\n");
-//	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
-			//rays[450].current_coordinates.x, rays[450].current_coordinates.y, rays[450].direction.x, rays[450].direction.y, rays[450].on_x, rays[450].on_y, \
-		//	rays[450].travelled_distance, rays[450].step_x, rays[450].step_y);
+	printf("INITIAL RAY STATS:\n");
+	printf("pos: %f, %f, dir: %f, %f on x: %d on y: %d distance to x: %f, distance to y: %f\n", \
+			  rays[250].current_coordinates.x, rays[250].current_coordinates.y, rays[250].direction.x, rays[250].direction.y,\
+			  rays[250].on_x, rays[250].on_y, rays[250].step_x, rays[250].step_y);
 }
 
 void	keep_going(t_player player, t_ray *ray, char **map)
@@ -234,8 +235,8 @@ void	first_step(t_ray *ray)
 
 int	start_dda(t_data *cub)
 {
-	//first_step(&cub->rays[450]);
-	//keep_going(cub->player, &cub->rays[450], cub->map);
+	//first_step(&cub->rays[250]);
+	//keep_going(cub->player, &cub->rays[250], cub->map);
 	int	i;
 
 	i = 0;
@@ -245,5 +246,6 @@ int	start_dda(t_data *cub)
 		keep_going(cub->player, &cub->rays[i], cub->map);
 		i++;
 	}
+//	printf("unit step x: %f, unit step y: %f\n", cub->rays[250].step_x, cub->rays[250].step_y);
 	return (0);
 }

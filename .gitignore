@@ -1,4 +1,4 @@
 *.o
 *.swp
 cub3d
-.dSYM/
+*.dSYM/

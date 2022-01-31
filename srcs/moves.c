@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:37:41 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:44:12 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	move(t_vector movement_direction, t_player *player, char **map)
 		else
 			player->position.y -= delta_y;
 	}
+	printf("The player moved by %f pixel on x and %f px on y\n", delta_x, delta_y);
 }
 
 int	move_player(int keycode, t_data *cub)

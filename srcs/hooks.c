@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 04:02:49 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 04:39:02 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ int	player_movement(int keycode, t_data *cub)
 		print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
 		cast_rays(cub->rays, cub->player);
 		start_dda(cub);
-		print_green_dot(cub, cub->rays[450].current_coordinates.y / TILE_SIZE * 10, cub->rays[450].current_coordinates.x / TILE_SIZE * 10);
 	}
 	return (0);
 }

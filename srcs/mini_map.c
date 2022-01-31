@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:30:13 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:00:20 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	ft_draw_frame(t_data *cub)
 
 int		is_inside_map(char c)
 {
-	if (c == '0' || ft_is_direction(c))
+	if (!c)
+		return (0);
+	else if (c == '0' || ft_is_direction(c))
 		return (1);
 	return (0);
 }
