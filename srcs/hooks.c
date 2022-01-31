@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:19:55 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 04:02:49 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	mouse_move(int x, int y, t_data *cub)
 	cub->mouse_x = x;
 	}
 	print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
+	//cast_rays(cub->rays, cub->player);
+	//start_dda(cub);
 	return (0);
 }
 
@@ -77,7 +79,7 @@ int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 
 	coord_x = (int)position.x / TILE_SIZE;
 	coord_y = (int)position.y / TILE_SIZE;
-	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
+	if (is_inside_map(map[coord_y][coord_x]))
 	{
 		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
@@ -94,7 +96,7 @@ int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 
 	coord_x = (int)position.x / TILE_SIZE;
 	coord_y = (int)position.y / TILE_SIZE;
-	if (map[coord_y][coord_x] == '0' || ft_is_direction(map[coord_y][coord_x]))
+	if (is_inside_map(map[coord_y][coord_x]))
 	{
 		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
@@ -124,6 +126,7 @@ int	player_movement(int keycode, t_data *cub)
 		print_green_dot(cub, (cub->player.position.y / TILE_SIZE * 10) + cub->player.direction.y * 10, (cub->player.position.x / TILE_SIZE * 10) + cub->player.direction.x * 10);
 		cast_rays(cub->rays, cub->player);
 		start_dda(cub);
+		print_green_dot(cub, cub->rays[450].current_coordinates.y / TILE_SIZE * 10, cub->rays[450].current_coordinates.x / TILE_SIZE * 10);
 	}
 	return (0);
 }

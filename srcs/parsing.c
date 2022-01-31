@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 13:07:50 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/01/30 22:24:11 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_valid_chars(t_data *cub)
 		ft_error(5);
 }
 
+/*THIS CHECK SEGFAULTS IF A CHARACTER IS BOTTOM RIGHT OF THE MAP AND OUTSIDE OF IT (IN THE MIDDLE OF EMPTY TILES)*/
 void	ft_valid_walls(t_data *cub)
 {
 	int	i;

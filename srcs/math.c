@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:25:37 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 04:12:36 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,37 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	return (step);
 }
 
-float	distance_to_x_axis(t_ray ray)
+float	distance_to_x_axis(int on_x, t_vector position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
 
-	if (ray.direction.y == 0)
+	if (on_x == 1)
+		return (0);
+	if (direction.y == 0)
 		return (FLT_MAX);
-	else if (ray.direction.y > 0)
-		offset = ceil(ray.current_coordinates.y) - ray.current_coordinates.y;
+	else if (direction.y > 0)
+		offset = ceil(position.y) - position.y;
 	else
-		offset = ray.current_coordinates.y - floor(ray.current_coordinates.y);
-	first_step = calc_step_y(ray.direction, offset);
+		offset = position.y - floor(position.y);
+	first_step = calc_step_y(direction, offset);
 	return (first_step);
 }
 
-float	distance_to_y_axis(t_ray ray)
+float	distance_to_y_axis(int on_y, t_vector position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
 
-	if (ray.direction.x == 0)
+	if (on_y == 1)
+		return (0);
+	if (direction.x == 0)
 		return (FLT_MAX);
-	else if (ray.direction.x > 0)
-		offset = ceil(ray.current_coordinates.x) - ray.current_coordinates.x;
+	else if (direction.x > 0)
+		offset = ceil(position.x) - position.x;
 	else
-		offset = ray.current_coordinates.x - floor(ray.current_coordinates.x);
-	first_step = calc_step_x(ray.direction, offset);
+		offset = position.x - floor(position.x);
+	first_step = calc_step_x(direction, offset);
 	return (first_step);
 }
 
@@ -111,80 +115,134 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 	{
 		if (i == 0)
 			rays[i].direction = rotate_vector(player.direction, -(FOV / 2));
-		else
+		else if (i != WIN_WIDTH / 2)
 			rays[i].direction = rotate_vector(rays[i - 1].direction, ANGLE_PER_PIXEL);
+		else
+			rays[i].direction = player.direction;
 		rays[i].current_coordinates = player.position;
-		rays[i].step_y = distance_to_y_axis(rays[i]);
-		rays[i].step_x = distance_to_x_axis(rays[i]);
+		rays[i].on_x = 0;
+		if (player.position.x - floor(player.position.x) == 0)
+			rays[i].on_x = 1;
+		rays[i].on_y = 0;
+		if (player.position.y - floor(player.position.y) == 0)
+			rays[i].on_y = 1;
+		rays[i].step_y = distance_to_y_axis(rays[i].on_y, rays[i].current_coordinates, rays[i].direction);
+		rays[i].step_x = distance_to_x_axis(rays[i].on_x, rays[i].current_coordinates, rays[i].direction);
 		rays[i].travelled_distance = 0;
 		i++;
 	}
+//	printf("INITIAL RAY STATS:\n");
+//	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
+			//rays[450].current_coordinates.x, rays[450].current_coordinates.y, rays[450].direction.x, rays[450].direction.y, rays[450].on_x, rays[450].on_y, \
+		//	rays[450].travelled_distance, rays[450].step_x, rays[450].step_y);
 }
 
-void	keep_going(t_ray ray, char **map)
+void	keep_going(t_player player, t_ray *ray, char **map)
 {
 	int		wall_hit;
 	int		number_of_steps;
 	float	initial_distance_to_y;
 	float	initial_distance_to_x;
 
-	initial_distance_to_y = distance_to_y_axis(ray);
-	initial_distance_to_x = distance_to_x_axis(ray);
-	//wall_hit = check_vertical_wall(ray.current_coordinates, ray.direction, map);
-	//wall_hit = check_horizontal_wall(ray.current_coordinates, ray.direction, map);
-	wall_hit = 1;
-	(void)map;
+//	printf("START OF DDA RAY STATS:\n");
+//	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
+		//	ray->current_coordinates.x, ray->current_coordinates.y, ray->direction.x, ray->direction.y, ray->on_x, ray->on_y, \
+		//	ray->travelled_distance, ray->step_x, ray->step_y);
+	initial_distance_to_y = distance_to_y_axis(ray->on_y, player.position, player.direction);
+	initial_distance_to_x = distance_to_x_axis(ray->on_x, player.position, player.direction);
 	number_of_steps = 0;
+	wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
+	if (wall_hit == 0)
+		wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
 	while (wall_hit == 0)
 	{
-		if (initial_distance_to_y + number_of_steps * ray.step_x < initial_distance_to_x + number_of_steps * ray.step_y)
+		if (initial_distance_to_y + number_of_steps * ray->step_x < initial_distance_to_x + number_of_steps * ray->step_y)
 		{
-			ray.travelled_distance = initial_distance_to_y + number_of_steps * ray.step_x;
 			number_of_steps++;
-		//	ray.current_coordinates.y++;
-		//	wall_hit = check_vertical_wall(ray);
+			ray->travelled_distance = initial_distance_to_y + number_of_steps * ray->step_x;
+//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
+			if (ray->on_y == 0)
+			{
+				if (ray->direction.x < 0)
+					ray->current_coordinates.x = floor(ray->current_coordinates.x);
+				else
+					ray->current_coordinates.x = ceil(ray->current_coordinates.x);
+				ray->on_y = 1;
+			}
+			else
+			{
+				if (ray->direction.x > 0)
+					ray->current_coordinates.x += TILE_SIZE;
+				else
+					ray->current_coordinates.x -= TILE_SIZE;
+			}
+			ray->on_x = 0;
+			wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
+//			printf("hit coordinates: %f, %f\n", ray->current_coordinates.x, ray->current_coordinates.y);
 		}
 		else
 		{
-			ray.travelled_distance = initial_distance_to_x + number_of_steps * ray.step_y;
 			number_of_steps++;
-		//	ray.current_coordinates.x++;
-		//	wall_hit = check_horizontal_wall(ray);
+			ray->travelled_distance = initial_distance_to_x + number_of_steps * ray->step_y;
+//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
+			if (ray->on_x == 0)
+			{
+				if (ray->direction.y < 0)
+					ray->current_coordinates.y = floor(ray->current_coordinates.y);
+				else
+					ray->current_coordinates.y = ceil(ray->current_coordinates.y);
+				ray->on_x = 1;
+			}
+			else
+			{
+				if (ray->direction.y > 0)
+					ray->current_coordinates.y += TILE_SIZE;
+				else
+					ray->current_coordinates.y -= TILE_SIZE;
+			}
+			ray->on_y = 0;
+			wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
+//			printf("hit coordinates: %f, %f\n", ray->current_coordinates.x, ray->current_coordinates.y);
 		}
 	}
+//	printf("wall hit: %d\n\n", wall_hit);
 }
 
-void	first_step(t_ray ray)
+void	first_step(t_ray *ray)
 {
-	if (distance_to_x_axis(ray) < distance_to_y_axis(ray))
+	if (distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction) < distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction))
 	{
-		ray.travelled_distance += distance_to_x_axis(ray);
-		if (ray.direction.y < 0)
-			ray.current_coordinates.y = floor(ray.current_coordinates.y);
+		ray->travelled_distance += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
+		if (ray->direction.y < 0)
+			ray->current_coordinates.y = floor(ray->current_coordinates.y);
 		else
-			ray.current_coordinates.y = ceil(ray.current_coordinates.y);
+			ray->current_coordinates.y = ceil(ray->current_coordinates.y);
+		ray->on_x = 1;
 	}
-	else
+	else if (distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction) < distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction))
 	{
-		ray.travelled_distance += distance_to_y_axis(ray);
-		if (ray.direction.x < 0)
-			ray.current_coordinates.x = floor(ray.current_coordinates.x);
+		ray->travelled_distance += distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
+		if (ray->direction.x < 0)
+			ray->current_coordinates.x = floor(ray->current_coordinates.x);
 		else
-			ray.current_coordinates.x = ceil(ray.current_coordinates.x);
+			ray->current_coordinates.x = ceil(ray->current_coordinates.x);
+		ray->on_y = 1;
 	}
-	ray.step_x = calc_step_x(ray.direction, 1);
-	ray.step_y = calc_step_y(ray.direction, 1);
+	ray->step_x = calc_step_x(ray->direction, 1);
+	ray->step_y = calc_step_y(ray->direction, 1);
 }
 
 int	start_dda(t_data *cub)
 {
+	//first_step(&cub->rays[450]);
+	//keep_going(cub->player, &cub->rays[450], cub->map);
 	int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
 	{ 
-		first_step(cub->rays[i]);
-		keep_going(cub->rays[i], cub->map);
+		first_step(&cub->rays[i]);
+		keep_going(cub->player, &cub->rays[i], cub->map);
 		i++;
 	}
 	return (0);

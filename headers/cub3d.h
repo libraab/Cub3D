@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 21:21:07 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/01/31 02:37:10 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ enum
 enum
 {
 	no_wall,
-	wall_below,
 	wall_above,
 	wall_right,
+	wall_below,
 	wall_left
 };
 
@@ -98,6 +98,8 @@ typedef struct s_ray
 	float		travelled_distance;
 	float		step_x;
 	float		step_y;
+	int			on_x;
+	int			on_y;
 }				t_ray;
 
 typedef struct s_data
@@ -112,7 +114,7 @@ typedef struct s_data
 	int			floor;
 	int			ceiling;
 	int			mouse_x;
-t_player	player;
+	t_player	player;
 	t_ray		rays[WIN_WIDTH];
 }				t_data;
 
@@ -167,8 +169,8 @@ int				ft_get_height(char *file);
 //======================================================//
 float			calc_step_x(t_vector ray_direction, float x_component);
 float			calc_step_y(t_vector ray_direction, float y_component);
-float			distance_to_y_axis(t_ray ray);
-float			distance_to_x_axis(t_ray ray);
+float			distance_to_y_axis(int on_y, t_vector position, t_vector direction);
+float			distance_to_x_axis(int on_x, t_vector position, t_vector direction);
 t_vector		starting_direction(char player_character);
 t_vector		rotate_vector(t_vector to_rotate, float angle);
 void			cast_rays(t_ray rays[WIN_WIDTH], t_player player);
@@ -223,4 +225,5 @@ int				ft_tabwidth(char **str);
 
 int				start_dda(t_data *cub);
 void			print_green_dot(t_data *cub, float x, float y);
+int				is_inside_map(char c);
 #endif
