@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 01:40:32 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 04:05:56 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,6 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 		rays[i].travelled_distance = 0;
 		i++;
 	}
-	printf("INITIAL RAY STATS:\n");
-	printf("pos: %d, %d, dir: %f, %f on x: %d on y: %d distance to x: %f, distance to y: %f\n", \
-			  rays[250].current_coordinates.x, rays[250].current_coordinates.y, rays[250].direction.x, rays[250].direction.y,\
-			  rays[250].on_x, rays[250].on_y, rays[250].step_x, rays[250].step_y);
 }
 
 void	keep_going(t_player player, t_ray *ray, char **map)
@@ -144,16 +140,18 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 	float	initial_distance_to_y;
 	float	initial_distance_to_x;
 
-//	printf("START OF DDA RAY STATS:\n");
 //	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
 		//	ray->current_coordinates.x, ray->current_coordinates.y, ray->direction.x, ray->direction.y, ray->on_x, ray->on_y, \
 		//	ray->travelled_distance, ray->step_x, ray->step_y);
 	initial_distance_to_y = distance_to_y_axis(ray->on_y, player.position, player.direction);
 	initial_distance_to_x = distance_to_x_axis(ray->on_x, player.position, player.direction);
+	printf("distances to axis after first step: x: %f y: %f\n", initial_distance_to_x, initial_distance_to_y);
 	number_of_steps = 0;
-	wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
-	if (wall_hit == 0)
+	if (ray->on_y)
+		wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
+	else
 		wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
+	printf("wall %d hit at a distance of %f\n", wall_hit, ray->travelled_distance);
 	while (wall_hit == 0)
 	{
 		if (initial_distance_to_y + number_of_steps * ray->step_x < initial_distance_to_x + number_of_steps * ray->step_y)
@@ -205,27 +203,27 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 //			printf("hit coordinates: %f, %f\n", ray->current_coordinates.x, ray->current_coordinates.y);
 		}
 	}
-//	printf("wall hit: %d\n\n", wall_hit);
 }
 
 void	first_step(t_ray *ray)
 {
+	printf("distances to axis before first step: x: %f y: %f\n", ray->step_x, ray->step_y);
 	if (distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction) < distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction))
 	{
 		ray->travelled_distance += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
-		if (ray->direction.y < 0)
+		/*if (ray->direction.y < 0)
 			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE);
 		else
-			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE) + TILE_SIZE;
+			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE) + TILE_SIZE;*/
 		ray->on_x = 1;
 	}
 	else if (distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction) < distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction))
 	{
 		ray->travelled_distance += distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
-		if (ray->direction.x < 0)
+		/*if (ray->direction.x < 0)
 			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE);
 		else
-			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE) + TILE_SIZE;
+			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE) + TILE_SIZE;*/
 		ray->on_y = 1;
 	}
 	ray->step_x = calc_step_x(ray->direction, 1);
@@ -234,9 +232,9 @@ void	first_step(t_ray *ray)
 
 int	start_dda(t_data *cub)
 {
-	//first_step(&cub->rays[250]);
-	//keep_going(cub->player, &cub->rays[250], cub->map);
-	int	i;
+	first_step(&cub->rays[450]);
+	keep_going(cub->player, &cub->rays[450], cub->map);
+	/*int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
@@ -244,7 +242,6 @@ int	start_dda(t_data *cub)
 		first_step(&cub->rays[i]);
 		keep_going(cub->player, &cub->rays[i], cub->map);
 		i++;
-	}
-//	printf("unit step x: %f, unit step y: %f\n", cub->rays[250].step_x, cub->rays[250].step_y);
+	}*/
 	return (0);
 }
