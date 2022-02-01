@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 14:38:19 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:06:21 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_error(0);
 	ft_init_data(&cub, av);
-	ft_valid_chars(&cub);
 	ft_valid_walls(&cub);
 	ft_define_img(&cub);
 	ft_print_all(&cub);
