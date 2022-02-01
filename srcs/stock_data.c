@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   stock_data.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 15:06:08 by bleotard         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/cub3d.h"
 
 void	ft_init_img(t_img *img)
@@ -52,6 +40,7 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	cub->sheet.img = mlx_new_image(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	ft_stock_map(cub, av[1]);
+	ft_valid_chars(cub);
 	ft_stock_texture(cub, av[1]);
 	ft_init_img(&cub->wall);
 	ft_init_img(&cub->frame);

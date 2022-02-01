@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 14:34:37 by abouhlel         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/cub3d.h"
 
 void	ft_valid_chars(t_data *cub)
@@ -38,7 +26,6 @@ void	ft_valid_chars(t_data *cub)
 		ft_error(5);
 }
 
-/*THIS CHECK SEGFAULTS IF A CHARACTER IS BOTTOM RIGHT OF THE MAP AND OUTSIDE OF IT (IN THE MIDDLE OF EMPTY TILES)*/
 void	ft_valid_walls(t_data *cub)
 {
 	int	i;

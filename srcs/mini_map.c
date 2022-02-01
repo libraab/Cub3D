@@ -1,22 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mini_map.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 11:27:01 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 21:00:20 by bleotard         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/cub3d.h"
 
 void	ft_update_map(t_data *cub, int x, int y)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
 	while (cub->map[++i])
 	{
@@ -52,7 +40,7 @@ void	ft_draw_frame(t_data *cub)
 	}
 }
 
-int		is_inside_map(char c)
+int	is_inside_map(char c)
 {
 	if (!c)
 		return (0);

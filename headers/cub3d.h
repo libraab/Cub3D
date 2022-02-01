@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 14:23:48 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:44:30 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,20 @@ typedef struct s_img
 typedef struct s_player
 {
 	t_coordinates	position;
-	t_vector	direction;
-	t_img		img;
-}				t_player;
+	t_vector		direction;
+	t_img			img;
+}					t_player;
 
 typedef struct s_ray
 {
-	t_vector	direction;
+	t_vector		direction;
 	t_coordinates	current_coordinates;
-	float		travelled_distance;
-	float		step_x;
-	float		step_y;
-	int			on_x;
-	int			on_y;
-}				t_ray;
+	float			travelled_distance;
+	float			step_x;
+	float			step_y;
+	int				on_x;
+	int				on_y;
+}					t_ray;
 
 typedef struct s_data
 {
@@ -117,7 +117,7 @@ typedef struct s_data
 	t_img		wall;
 	t_img		sheet;
 	t_img		frame;
-	t_img		north_wall;;
+	t_img		north_wall;
 	int			floor;
 	int			ceiling;
 	int			mouse_x;
@@ -229,9 +229,8 @@ int				ft_tabwidth(char **str);
 //======================================================//
 //					* F U N C T I O N S *				//
 //======================================================//
-
 int				start_dda(t_data *cub);
 void			print_green_dot(t_data *cub, int x, int y);
 int				is_inside_map(char c);
-void    ft_print_texture(t_data *cub);
+void			ft_print_texture(t_data *cub);
 #endif

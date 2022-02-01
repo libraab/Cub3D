@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 09:37:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 03:40:14 by bleotard         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/cub3d.h"
 
 void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float distance)

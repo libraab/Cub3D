@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/26 09:50:23 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/27 17:33:46 by abouhlel         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/cub3d.h"
 
 void	draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour)
@@ -64,6 +52,5 @@ void	ft_print_all(t_data *cub)
 	draw_floor(cub);
 	draw_ceiling(cub);
 	ft_draw_minimap(cub);
-	//ft_draw_frame(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }

@@ -2,6 +2,7 @@
 
 float	calc_dist_to_screen(void)
 {
+<<<<<<< Updated upstream
 	return (WIN_WIDTH / tan(FOV));
 }
 
@@ -17,4 +18,7 @@ float	calc_projected_wall_height(float distance_to_wall)
 	distorted_wall_height = (distance_to_screen / distance_to_wall) * real_wall_height;
 	projected_wall_height = distorted_wall_height * cos(FOV / 2);
 	return (projected_wall_height);
+=======
+	return ((WIN_WIDTH / 2) / (tan (FOV / 2)));
+>>>>>>> Stashed changes
 }

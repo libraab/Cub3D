@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 03:28:22 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:48:30 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 
 void	print_green_dot(t_data *cub, int x, int y)
 {
-		ft_put_img2(&cub->sheet, GREEN, x, y);
-		ft_put_img2(&cub->sheet, GREEN, x + 1, y);
-		ft_put_img2(&cub->sheet, GREEN, x, y + 1);
-		ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
-		mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+	ft_put_img2(&cub->sheet, GREEN, x, y);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
+	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
 
 int	player_movement(int keycode, t_data *cub)
