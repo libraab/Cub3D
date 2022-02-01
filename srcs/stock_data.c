@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 14:29:20 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/31 02:03:34 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 01:04:46 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_player	init_player(char **map)
 {
 	int			i;
 	int			j;
-	t_player	newborn;
+	t_player	player;
 
 	i = 0;
 	while (map[i])
@@ -34,16 +34,16 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				newborn.position.y = (float)i * TILE_SIZE;
-				newborn.position.x = (float)j * TILE_SIZE;
-				newborn.direction = starting_direction(map[i][j]);
+				player.position.y = i * TILE_SIZE;
+				player.position.x = j * TILE_SIZE;
+				player.direction = starting_direction(map[i][j]);
 			}
 			j++;
 		}
 		i++;
 	}
-	ft_init_img(&newborn.img);
-	return (newborn);
+	ft_init_img(&player.img);
+	return (player);
 }
 
 void	ft_init_data(t_data *cub, char **av)

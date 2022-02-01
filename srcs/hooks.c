@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 00:18:26 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 01:15:12 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ int	mouse_move(int x, int y, t_data *cub)
 
 int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map)
 {
-	if (is_inside_map(map[position.y / TILE_SIZE][position.x / TILE_SIZE]))
+	int	coord_x;
+	int	coord_y;
+
+	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
+	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
+	if (is_inside_map(map[coord_y][coord_x]))
 	{
-		if (direction.y > 0 && map[position.y / TILE_SIZE + 1][position.x / TILE_SIZE] == '1')
+		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
-		else if (direction.y < 0 && map[position.y / TILE_SIZE - 1][position.x / TILE_SIZE] == '1')
+		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
 			return (wall_above);
 	}
 	return (no_wall);
@@ -86,11 +91,16 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 
 int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 {
-	if (is_inside_map(map[position.y / TILE_SIZE][position.x / TILE_SIZE]))
+	int	coord_x;
+	int	coord_y;
+
+	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
+	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
+	if (is_inside_map(map[coord_y][coord_x]))
 	{
-		if (direction.x > 0 && map[position.y / TILE_SIZE][position.x / TILE_SIZE + 1] == '1')
+		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
-		else if (direction.x < 0 && map[position.y / TILE_SIZE][position.x / TILE_SIZE - 1] == '1')
+		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
 			return (wall_left);
 	}
 	return (no_wall);
