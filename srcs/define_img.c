@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:24:24 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 19:09:18 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:16:18 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_define_img(t_data *cub)
 	cub->wall.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/blue.xpm", &cub->wall.width, &cub->wall.height);
 	cub->frame.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/yellow.xpm", &cub->frame.width, &cub->frame.height);
 	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/minimap/red.xpm", &cub->player.img.width, &cub->player.img.height);
+	cub->north_wall.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/mur1.xpm", &cub->north_wall.width, &cub->north_wall.height);
 }
 
 void	ft_pixel_put(t_info *data, int x, int y, int color)

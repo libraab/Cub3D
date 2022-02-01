@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:17:02 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 22:24:11 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:34:37 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ void	ft_valid_chars(t_data *cub)
 		while (cub->map[i][++j])
 		{
 			if (cub->map[i][j] != ' ' && cub->map[i][j] != '0'
-				&& cub->map[i][j] != '1' && cub->map[i][j] != 'E'
-				&& cub->map[i][j] != 'N' && cub->map[i][j] != 'S'
-				&& cub->map[i][j] != 'W')
+				&& cub->map[i][j] != '1' && !ft_is_direction(cub->map[i][j]))
 				ft_error(3);
-			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'S'
-				|| cub->map[i][j] == 'E' || cub->map[i][j] == 'W')
+			if (ft_is_direction(cub->map[i][j]))
 				count++;
 		}
 	}
@@ -55,7 +52,7 @@ void	ft_valid_walls(t_data *cub)
 		{
 			if (cub->map[i][j] == '0' && i == 0 && j == 0)
 				ft_error(6);
-			if (cub->map[i][j] == '0')
+			if (cub->map[i][j] == '0' || ft_is_direction(cub->map[i][j]))
 			{
 				if (!ft_north_wall(cub->map, i, j)
 					|| !ft_south_wall(cub->map, i, j)

@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/01/31 18:11:05 by bleotard         ###   ########.fr        #
+#    Updated: 2022/02/01 14:30:16 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS				=	check_textures.c \
 						moves.c \
 						parsing.c \
 						stock_data.c \
-						utils.c
+						utils.c \
+						#printf_texture.c 
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})

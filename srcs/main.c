@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:18:11 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/01/30 20:44:17 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:38:19 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_hook(cub.win_ptr, ON_KEYDOWN, 0, player_movement, &cub);
 	mlx_hook(cub.win_ptr, ON_MOUSEMOVE, 0, mouse_move, &cub);
+	//ft_print_texture(cub);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
 	ft_free_double(cub.map);
