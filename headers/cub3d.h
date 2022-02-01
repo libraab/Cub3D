@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 14:44:30 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/01 17:09:57 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,5 +232,5 @@ int				ft_tabwidth(char **str);
 int				start_dda(t_data *cub);
 void			print_green_dot(t_data *cub, int x, int y);
 int				is_inside_map(char c);
-void			ft_print_texture(t_data *cub);
+void			ft_print_texture(t_data *cub, int x);
 #endif
