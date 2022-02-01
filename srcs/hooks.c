@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 01:15:12 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 01:19:29 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 	return (no_wall);
 }
 
-void	print_green_dot(t_data *cub, float x, float y)
+void	print_green_dot(t_data *cub, int x, int y)
 {
 		ft_put_img2(&cub->sheet, GREEN, x, y);
 		ft_put_img2(&cub->sheet, GREEN, x + 1, y);

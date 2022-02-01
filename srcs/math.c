@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:45:21 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 00:34:03 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 01:40:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,18 +214,18 @@ void	first_step(t_ray *ray)
 	{
 		ray->travelled_distance += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
 		if (ray->direction.y < 0)
-			ray->current_coordinates.y = floor(ray->current_coordinates.y);
+			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE);
 		else
-			ray->current_coordinates.y = ceil(ray->current_coordinates.y);
+			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE) + TILE_SIZE;
 		ray->on_x = 1;
 	}
 	else if (distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction) < distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction))
 	{
 		ray->travelled_distance += distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
 		if (ray->direction.x < 0)
-			ray->current_coordinates.x = floor(ray->current_coordinates.x);
+			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE);
 		else
-			ray->current_coordinates.x = ceil(ray->current_coordinates.x);
+			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE) + TILE_SIZE;
 		ray->on_y = 1;
 	}
 	ray->step_x = calc_step_x(ray->direction, 1);
