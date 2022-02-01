@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 01:19:29 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 02:01:59 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	if (is_inside_map(map[coord_y][coord_x]))
+	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
 		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
@@ -96,7 +96,7 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	if (is_inside_map(map[coord_y][coord_x]))
+	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
 		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
