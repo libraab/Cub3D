@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/01 14:53:49 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/02 09:51:29 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ OBJS				= ${SRC:.c=.o}
 #  ╚═════╝     ╚═════╝     ╚═╝     ╚═╝    ╚═╝         ╚═╝    ╚══════╝
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS  			= -Wall -Wextra -Werror -g #-fsanitize=address
 RM					= rm -rf
 MAKE_EXT			= @make -s --no-print-directory -C
 

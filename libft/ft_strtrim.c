@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 09:05:29 by abouhlel          #+#    #+#             */
-/*   Updated: 2021/11/30 16:05:17 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/02 09:51:49 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char	*ft_strtrim(char *s1, char *set)
 	while (start < end)
 		str[i++] = s1[start++];
 	str[i] = 0;
+	free (s1);
 	return (str);
 }
