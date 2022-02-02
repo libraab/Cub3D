@@ -2,3 +2,4 @@
 *.swp
 cub3d
 *.dSYM/
+libft/libft.a

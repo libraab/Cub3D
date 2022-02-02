@@ -1,9 +1,9 @@
 #include "../headers/cub3d.h"
 
-void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float distance)
+void	calc_deltas(t_vector direction, int *delta_x, int *delta_y, int distance)
 {
-	float		step_x;
-	float		step_y;
+	int		step_x;
+	int		step_y;
 
 	step_x = calc_step_x(direction, 1);
 	step_y = calc_step_y(direction, 1);
@@ -13,8 +13,8 @@ void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float dista
 
 void	move(t_vector movement_direction, t_player *player, char **map)
 {
-	float		delta_x;
-	float		delta_y;
+	int		delta_x;
+	int		delta_y;
 
 	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
