@@ -1,28 +1,28 @@
 #include "../headers/cub3d.h"
 
-unsigned long	calc_step_x(t_vector ray_direction, unsigned long x_component)
+float	calc_step_x(t_vector ray_direction, float x_component)
 {
-	unsigned long	step;
+	float	step;
 
 	if (ray_direction.x != 0)
 		step = x_component * sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
 	else
-		step = ULONG_MAX;
+		step = FLT_MAX;
 	return (step);
 }
 
-unsigned long	calc_step_y(t_vector ray_direction, unsigned long y_component)
+float	calc_step_y(t_vector ray_direction, float y_component)
 {
-	unsigned long	step;
+	float	step;
 
 	if (ray_direction.y != 0)
 		step = y_component * sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
 	else
-		step = ULONG_MAX;
+		step = FLT_MAX;
 	return (step);
 }
 
-unsigned long	distance_to_x_axis(int on_x, t_coordinates position, t_vector direction)
+float	distance_to_x_axis(int on_x, t_coordinates position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
@@ -30,7 +30,7 @@ unsigned long	distance_to_x_axis(int on_x, t_coordinates position, t_vector dire
 	if (on_x == 1)
 		return (0);
 	else if (direction.y == 0)
-		return (ULONG_MAX);
+		return (FLT_MAX);
 	else if (direction.y < 0)
 		offset = position.y % TILE_SIZE;
 	else
@@ -39,15 +39,15 @@ unsigned long	distance_to_x_axis(int on_x, t_coordinates position, t_vector dire
 	return (first_step);
 }
 
-unsigned long	distance_to_y_axis(int on_y, t_coordinates position, t_vector direction)
+float	distance_to_y_axis(int on_y, t_coordinates position, t_vector direction)
 {
-	unsigned long	offset;
-	unsigned long	first_step;
+	float	offset;
+	float	first_step;
 
 	if (on_y == 1)
 		return (0);
 	else if (direction.x == 0)
-		return (ULONG_MAX);
+		return (FLT_MAX);
 	else if (direction.x < 0)
 		offset = position.x % TILE_SIZE;
 	else
@@ -116,7 +116,7 @@ void	cast_rays(t_ray rays[WIN_WIDTH], t_player player)
 			rays[i].on_x = 1;
 		rays[i].step_y = distance_to_y_axis(rays[i].on_y, rays[i].current_coordinates, rays[i].direction);
 		rays[i].step_x = distance_to_x_axis(rays[i].on_x, rays[i].current_coordinates, rays[i].direction);
-		rays[i].distance_travelled = 0;
+		rays[i].travelled_distance = 0;
 		i++;
 	}
 }
@@ -125,28 +125,28 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 {
 	int		wall_hit;
 	int		number_of_steps;
-	unsigned long	initial_distance_to_y;
-	unsigned long	initial_distance_to_x;
+	float	initial_distance_to_y;
+	float	initial_distance_to_x;
 
 //	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
 		//	ray->current_coordinates.x, ray->current_coordinates.y, ray->direction.x, ray->direction.y, ray->on_x, ray->on_y, \
-		//	ray->distance_travelled, ray->step_x, ray->step_y);
+		//	ray->travelled_distance, ray->step_x, ray->step_y);
 	initial_distance_to_y = distance_to_y_axis(ray->on_y, player.position, player.direction);
 	initial_distance_to_x = distance_to_x_axis(ray->on_x, player.position, player.direction);
-	printf("distances to axis after first step: x: %lu y: %lu\n", initial_distance_to_x, initial_distance_to_y);
+	printf("distances to axis after first step: x: %f y: %f\n", initial_distance_to_x, initial_distance_to_y);
 	number_of_steps = 0;
 	if (ray->on_y)
 		wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
 	else
 		wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
-	printf("wall %d hit at a distance of %d\n", wall_hit, ray->distance_travelled);
+	printf("wall %d hit at a distance of %f\n", wall_hit, ray->travelled_distance);
 	while (wall_hit == 0)
 	{
 		if (initial_distance_to_y + number_of_steps * ray->step_x < initial_distance_to_x + number_of_steps * ray->step_y)
 		{
 			number_of_steps++;
-			ray->distance_travelled = initial_distance_to_y + number_of_steps * ray->step_x;
-//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->distance_travelled);
+			ray->travelled_distance = initial_distance_to_y + number_of_steps * ray->step_x;
+//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
 			if (ray->on_y == 0)
 			{
 				if (ray->direction.x < 0)
@@ -169,8 +169,8 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 		else
 		{
 			number_of_steps++;
-			ray->distance_travelled = initial_distance_to_x + number_of_steps * ray->step_y;
-//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->distance_travelled);
+			ray->travelled_distance = initial_distance_to_x + number_of_steps * ray->step_y;
+//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
 			if (ray->on_x == 0)
 			{
 				if (ray->direction.y < 0)
@@ -195,10 +195,10 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 
 void	first_step(t_ray *ray)
 {
-	printf("distances to axis before first step: x: %lu y: %lu\n", ray->step_x, ray->step_y);
+	printf("distances to axis before first step: x: %f y: %f\n", ray->step_x, ray->step_y);
 	if (distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction) < distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction))
 	{
-		ray->distance_travelled += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
+		ray->travelled_distance += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
 		/*if (ray->direction.y < 0)
 			ray->current_coordinates.y = ray->current_coordinates.y - (ray->current_coordinates.y % TILE_SIZE);
 		else
@@ -207,7 +207,7 @@ void	first_step(t_ray *ray)
 	}
 	else if (distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction) < distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction))
 	{
-		ray->distance_travelled += distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
+		ray->travelled_distance += distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
 		/*if (ray->direction.x < 0)
 			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE);
 		else

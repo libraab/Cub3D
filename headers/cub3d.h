@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/02 17:21:45 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/01 17:09:57 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ typedef struct s_ray
 {
 	t_vector		direction;
 	t_coordinates	current_coordinates;
-	int				distance_travelled;
-	unsigned long	step_x;
-	unsigned long	step_y;
+	float			travelled_distance;
+	float			step_x;
+	float			step_y;
 	int				on_x;
 	int				on_y;
 }					t_ray;
@@ -174,10 +174,10 @@ int				ft_get_height(char *file);
 //======================================================//
 //						* M A T H *						//
 //======================================================//
-unsigned long			calc_step_x(t_vector ray_direction, unsigned long x_component);
-unsigned long			calc_step_y(t_vector ray_direction, unsigned long y_component);
-unsigned long			distance_to_y_axis(int on_y, t_coordinates position, t_vector direction);
-unsigned long			distance_to_x_axis(int on_x, t_coordinates position, t_vector direction);
+float			calc_step_x(t_vector ray_direction, float x_component);
+float			calc_step_y(t_vector ray_direction, float y_component);
+float			distance_to_y_axis(int on_y, t_coordinates position, t_vector direction);
+float			distance_to_x_axis(int on_x, t_coordinates position, t_vector direction);
 t_vector		starting_direction(char player_character);
 t_vector		rotate_vector(t_vector to_rotate, float angle);
 void			cast_rays(t_ray rays[WIN_WIDTH], t_player player);
@@ -195,7 +195,7 @@ void			ft_draw_minimap(t_data *cub);
 //======================================================//
 //						* M O V E S *					//
 //======================================================//
-void			calc_deltas(t_vector movement_direction, int *delta_x, int *delta_y, int distance);
+void			calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y, float distance);
 void			move_forward(t_player *player, char **map);
 void			move_left(t_player *player, char **map);
 void			move_right(t_player *player, char **map);
