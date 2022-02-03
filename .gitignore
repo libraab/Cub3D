@@ -1,4 +1,5 @@
 *.o
 *.swp
 cub3d
+libft/libft.a
 *.dSYM/

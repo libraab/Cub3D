@@ -45,7 +45,7 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_init_img(&cub->wall);
 	ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map);
-	cast_rays(cub->rays, cub->player);
+	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 	cub->mouse_x = 0;
 }
@@ -105,3 +105,42 @@ void	ft_stock_texture(t_data *cub, char *file)
 	close (fd);
 	ft_check_double_texture(cub, -1, 0);
 }
+
+t_vector	starting_direction(char player_character)
+{
+	t_vector	direction;
+
+	direction.x = 0;
+	direction.y = 0;
+	if (player_character == 'N')
+	{
+		direction.x = 0;
+		direction.y = -1;
+	}
+	else if (player_character == 'E')
+	{
+		direction.x = 1;
+		direction.y = 0;
+	}
+	else if (player_character == 'S')
+	{
+		direction.x = 0;
+		direction.y = 1;
+	}
+	else if (player_character == 'W')
+	{
+		direction.x = -1;
+		direction.y = 0;
+	}
+	return (direction);
+}
+
+t_vector	rotate_vector(t_vector to_rotate, float angle)
+{
+	t_vector	rotated;
+
+	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
+	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);
+	return (rotated);
+}
+

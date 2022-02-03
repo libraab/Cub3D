@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/01 17:09:57 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/03 15:00:32 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_data
 	int			ceiling;
 	int			mouse_x;
 	t_player	player;
-	t_ray		rays[WIN_WIDTH];
+	t_ray		ray[WIN_WIDTH];
 }				t_data;
 
 //======================================================//
@@ -152,7 +152,7 @@ void			ft_put_img2(t_img *dest, int color, int x, int y);
 //						* D R A W *						//
 //======================================================//
 void			ft_print_all(t_data *cub);
-void			draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour);
+void			draw_fov(t_ray ray[WIN_WIDTH], t_data *cub, int colour);
 void			draw_floor(t_data *cub);
 void			draw_ceiling(t_data *cub);
 //======================================================//
@@ -180,7 +180,7 @@ float			distance_to_y_axis(int on_y, t_coordinates position, t_vector direction)
 float			distance_to_x_axis(int on_x, t_coordinates position, t_vector direction);
 t_vector		starting_direction(char player_character);
 t_vector		rotate_vector(t_vector to_rotate, float angle);
-void			cast_rays(t_ray rays[WIN_WIDTH], t_player player);
+void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
 //======================================================//
 //						* M E M O R Y *					//
 //======================================================//
