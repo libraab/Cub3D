@@ -22,24 +22,11 @@ int	ft_tablen(char **str)
 	return (i);
 }
 
-int	ft_tabwidth(char **str)
+t_vector	rotate_vector(t_vector to_rotate, float angle)
 {
-	int	i;
-	int	j;
-	int	width;
+	t_vector	rotated;
 
-	i = 0;
-	width = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (j > width)
-				width = j;
-			j++;
-		}
-		i++;
-	}
-	return (width);
+	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
+	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);
+	return (rotated);
 }

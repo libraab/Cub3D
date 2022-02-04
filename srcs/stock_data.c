@@ -40,7 +40,6 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	cub->sheet.img = mlx_new_image(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	ft_stock_map(cub, av[1]);
-	ft_valid_chars(cub);
 	ft_stock_texture(cub, av[1]);
 	ft_init_img(&cub->wall);
 	ft_init_img(&cub->frame);
@@ -48,6 +47,48 @@ void	ft_init_data(t_data *cub, char **av)
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 	cub->mouse_x = 0;
+}
+
+int	get_map_width(char **map)
+{
+	int	i;
+	int	width;
+
+	width = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (width <= (int)ft_strlen(map[i]))
+			width = (int)ft_strlen(map[i]);
+		i++;
+	}
+	return (width);
+}
+
+void	fill_blanks(char **map)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (map[i])
+	{
+		tmp = malloc(get_map_width(map) * sizeof(char) + 1);
+		if (!tmp)
+			return ;
+		j = 0;
+		while (j < (int)ft_strlen(map[i]) + 1)
+		{
+			tmp[j] = map[i][j];	
+			j++;
+		}
+		while (j < get_map_width(map))
+			tmp[j++] = '\0';
+		free(map[i]);
+		map[i] = tmp;
+		i++;
+	}
 }
 
 void	ft_stock_map(t_data *cub, char *file)
@@ -74,8 +115,10 @@ void	ft_stock_map(t_data *cub, char *file)
 		cub->map[i++] = ft_strdup(line);
 		free (line);
 	}
-	close (fd);
+	cub->map[i] = NULL;
+	fill_blanks(cub->map);
 	ft_valid_chars(cub);
+	close (fd);
 }
 
 void	ft_stock_texture(t_data *cub, char *file)
@@ -134,13 +177,3 @@ t_vector	starting_direction(char player_character)
 	}
 	return (direction);
 }
-
-t_vector	rotate_vector(t_vector to_rotate, float angle)
-{
-	t_vector	rotated;
-
-	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
-	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);
-	return (rotated);
-}
-
