@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/03 23:46:46 by bleotard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../headers/cub3d.h"
 
 int	ft_exit(void)
@@ -60,48 +72,6 @@ int	mouse_move(int x, int y, t_data *cub)
 	return (0);
 }
 
-int	get_map_width(char **map)
-{
-	int	i;
-	int	width;
-
-	width = 0;
-	i = 0;
-	while (map[i])
-	{
-		if (width < (int)ft_strlen(map[i]))
-			width = (int)ft_strlen(map[i]);
-		i++;
-	}
-	return (width);
-}
-
-void	fill_blanks(char **map)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (map[i])
-	{
-		tmp = ft_calloc(get_map_width(map) - (int)ft_strlen(map[i]) + 1, sizeof(char));
-		tmp = ft_strjoin(map[i], tmp);
-		free(map[i]);
-		map[i] = tmp;
-		i++;
-	}
-}
-
-int	get_column_height(char **tab, int column)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i][column])
-		i++;
-	return (i);
-}
-
 int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map)
 {
 	int	coord_x;
@@ -109,9 +79,9 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	printf("x: %d, y: %d, mapx: %d, mapy: %d\n", position.x, position.y, coord_x, coord_y);
-	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]) && coord_y > 0 && coord_x > 0)
+	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
+	//	printf("In check horizontal | x: %d, y: %d, dix y: %f, next tile: %c\n", coord_x, coord_y, direction.y, map[coord_y + 1][coord_x]);
 		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
 		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
@@ -127,9 +97,9 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	printf("x: %d, y: %d, mapx: %d, mapy: %d\n", position.x, position.y, coord_x, coord_y);
-	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]) && coord_y > 0 && coord_x > 0)
+	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
+	//	printf("In check vertical | x: %d, y: %d, dix x: %f, next tile: %c\n", coord_x, coord_y, direction.x, map[coord_y][coord_x + 1]);
 		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
 		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
