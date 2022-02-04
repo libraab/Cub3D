@@ -4,6 +4,9 @@ WE ./textures/pillar1.xpm
 EA ./textures/pillar2.xpm
 F 255 , 100 , 0
 C 225 , 255, 255
-111
-1S1
-111
+
+  111
+111011
+1000S1
+111011
+  111

@@ -1,36 +1,11 @@
 #include "../headers/cub3d.h"
 
-void	calc_deltas(t_vector direction, float *delta_x, float *delta_y, float distance)
-{
-	float		step_x;
-	float		step_y;
-
-	step_x = calc_step_x(direction, 1);
-	step_y = calc_step_y(direction, 1);
-	*delta_x = distance / step_x;
-	*delta_y = distance / step_y;
-}
-
 void	move(t_vector movement_direction, t_player *player, char **map)
 {
-	float		delta_x;
-	float		delta_y;
-
-	calc_deltas(movement_direction, &delta_x, &delta_y, PLAYER_STEP);
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
-	{
-		if (movement_direction.x > 0)
-			player->position.x += delta_x;
-		else
-			player->position.x -= delta_x;
-	}
+		player->position.x += movement_direction.x * PLAYER_STEP;
 	if (check_horizontal_wall(player->position, movement_direction, map) == no_wall)
-	{
-		if (movement_direction.y > 0)
-			player->position.y += delta_y;
-		else
-			player->position.y -= delta_y;
-	}
+		player->position.y += movement_direction.y * PLAYER_STEP;
 }
 
 int	move_player(int keycode, t_data *cub)

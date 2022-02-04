@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/03 15:00:32 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/04 02:30:04 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
-# define PLAYER_STEP 25 
+# define PLAYER_STEP 20 
+//segfault when PLAYER_STEP > TILE_SIZE
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -101,6 +102,7 @@ typedef struct s_ray
 {
 	t_vector		direction;
 	t_coordinates	current_coordinates;
+	int				wall_hit;
 	float			travelled_distance;
 	float			step_x;
 	float			step_y;

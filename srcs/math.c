@@ -22,12 +22,13 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	return (step);
 }
 
-float	distance_to_x_axis(int on_y, t_coordinates position, t_vector direction)
+float	distance_to_x_axis(int on_x, t_coordinates position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
 
-	if (on_y == 1)
+	(void)on_x;
+	if (position.x % TILE_SIZE == 0)
 		offset = TILE_SIZE;
 	else if (direction.y == 0)
 		return (FLT_MAX);
@@ -39,12 +40,13 @@ float	distance_to_x_axis(int on_y, t_coordinates position, t_vector direction)
 	return (first_step);
 }
 
-float	distance_to_y_axis(int on_x, t_coordinates position, t_vector direction)
+float	distance_to_y_axis(int on_y, t_coordinates position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
 
-	if (on_x == 1)
+	(void)on_y;
+	if (position.y % TILE_SIZE == 0)
 		offset = TILE_SIZE;
 	else if (direction.x == 0)
 		return (FLT_MAX);
@@ -69,24 +71,19 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 			ray[i].direction = rotate_vector(ray[i - 1].direction, ANGLE_PER_PIXEL);
 		else
 			ray[i].direction = player.direction;
-		ray[i].current_coordinates = player.position;
+		ray[i].current_coordinates.x = player.position.x;
+		ray[i].current_coordinates.y = player.position.y;
 		ray[i].on_y = 0;
 		if (player.position.x % TILE_SIZE == 0)
 			ray[i].on_y = 1;
 		ray[i].on_x = 0;
 		if (player.position.y % TILE_SIZE == 0)
 			ray[i].on_x = 1;
-		ray[i].step_y = distance_to_y_axis(ray[i].on_y, ray[i].current_coordinates, ray[i].direction);
-		ray[i].step_x = distance_to_x_axis(ray[i].on_x, ray[i].current_coordinates, ray[i].direction);
+		ray[i].step_y = distance_to_x_axis(ray[i].on_x, ray[i].current_coordinates, ray[i].direction);
+		ray[i].step_x = distance_to_y_axis(ray[i].on_y, ray[i].current_coordinates, ray[i].direction);
 		ray[i].travelled_distance = 0;
 		i++;
 	}
-	printf("direction ray at %d, %d towards %f, %f on y: %d, on x: %d, step y: %f, step x: %f\n", ray[450].current_coordinates.x, \
-			ray[450].current_coordinates.y, ray[450].direction.x, ray[450].direction.y, ray[450].on_y, ray[450].on_x, \
-			ray[450].step_x, ray[450].step_y);
-	printf("left ray at %d, %d towards %f, %f on y: %d, on x: %d, step y: %f, step x: %f\n", ray[0].current_coordinates.x, \
-			ray[0].current_coordinates.y, ray[0].direction.x, ray[0].direction.y, ray[0].on_y, ray[0].on_x, \
-			ray[0].step_x, ray[0].step_y);
 }
 
 void	keep_going(t_player player, t_ray *ray, char **map)
@@ -96,23 +93,20 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 	float	initial_distance_to_y;
 	float	initial_distance_to_x;
 
-//	printf("pos: %f, %f, dir: %f, %f on x: %d, on y: %d, distance travelled: %f, step x: %f, step y: %f\n", \
-		//	ray->current_coordinates.x, ray->current_coordinates.y, ray->direction.x, ray->direction.y, ray->on_x, ray->on_y, \
-		//	ray->travelled_distance, ray->step_x, ray->step_y);
-	initial_distance_to_y = distance_to_y_axis(ray->on_y, player.position, player.direction);
 	initial_distance_to_x = distance_to_x_axis(ray->on_x, player.position, player.direction);
+	initial_distance_to_y = distance_to_y_axis(ray->on_y, player.position, player.direction);
 	number_of_steps = 0;
-	if (ray->on_y)
+	if (ray->travelled_distance == initial_distance_to_y)
 		wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
 	else
 		wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
+	printf("wall hit: %d\n", wall_hit);
 	while (wall_hit == 0)
 	{
 		if (initial_distance_to_y + number_of_steps * ray->step_x < initial_distance_to_x + number_of_steps * ray->step_y)
 		{
 			number_of_steps++;
 			ray->travelled_distance = initial_distance_to_y + number_of_steps * ray->step_x;
-//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
 			if (ray->on_y == 0)
 			{
 				if (ray->direction.x < 0)
@@ -130,13 +124,11 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 			}
 			ray->on_x = 0;
 			wall_hit = check_vertical_wall(ray->current_coordinates, ray->direction, map);
-//			printf("hit coordinates: %f, %f\n", ray->current_coordinates.x, ray->current_coordinates.y);
 		}
 		else
 		{
 			number_of_steps++;
 			ray->travelled_distance = initial_distance_to_x + number_of_steps * ray->step_y;
-//			printf("distance travelled after %d steps taken: %f\n", number_of_steps, ray->travelled_distance);
 			if (ray->on_x == 0)
 			{
 				if (ray->direction.y < 0)
@@ -154,14 +146,13 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 			}
 			ray->on_y = 0;
 			wall_hit = check_horizontal_wall(ray->current_coordinates, ray->direction, map);
-//			printf("hit coordinates: %f, %f\n", ray->current_coordinates.x, ray->current_coordinates.y);
 		}
 	}
 }
 
 void	first_step(t_ray *ray)
 {
-	if (distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction) <= distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction))
+	if (distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction) < distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction))
 	{
 		ray->travelled_distance += distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
 		/*if (ray->direction.y < 0)
@@ -179,12 +170,18 @@ void	first_step(t_ray *ray)
 			ray->current_coordinates.x = ray->current_coordinates.x - (ray->current_coordinates.x % TILE_SIZE) + TILE_SIZE;*/
 		ray->on_y = 1;
 	}
-	ray->step_x = calc_step_x(ray->direction, 1);
-	ray->step_y = calc_step_y(ray->direction, 1);
+	ray->step_x = calc_step_x(ray->direction, TILE_SIZE);
+	ray->step_y = calc_step_y(ray->direction, TILE_SIZE);
 }
 
 int	start_dda(t_data *cub)
 {
+	first_step(&cub->ray[450]);
+	keep_going(cub->player, &cub->ray[450], cub->map);
+	/*printf("3 direction ray at %d, %d towards %f, %f on y: %d, on x: %d, step y: %f, step x: %f\n", cub->ray[450].current_coordinates.x, \
+			cub->ray[450].current_coordinates.y, cub->ray[450].direction.x, cub->ray[450].direction.y, cub->ray[450].on_y, cub->ray[450].on_x, \
+			cub->ray[450].step_x, cub->ray[450].step_y);*/
+	//first_step(&cub->ray[0]);
 /*	int	i;
 
 	i = 0;
@@ -194,6 +191,5 @@ int	start_dda(t_data *cub)
 		keep_going(cub->player, &cub->ray[i], cub->map);
 		i++;
 	}*/
-	(void)cub;
 	return (0);
 }

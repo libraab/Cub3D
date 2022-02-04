@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 09:50:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/03 15:00:59 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/03 23:46:46 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
 	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
+	//	printf("In check horizontal | x: %d, y: %d, dix y: %f, next tile: %c\n", coord_x, coord_y, direction.y, map[coord_y + 1][coord_x]);
 		if (direction.y > 0 && map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
 		else if (direction.y < 0 && map[coord_y - 1][coord_x] == '1')
@@ -98,6 +99,7 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
 	if (coord_y < ft_tablen(map) && coord_x < (int)ft_strlen(map[coord_y]))
 	{
+	//	printf("In check vertical | x: %d, y: %d, dix x: %f, next tile: %c\n", coord_x, coord_y, direction.x, map[coord_y][coord_x + 1]);
 		if (direction.x > 0 && map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
 		else if (direction.x < 0 && map[coord_y][coord_x - 1] == '1')
