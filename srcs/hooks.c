@@ -77,12 +77,12 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	if (direction.y < 0 && coord_y > 0)
+	if (direction.y <= 0 && coord_y > 0)
 	{
 		if (map[coord_y - 1][coord_x] == '1')
 			return (wall_above);
 	}
-	else if (direction.y > 0 && coord_y < get_map_height(map))
+	else if (direction.y >= 0 && coord_y < get_map_height(map))
 	{
 		if (map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
@@ -97,12 +97,12 @@ int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
-	if (direction.x < 0 && coord_x > 0)
+	if (direction.x <= 0 && coord_x > 0)
 	{
 		if (map[coord_y][coord_x - 1] == '1')
 			return (wall_left);
 	}
-	else if (direction.x > 0 && coord_x < (int)ft_strlen(map[coord_y]))
+	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y]))
 	{
 		 if (map[coord_y][coord_x + 1] == '1')
 			return (wall_right);

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/04 02:30:04 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/05 02:03:04 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,4 +235,7 @@ int				start_dda(t_data *cub);
 void			print_green_dot(t_data *cub, int x, int y);
 int				is_inside_map(char c);
 void			ft_print_texture(t_data *cub, int x);
+
+int	get_map_height(char **tab);
+
 #endif
