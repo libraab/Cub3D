@@ -100,6 +100,8 @@ int	ray_ver_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
+	//below condition is a bandaid to avoid infinite loop when going out of map (so never performing wall checks)
+	//it causes segfault when the program then tries to draw in that out of bound tile
 	if (!in_map(map, coord_x, coord_y))
 		return (wall_right);
 	if (direction.x <= 0 && in_map(map, coord_x, coord_y))
@@ -123,6 +125,7 @@ int	ray_hor_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (position.x - position.x % TILE_SIZE) / TILE_SIZE;
 	coord_y = (position.y - position.y % TILE_SIZE) / TILE_SIZE;
+	//same as in above function
 	if (!in_map(map, coord_x, coord_y))
 		return (wall_below);
 	if (direction.y <= 0 && in_map(map, coord_x, coord_y))
@@ -138,7 +141,7 @@ int	ray_hor_wall(t_coordinates position, t_vector direction, char **map)
 	return (no_wall);
 }
 
-void	keep_going(t_player player, t_ray *ray, char **map)
+void	dda_algorithm(t_player player, t_ray *ray, char **map)
 {
 	int		wall_hit;
 	int		number_of_steps;
@@ -149,6 +152,7 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 	initial_distance_to_y = distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
 	number_of_steps = 0;
 	wall_hit = 0;
+	//these calculations are not accurate enough, rays often go through walls and either hit a wall behind or go out of the map
 	while (wall_hit == 0)
 	{
 		if (initial_distance_to_y + number_of_steps * ray->step_x < initial_distance_to_x + number_of_steps * ray->step_y)
@@ -172,18 +176,16 @@ void	keep_going(t_player player, t_ray *ray, char **map)
 		}
 		number_of_steps++;
 	}
-	//printf("wall %d hit at a distance of %f\n", wall_hit, ray->travelled_distance);
 }
 
 int	start_dda(t_data *cub)
 {
-	//keep_going(cub->player, &cub->ray[450], cub->map);
 	int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
 	{ 
-		keep_going(cub->player, &cub->ray[i], cub->map);
+		dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		ft_put_img2(&cub->sheet, GREEN, (cub->ray[i].current_coordinates.y / TILE_SIZE * 10), cub->ray[i].current_coordinates.x / TILE_SIZE * 10);
 		i++;
 	}
