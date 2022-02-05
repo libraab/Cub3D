@@ -4,10 +4,12 @@ float	calc_step_x(t_vector ray_direction, float x_component)
 {
 	float	step;
 
+//	printf("x direction: %f   ", ray_direction.x);
 	if (ray_direction.x != 0)
 		step = x_component * sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
 	else
 		step = FLT_MAX;
+//	printf("x step: %f\n", step);
 	return (step);
 }
 
@@ -15,10 +17,12 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 {
 	float	step;
 
+//	printf("y direction: %f   ", ray_direction.y);
 	if (ray_direction.y != 0)
 		step = y_component * sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
 	else
 		step = FLT_MAX;
+//	printf("y step: %f\n", step);
 	return (step);
 }
 
@@ -65,7 +69,7 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		printf("ray %d: ", i);
+//		printf("ray %d: ", i);
 		if (i == 0)
 			ray[i].direction = rotate_vector(player.direction, -(FOV / 2));
 		else if (i != WIN_WIDTH / 2)
@@ -80,10 +84,10 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 		ray[i].on_x = 0;
 		if (player.position.y == floor(player.position.y))
 			ray[i].on_x = 1;
-		ray[i].step_x = calc_step_x(ray->direction, 1);
-		ray[i].step_y = calc_step_y(ray->direction, 1);
+		ray[i].step_x = calc_step_x(ray[i].direction, 1);
+		ray[i].step_y = calc_step_y(ray[i].direction, 1);
 		ray[i].travelled_distance = 0;
-		printf("direction: %f, %f     calc'd steps: %f, %f\n", ray[i].direction.y, ray[i].direction.x, ray[i].step_x, ray[i].step_y);
+		//printf("direction: %f, %f     calc'd steps: %f, %f\n", ray[i].direction.y, ray[i].direction.x, ray[i].step_x, ray[i].step_y);
 		i++;
 	}
 }
@@ -102,10 +106,11 @@ int	ray_ver_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (int)position.x;
 	coord_y = (int)position.y;
-	printf("in vertical check coordinates: %d, %d\n", coord_x, coord_y);
-	printf("ray direction: %f, %f\n", direction.x, direction.y);
+//	printf("in vertical check coordinates: %d, %d\n", coord_x, coord_y);
+//	printf("ray direction: %f, %f\n", direction.x, direction.y);
 	if (!in_map(map, coord_x, coord_y))
 	{
+		printf("out of bounds\n");
 		sleep(1);
 		return (no_wall);
 	}
@@ -129,11 +134,12 @@ int	ray_hor_wall(t_coordinates position, t_vector direction, char **map)
 
 	coord_x = (int)position.x;
 	coord_y = (int)position.y;
-	printf("in horizontal check coordinates: %d, %d\n", coord_x, coord_y);
-	printf("ray direction: %f, %f\n", direction.x, direction.y);
+//	printf("in horizontal check coordinates: %d, %d\n", coord_x, coord_y);
+//	printf("ray direction: %f, %f\n", direction.x, direction.y);
 	if (!in_map(map, coord_x, coord_y))
 	{
 		sleep(1);
+		printf("out of bounds\n");
 		return (no_wall);
 	}
 	if (direction.y <= 0 && in_map(map, coord_x, coord_y - 1))
@@ -185,16 +191,16 @@ void	dda_algorithm(t_player player, t_ray *ray, char **map)
 
 int	start_dda(t_data *cub)
 {
-	printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
+//	printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
 		dda_algorithm(cub->player, &cub->ray[450], cub->map);
-		ft_put_img2(&cub->sheet, GREEN, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10);
+		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10);
 	/*int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
 	{ 
 		dda_algorithm(cub->player, &cub->ray[i], cub->map);
-		ft_put_img2(&cub->sheet, GREEN, (cub->ray[i].current_coordinates.y * 10), cub->ray[i].current_coordinates.x * 10);
+		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10), cub->ray[i].current_coordinates.x * 10);
 		i++;
 	}*/
 	return (0);
