@@ -158,21 +158,21 @@ t_vector	starting_direction(char player_character)
 	if (player_character == 'N')
 	{
 		direction.x = 0;
-		direction.y = -1;
+		direction.y = -TILE_SIZE;
 	}
 	else if (player_character == 'E')
 	{
-		direction.x = 1;
+		direction.x = TILE_SIZE;
 		direction.y = 0;
 	}
 	else if (player_character == 'S')
 	{
 		direction.x = 0;
-		direction.y = 1;
+		direction.y = TILE_SIZE;
 	}
 	else if (player_character == 'W')
 	{
-		direction.x = -1;
+		direction.x = -TILE_SIZE;
 		direction.y = 0;
 	}
 	return (direction);

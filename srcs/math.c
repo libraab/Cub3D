@@ -67,16 +67,19 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 			ray[i].direction = rotate_vector(ray[i - 1].direction, ANGLE_PER_PIXEL);
 		else
 			ray[i].direction = player.direction;
+		ray[i].direction.y = ray[i].direction.y;
+		ray[i].direction.x = ray[i].direction.x;
 		ray[i].current_coordinates.x = player.position.x;
 		ray[i].current_coordinates.y = player.position.y;
+		printf("ray %d position: %d, %d\n", i, ray[i].current_coordinates.y  , ray[i].current_coordinates.x  );
 		ray[i].on_y = 0;
 		if (player.position.x == floor(player.position.x))
 			ray[i].on_y = 1;
 		ray[i].on_x = 0;
 		if (player.position.y == floor(player.position.y))
 			ray[i].on_x = 1;
-		ray[i].step_x = calc_step_x(ray[i].direction, 1);
 		ray[i].step_y = calc_step_y(ray[i].direction, 1);
+		ray[i].step_x = calc_step_x(ray[i].direction, 1);
 		ray[i].travelled_distance = 0;
 		i++;
 	}
