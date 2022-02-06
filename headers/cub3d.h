@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/06 21:46:46 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/06 23:16:57 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_vector
 
 typedef struct s_coordinates
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 }			t_coordinates;
 
 typedef struct s_info

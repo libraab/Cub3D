@@ -62,7 +62,7 @@ void	ft_draw_minimap(t_data *cub)
 		{
 			if (cub->map[y][x] == '1')
 				ft_put_img(&cub->sheet, &cub->wall, (float)x * 10, (float)y * 10);
-			else if ((x != (int)floor(cub->player.position.x) || (y != (int)floor(cub->player.position.y) && is_inside_map(cub->map[y][x]))))
+			else if ((x != (int)cub->player.position.x / TILE_SIZE || y != (int)cub->player.position.y / TILE_SIZE) && is_inside_map(cub->map[y][x]))
 				ft_put_img(&cub->sheet, &cub->frame, (float)x * 10, (float)y * 10);
 			else if (is_inside_map(cub->map[y][x]))
 				ft_put_img(&cub->sheet, &cub->player.img, (float)x * 10, (float)y * 10);
