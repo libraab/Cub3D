@@ -151,7 +151,6 @@ void	dda_algorithm(t_player player, t_ray *ray, char **map)
 
 	initial_distance_to_x = distance_to_x_axis(ray->on_x, ray->current_coordinates, ray->direction);
 	initial_distance_to_y = distance_to_y_axis(ray->on_y, ray->current_coordinates, ray->direction);
-	printf("ray initial coordinates: %f, %f    direction: %f, %f\n", ray->current_coordinates.y, ray->current_coordinates.x, ray->direction.y, ray->direction.x);
 	number_of_steps_x = 0;
 	number_of_steps_y = 0;
 	wall_hit = no_wall;
@@ -160,53 +159,33 @@ void	dda_algorithm(t_player player, t_ray *ray, char **map)
 		if (initial_distance_to_y + number_of_steps_x * ray->step_x < initial_distance_to_x + number_of_steps_y * ray->step_y)
 		{
 			ray->travelled_distance = initial_distance_to_y + number_of_steps_x * ray->step_x;
-			if (number_of_steps_x == 0)
-				ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
-			else
-			{
-				if (ray->direction.x < 0)
-					ray->current_coordinates.x--;
-				else
-					ray->current_coordinates.x++;
-			}
-			//ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
-			//ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
+			ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
+			ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
 			wall_hit = ray_ver_wall(ray->current_coordinates, ray->direction, map);
 			number_of_steps_x++;
 		}
 		else
 		{
 			ray->travelled_distance = initial_distance_to_x + number_of_steps_y * ray->step_y;
-			if (number_of_steps_y == 0)
-				ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
-			else
-			{
-				if (ray->direction.y < 0)
-					ray->current_coordinates.y--;
-				else
-					ray->current_coordinates.y++;
-			}
-			//ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
-			//ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
+			ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
+			ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
 			wall_hit = ray_hor_wall(ray->current_coordinates, ray->direction, map);
 			number_of_steps_y++;
 		}
 	}
 //	printf("wall hit: %d at coordinates %f, %f\n", wall_hit, ray->current_coordinates.y, ray->current_coordinates.x);
-	ray->current_coordinates.x = player.position.x + ray->travelled_distance * ray->direction.x;
-	ray->current_coordinates.y = player.position.y + ray->travelled_distance * ray->direction.y;
 //	printf("reajusted coordinates %f, %f\n", ray->current_coordinates.y, ray->current_coordinates.x);
 }
 
 int	start_dda(t_data *cub)
 {
 //	printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
-		dda_algorithm(cub->player, &cub->ray[450], cub->map);
+/*		dda_algorithm(cub->player, &cub->ray[450], cub->map);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10 + 1, cub->ray[450].current_coordinates.x * 10);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10 + 1);
-		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10 + 1, cub->ray[450].current_coordinates.x * 10 + 1);
-	/*int	i;
+		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10 + 1, cub->ray[450].current_coordinates.x * 10 + 1);*/
+	int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
@@ -217,7 +196,7 @@ int	start_dda(t_data *cub)
 		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10), cub->ray[i].current_coordinates.x * 10);
 		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10 + 1), cub->ray[i].current_coordinates.x * 10 + 1);
 		i++;
-	}*/
+	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
 }
