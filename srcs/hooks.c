@@ -116,7 +116,6 @@ void	print_green_dot(t_data *cub, int x, int y)
 	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
 	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
 	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
 
 int	player_movement(int keycode, t_data *cub)
