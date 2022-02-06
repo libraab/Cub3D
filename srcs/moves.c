@@ -3,9 +3,9 @@
 void	move(t_vector movement_direction, t_player *player, char **map)
 {
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
-		player->position.x += movement_direction.x * PLAYER_STEP;
+		player->position.x += movement_direction.x * PLAYER_SPEED;
 	if (check_horizontal_wall(player->position, movement_direction, map) == no_wall)
-		player->position.y += movement_direction.y * PLAYER_STEP;
+		player->position.y += movement_direction.y * PLAYER_SPEED;
 }
 
 int	move_player(int keycode, t_data *cub)
@@ -22,6 +22,5 @@ int	move_player(int keycode, t_data *cub)
 		movement_direction = rotate_vector(cub->player.direction, M_PI / 2);
 	move(movement_direction, &cub->player, cub->map);
 	ft_draw_minimap(cub);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
 }

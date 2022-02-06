@@ -71,8 +71,8 @@ typedef struct s_vector
 
 typedef struct s_coordinates
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }			t_coordinates;
 
 typedef struct s_info

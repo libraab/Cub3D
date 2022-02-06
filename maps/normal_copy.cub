@@ -1,11 +1,3 @@
-NO ./textures/mur1.xpm
-SO ./textures/mur2.xpm
-WE ./textures/pillar1.xpm                                  
-EA ./textures/pillar2.xpm
-
-F 255, 100, 0
-C 225, 255, 255
-
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001

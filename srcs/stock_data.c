@@ -22,8 +22,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player.position.y = i * TILE_SIZE;
-				player.position.x = j * TILE_SIZE;
+				player.position.y = i;
+				player.position.x = j;
 				player.direction = starting_direction(map[i][j]);
 			}
 			j++;
