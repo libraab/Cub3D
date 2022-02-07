@@ -45,6 +45,6 @@ int	main(int ac, char **av)
 	mlx_hook(cub.win_ptr, ON_MOUSEMOVE, 0, mouse_move, &cub);
 	mlx_loop(cub.mlx_ptr);
 	ft_free_double(cub.tex);
-	ft_free_double(cub.map);
+	ft_free_double(cub.map.map);
 	return (0);
 }

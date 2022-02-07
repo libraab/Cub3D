@@ -43,7 +43,7 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_stock_texture(cub, av[1]);
 	ft_init_img(&cub->wall);
 	ft_init_img(&cub->frame);
-	cub->player = init_player(cub->map);
+	cub->player = init_player(cub->map.map);
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 	cub->mouse_x = 0;
@@ -100,7 +100,7 @@ void	ft_stock_map(t_data *cub, char *file)
 
 	i = 0;
 	ret = 1;
-	cub->map = ft_calloc(sizeof(char *), ft_get_height(file) + 1);
+	cub->map.map = ft_calloc(sizeof(char *), ft_get_height(file) + 1);
 	fd = open(file, O_RDONLY);
 	while (ret > 0)
 	{
@@ -112,11 +112,11 @@ void	ft_stock_map(t_data *cub, char *file)
 			free (line);
 			continue ;
 		}
-		cub->map[i++] = ft_strdup(line);
+		cub->map.map[i++] = ft_strdup(line);
 		free (line);
 	}
-	cub->map[i] = NULL;
-	fill_blanks(cub->map);
+	cub->map.map[i] = NULL;
+	fill_blanks(cub->map.map);
 	ft_valid_chars(cub);
 	close (fd);
 }
@@ -149,9 +149,9 @@ void	ft_stock_texture(t_data *cub, char *file)
 	ft_check_double_texture(cub, -1, 0);
 }
 
-t_vector	starting_direction(char player_character)
+t_direction	starting_direction(char player_character)
 {
-	t_vector	direction;
+	t_direction	direction;
 
 	direction.x = 0;
 	direction.y = 0;

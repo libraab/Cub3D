@@ -6,15 +6,15 @@ void	ft_update_map(t_data *cub, int x, int y)
 	int	j;
 
 	i = -1;
-	while (cub->map[++i])
+	while (cub->map.map[++i])
 	{
 		j = -1;
-		while (cub->map[i][++j])
+		while (cub->map.map[i][++j])
 		{
-			if (ft_is_direction(cub->map[i][j]))
+			if (ft_is_direction(cub->map.map[i][j]))
 			{
-				cub->map[i + x][j + y] = cub->map[i][j];
-				cub->map[i][j] = '0';
+				cub->map.map[i + x][j + y] = cub->map.map[i][j];
+				cub->map.map[i][j] = '0';
 				j++;
 			}
 		}
@@ -55,16 +55,16 @@ void	ft_draw_minimap(t_data *cub)
 	int	y;
 
 	y = -1;
-	while (cub->map[++y])
+	while (cub->map.map[++y])
 	{
 		x = -1;
-		while (cub->map[y][++x])
+		while (cub->map.map[y][++x])
 		{
-			if (cub->map[y][x] == '1')
+			if (cub->map.map[y][x] == '1')
 				ft_put_img(&cub->sheet, &cub->wall, (float)x * 10, (float)y * 10);
-			else if ((x != (int)floor(cub->player.position.x) || (y != (int)floor(cub->player.position.y) && is_inside_map(cub->map[y][x]))))
+			else if ((x != (int)floor(cub->player.position.x) || (y != (int)floor(cub->player.position.y) && is_inside_map(cub->map.map[y][x]))))
 				ft_put_img(&cub->sheet, &cub->frame, (float)x * 10, (float)y * 10);
-			else if (is_inside_map(cub->map[y][x]))
+			else if (is_inside_map(cub->map.map[y][x]))
 				ft_put_img(&cub->sheet, &cub->player.img, (float)x * 10, (float)y * 10);
 		}
 	}

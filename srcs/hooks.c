@@ -70,7 +70,7 @@ int	get_map_height(char **tab)
 	return (i);
 }
 
-int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map)
+int	check_horizontal_wall(t_coordinates position, t_direction direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;
@@ -90,7 +90,7 @@ int	check_horizontal_wall(t_coordinates position, t_vector direction, char **map
 	return (no_wall);
 }
 
-int	check_vertical_wall(t_coordinates position, t_vector direction, char **map)
+int	check_vertical_wall(t_coordinates position, t_direction direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;

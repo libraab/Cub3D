@@ -2,7 +2,7 @@
 
 void	draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour)
 {
-	t_vector	center;
+	t_direction	center;
 	int			i;
 
 	center.x = cub->player.position.x;

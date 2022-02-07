@@ -22,9 +22,9 @@ int	ft_tablen(char **str)
 	return (i);
 }
 
-t_vector	rotate_vector(t_vector to_rotate, float angle)
+t_direction	rotate_vector(t_direction to_rotate, float angle)
 {
-	t_vector	rotated;
+	t_direction	rotated;
 
 	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
 	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);

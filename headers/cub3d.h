@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/07 02:26:17 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/07 04:25:36 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
 # define PLAYER_SPEED 0.3
-//segfault when PLAYER_STEP > TILE_SIZE
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -64,11 +63,11 @@ enum
 	wall_left
 };
 
-typedef struct s_vector
+typedef struct s_direction
 {
 	float	x;
 	float	y;
-}			t_vector;
+}			t_direction;
 
 typedef struct s_coordinates
 {
@@ -94,27 +93,32 @@ typedef struct s_img
 typedef struct s_player
 {
 	t_coordinates	position;
-	t_vector		direction;
+	t_direction		direction;
 	t_img			img;
 }					t_player;
 
 typedef struct s_ray
 {
-	t_vector		direction;
-	t_coordinates	current_coordinates;
+	t_direction		direction;
+	t_coordinates	hit_coordinates;
 	int				wall_hit;
 	float			travelled_distance;
 	float			step_x;
 	float			step_y;
-	int				on_x;
-	int				on_y;
 }					t_ray;
+
+typedef struct s_map
+{
+	int		x;
+	int		y;
+	char	**map;
+}			t_map;
 
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	char		**map;
+	t_map		map;
 	char		**tex;
 	t_img		wall;
 	t_img		sheet;
@@ -176,12 +180,12 @@ int				ft_get_height(char *file);
 //======================================================//
 //						* M A T H *						//
 //======================================================//
-float			calc_step_x(t_vector ray_direction, float x_component);
-float			calc_step_y(t_vector ray_direction, float y_component);
-float			distance_to_y_axis(t_coordinates position, t_vector direction);
-float			distance_to_x_axis(t_coordinates position, t_vector direction);
-t_vector		starting_direction(char player_character);
-t_vector		rotate_vector(t_vector to_rotate, float angle);
+float			calc_step_x(t_direction ray_direction, float x_component);
+float			calc_step_y(t_direction ray_direction, float y_component);
+float			distance_to_y_axis(t_coordinates position, t_direction direction);
+float			distance_to_x_axis(t_coordinates position, t_direction direction);
+t_direction		starting_direction(char player_character);
+t_direction		rotate_vector(t_direction to_rotate, float angle);
 void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
 //======================================================//
 //						* M E M O R Y *					//
@@ -197,14 +201,14 @@ void			ft_draw_minimap(t_data *cub);
 //======================================================//
 //						* M O V E S *					//
 //======================================================//
-void			calc_deltas(t_vector movement_direction, float *delta_x, float *delta_y, float distance);
+void			calc_deltas(t_direction movement_direction, float *delta_x, float *delta_y, float distance);
 void			move_forward(t_player *player, char **map);
 void			move_left(t_player *player, char **map);
 void			move_right(t_player *player, char **map);
 void			move_back(t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
-int				check_horizontal_wall(t_coordinates position, t_vector direction, char **map);
-int				check_vertical_wall(t_coordinates position, t_vector direction, char **map);
+int				check_horizontal_wall(t_coordinates position, t_direction direction, char **map);
+int				check_vertical_wall(t_coordinates position, t_direction direction, char **map);
 //======================================================//
 //						* P A R S I N G *				//
 //======================================================//

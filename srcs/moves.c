@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-void	move(t_vector movement_direction, t_player *player, char **map)
+void	move(t_direction movement_direction, t_player *player, char **map)
 {
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
 		player->position.x += movement_direction.x * PLAYER_SPEED;
@@ -10,7 +10,7 @@ void	move(t_vector movement_direction, t_player *player, char **map)
 
 int	move_player(int keycode, t_data *cub)
 {
-	t_vector	movement_direction;
+	t_direction	movement_direction;
 
 	if (keycode == KEY_W)
 		movement_direction = cub->player.direction;
@@ -20,7 +20,7 @@ int	move_player(int keycode, t_data *cub)
 		movement_direction = rotate_vector(cub->player.direction, M_PI);
 	else
 		movement_direction = rotate_vector(cub->player.direction, M_PI / 2);
-	move(movement_direction, &cub->player, cub->map);
+	move(movement_direction, &cub->player, cub->map.map);
 	ft_draw_minimap(cub);
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-float	calc_step_x(t_vector ray_direction, float x_component)
+float	calc_step_x(t_direction ray_direction, float x_component)
 {
 	float	step;
 
@@ -11,7 +11,7 @@ float	calc_step_x(t_vector ray_direction, float x_component)
 	return (step);
 }
 
-float	calc_step_y(t_vector ray_direction, float y_component)
+float	calc_step_y(t_direction ray_direction, float y_component)
 {
 	float	step;
 
@@ -22,7 +22,7 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	return (step);
 }
 
-float	distance_to_x_axis(t_coordinates position, t_vector direction)
+float	distance_to_x_axis(t_coordinates position, t_direction direction)
 {
 	float	offset;
 	float	first_step;
@@ -37,7 +37,7 @@ float	distance_to_x_axis(t_coordinates position, t_vector direction)
 	return (first_step);
 }
 
-float	distance_to_y_axis(t_coordinates position, t_vector direction)
+float	distance_to_y_axis(t_coordinates position, t_direction direction)
 {
 	float	offset;
 	float	first_step;
@@ -65,8 +65,6 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 			ray[i].direction = rotate_vector(ray[i - 1].direction, ANGLE_PER_PIXEL);
 		else
 			ray[i].direction = player.direction;
-		ray[i].current_coordinates.x = player.position.x;
-		ray[i].current_coordinates.y = player.position.y;
 		ray[i].step_x = calc_step_x(ray[i].direction, 1);
 		ray[i].step_y = calc_step_y(ray[i].direction, 1);
 		ray[i].travelled_distance = 0;
@@ -81,7 +79,7 @@ int	in_map(char **map, int x, int y)
 	return (0);
 }
 
-int	ray_ver_wall(int coord_y, int coord_x, t_vector direction, char **map)
+int	ray_ver_wall(int coord_y, int coord_x, t_direction direction, char **map)
 {
 	if (in_map(map, coord_x, coord_y) && in_map(map, coord_x - 1, coord_y))
 		printf("map coordinates: %d, %d  tile: %c, left tile: %c\n", coord_y, coord_x, map[coord_y][coord_x], map[coord_y][coord_x - 1]);
@@ -105,7 +103,7 @@ int	ray_ver_wall(int coord_y, int coord_x, t_vector direction, char **map)
 	return (no_wall);
 }
 
-int	ray_hor_wall(int coord_y, int coord_x, t_vector direction, char **map)
+int	ray_hor_wall(int coord_y, int coord_x, t_direction direction, char **map)
 {
 	(void)direction;
 	if (in_map(map, coord_x, coord_y) && in_map(map, coord_x, coord_y - 1))
@@ -138,8 +136,8 @@ void	dda_algorithm(t_player player, t_ray *ray, char **map)
 	int		coord_y;
 	int		coord_x;
 
-	travelled_on_y = distance_to_x_axis(ray->current_coordinates, ray->direction);
-	travelled_on_x = distance_to_y_axis(ray->current_coordinates, ray->direction);
+	travelled_on_y = distance_to_x_axis(player.position, ray->direction);
+	travelled_on_x = distance_to_y_axis(player.position, ray->direction);
 	coord_x = (int)player.position.x;
 	coord_y = (int)player.position.y;
 	/*if (ray->direction.y == 1 || ray->direction.y == -1)
@@ -183,27 +181,18 @@ void	dda_algorithm(t_player player, t_ray *ray, char **map)
 		}
 	}
 	printf("wall %d hit at coordinates %d, %d\n", wall_hit, coord_y, coord_x);
-//	printf("reajusted coordinates %f, %f\n", ray->current_coordinates.y, ray->current_coordinates.x);
 }
 
 int	start_dda(t_data *cub)
 {
 //	printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
 //		dda_algorithm(cub->player, &cub->ray[450], cub->map);
-/*		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10);
-		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10 + 1, cub->ray[450].current_coordinates.x * 10);
-		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10, cub->ray[450].current_coordinates.x * 10 + 1);
-		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[450].current_coordinates.y * 10 + 1, cub->ray[450].current_coordinates.x * 10 + 1);*/
 	int	i;
 
 	i = 0;
 	while (i < WIN_WIDTH)
 	{ 
-		dda_algorithm(cub->player, &cub->ray[i], cub->map);
-/*		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10 + 1), cub->ray[i].current_coordinates.x * 10);
-		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10), cub->ray[i].current_coordinates.x * 10 + 1);
-		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10), cub->ray[i].current_coordinates.x * 10);
-		ft_put_img2(&cub->sheet, DEEP_PINK, (cub->ray[i].current_coordinates.y * 10 + 1), cub->ray[i].current_coordinates.x * 10 + 1);*/
+		dda_algorithm(cub->player, &cub->ray[i], cub->map.map);
 		i++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
