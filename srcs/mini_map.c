@@ -49,23 +49,33 @@ int	is_inside_map(char c)
 	return (0);
 }
 
-void	ft_draw_minimap(t_data *cub)
+void	ft_draw_minimap(t_data *c)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	while (cub->map.map[++y])
+	while (c->map.map[++y])
 	{
 		x = -1;
-		while (cub->map.map[y][++x])
+		while (c->map.map[y][++x])
 		{
-			if (cub->map.map[y][x] == '1')
-				ft_put_img(&cub->sheet, &cub->wall, (float)x * 10, (float)y * 10);
-			else if ((x != (int)floor(cub->player.position.x) || (y != (int)floor(cub->player.position.y) && is_inside_map(cub->map.map[y][x]))))
-				ft_put_img(&cub->sheet, &cub->frame, (float)x * 10, (float)y * 10);
-			else if (is_inside_map(cub->map.map[y][x]))
-				ft_put_img(&cub->sheet, &cub->player.img, (float)x * 10, (float)y * 10);
+			if (c->map.map[y][x] == '1')
+				ft_put_img(&c->sheet, &c->wall, (float)x * 10, (float)y * 10);
+			else if ((x != (int)floor(c->player.position.x)
+					|| (y != (int)floor(c->player.position.y)
+						&& is_inside_map(c->map.map[y][x]))))
+				ft_put_img(&c->sheet, &c->frame, (float)x * 10, (float)y * 10);
+			else if (is_inside_map(c->map.map[y][x]))
+				ft_put_img(&c->sheet, &c->player.img, (float)x * 10, (float)y * 10);
 		}
 	}
+}
+
+void	print_green_dot(t_data *cub, int x, int y)
+{
+	ft_put_img2(&cub->sheet, GREEN, x, y);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
+	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
 }

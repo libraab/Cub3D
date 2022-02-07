@@ -47,7 +47,7 @@ void	draw_ceiling(t_data *cub)
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
 
-void	ft_print_all(t_data *cub)
+void	ft_draw_all(t_data *cub)
 {
 	draw_floor(cub);
 	draw_ceiling(cub);

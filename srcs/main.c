@@ -38,7 +38,7 @@ int	main(int ac, char **av)
 	ft_init_data(&cub, av);
 	ft_valid_walls(&cub);
 	ft_define_img(&cub);
-	ft_print_all(&cub);
+	ft_draw_all(&cub);
 	mlx_hook(cub.win_ptr, ON_DESTROY, 0, ft_exit, NULL);
 	mlx_hook(cub.win_ptr, ON_KEYUP, 0, key_release, &cub);
 	mlx_hook(cub.win_ptr, ON_KEYDOWN, 0, player_movement, &cub);

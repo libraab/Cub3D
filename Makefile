@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/03 22:21:28 by bleotard         ###   ########.fr        #
+#    Updated: 2022/02/07 10:43:15 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,22 @@ HEADER_FILE 		= cub3d.h
 
 SRCS				=	check_textures.c \
 						check_walls.c \
+						dda.c \
 						define_img.c \
+						distance.c \
 						draw.c \
 						errors.c \
 						hooks.c \
+						init_data.c \
 					 	main.c \
 						math.c \
 						memory.c \
 						mini_map.c \
 						moves.c \
 						parsing.c \
+						print_texture.c \
 						stock_data.c \
-						utils.c \
-						print_texture.c 
+						utils.c
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})

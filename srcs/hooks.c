@@ -1,11 +1,5 @@
 #include "../headers/cub3d.h"
 
-int	ft_exit(void)
-{
-	write(1, "Bye Bye!\n", 9);
-	exit(0);
-}
-
 int	key_release(int keycode)
 {
 	if (keycode == KEY_ECHAP)
@@ -60,16 +54,6 @@ int	mouse_move(int x, int y, t_data *cub)
 	return (0);
 }
 
-int	get_map_height(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
 int	check_horizontal_wall(t_coordinates position, t_direction direction, char **map)
 {
 	int	coord_x;
@@ -104,18 +88,10 @@ int	check_vertical_wall(t_coordinates position, t_direction direction, char **ma
 	}
 	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y]))
 	{
-		 if (map[coord_y][coord_x + 1] == '1')
+		if (map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
 	}
 	return (no_wall);
-}
-
-void	print_green_dot(t_data *cub, int x, int y)
-{
-	ft_put_img2(&cub->sheet, GREEN, x, y);
-	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
-	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
-	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
 }
 
 int	player_movement(int keycode, t_data *cub)

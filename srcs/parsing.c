@@ -14,7 +14,8 @@ void	ft_valid_chars(t_data *cub)
 		while (cub->map.map[i][++j])
 		{
 			if (cub->map.map[i][j] != ' ' && cub->map.map[i][j] != '0'
-				&& cub->map.map[i][j] != '1' && !ft_is_direction(cub->map.map[i][j]))
+				&& cub->map.map[i][j] != '1'
+				&& !ft_is_direction(cub->map.map[i][j]))
 				ft_error(3);
 			if (ft_is_direction(cub->map.map[i][j]))
 				count++;
@@ -39,7 +40,8 @@ void	ft_valid_walls(t_data *cub)
 		{
 			if (cub->map.map[i][j] == '0' && i == 0 && j == 0)
 				ft_error(6);
-			if (cub->map.map[i][j] == '0' || ft_is_direction(cub->map.map[i][j]))
+			if (cub->map.map[i][j] == '0'
+				|| ft_is_direction(cub->map.map[i][j]))
 			{
 				if (!ft_north_wall(cub->map.map, i, j)
 					|| !ft_south_wall(cub->map.map, i, j)
