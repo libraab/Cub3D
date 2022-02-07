@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/07 10:50:22 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/07 16:33:26 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ enum
 enum
 {
 	no_wall,
-	wall_above,
 	wall_right,
+	wall_above,
 	wall_below,
-	wall_left
+	wall_left,
 };
 
 typedef struct s_direction
@@ -101,7 +101,8 @@ typedef struct s_ray
 	t_direction		direction;
 	t_coordinates	hit_coordinates;
 	int				wall_hit;
-	float			travelled_distance;
+	float			travelled_on_x;
+	float			travelled_on_y;
 	float			step_x;
 	float			step_y;
 }					t_ray;
@@ -148,7 +149,7 @@ int				ft_west_wall(char **map, int i, int j);
 //============================================================================//
 //								* D D A *									  //
 //============================================================================//
-void			dda_algorithm(t_player player, t_ray *ray, char **map);
+void			dda_algorithm(t_player player, t_ray *ray, t_map map);
 int				start_dda(t_data *cub);
 //============================================================================//
 //							* D E F I N E _ I M G *							  //
