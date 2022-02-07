@@ -48,7 +48,6 @@ float	distance_to_y_axis(t_coordinates position, t_direction direction)
 		offset = position.x - (int)position.x;                     
 	else
 		offset = (int)position.x + 1 - position.x;
-	printf("offset is -------> [%f]\n", offset);
 	first_step = calc_step_x(direction, offset);
 	return (first_step);
 }
@@ -68,8 +67,7 @@ void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 			ray[i].direction = player.direction;
 		ray[i].step_x = calc_step_x(ray[i].direction, 1);
 		ray[i].step_y = calc_step_y(ray[i].direction, 1);
-		ray[i].travelled_on_x = 0;
-		ray[i].travelled_on_y = 0;
+		ray[i].distance = 0;
 		i++;
 	}
 }
