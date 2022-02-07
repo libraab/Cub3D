@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-void	dda_algorithm(t_player player, t_ray *ray, t_map map)
+int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 {
 	int		wall_hit;
 
@@ -49,21 +49,22 @@ void	dda_algorithm(t_player player, t_ray *ray, t_map map)
 		}
 	}
 	printf("wall %d hit at coordinates %d, %d\n", wall_hit, map.y, map.x);
+	return (wall_hit);
 }
 
 int	start_dda(t_data *cub)
 {
-	dda_algorithm(cub->player, &cub->ray[450], cub->map);
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
-	/*int	i;
-//	printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
-//		dda_algorithm(cub->player, &cub->ray[450], cub->map);
+	// dda_algorithm(cub->player, &cub->ray[450], cub->map);
+	// mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+	int	i;
+	//printf("player position: %f, %f   ray 450 step: %f, %f   ray 450 direction: %f, %f\n", cub->player.position.x, cub->player.position.y, cub->ray[450].step_x, cub->ray[450].step_y, cub->ray[450].direction.x, cub->ray[450].direction.y);
+	//dda_algorithm(cub->player, &cub->ray[450], cub->map);
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		dda_algorithm(cub->player, &cub->ray[i], cub->map.map);
+		ft_print_texture(cub, dda_algorithm(cub->player, &cub->ray[i], cub->map));
 		i++;
 	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);*/
+	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
 }
