@@ -70,15 +70,6 @@ void	fill_blanks(char **map)
 	}
 }
 
-t_direction	rotate_vector(t_direction to_rotate, float angle)
-{
-	t_direction	rotated;
-
-	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
-	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);
-	return (rotated);
-}
-
 t_direction	starting_direction(char player_character)
 {
 	t_direction	direction;

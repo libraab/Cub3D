@@ -7,15 +7,6 @@ int	key_release(int keycode)
 	return (0);
 }
 
-int	rotate_player(int keycode, t_data *cub)
-{
-	if (keycode == KEY_ARROW_LEFT)
-		cub->player.direction = rotate_vector(cub->player.direction, -ROTATION_ANGLE);
-	if (keycode == KEY_ARROW_RIGHT)
-		cub->player.direction = rotate_vector(cub->player.direction, ROTATION_ANGLE);
-	return (0);
-}
-
 int	rotation_key(int keycode)
 {
 	if (keycode == KEY_ARROW_LEFT || keycode == KEY_ARROW_RIGHT)
@@ -52,46 +43,6 @@ int	mouse_move(int x, int y, t_data *cub)
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 	return (0);
-}
-
-int	check_horizontal_wall(t_coordinates position, t_direction direction, char **map)
-{
-	int	coord_x;
-	int	coord_y;
-
-	coord_x = floor(position.x);
-	coord_y = floor(position.y);
-	if (direction.y <= 0 && coord_y > 0)
-	{
-		if (map[coord_y - 1][coord_x] == '1')
-			return (wall_above);
-	}
-	else if (direction.y >= 0 && coord_y < get_map_height(map))
-	{
-		if (map[coord_y + 1][coord_x] == '1')
-			return (wall_below);
-	}
-	return (no_wall);
-}
-
-int	check_vertical_wall(t_coordinates position, t_direction direction, char **map)
-{
-	int	coord_x;
-	int	coord_y;
-
-	coord_x = floor(position.x);
-	coord_y = floor(position.y);
-	if (direction.x <= 0 && coord_x > 0)
-	{
-		if (map[coord_y][coord_x - 1] == '1')
-			return (wall_left);
-	}
-	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y]))
-	{
-		if (map[coord_y][coord_x + 1] == '1')
-			return (wall_right);
-	}
-	return (no_wall);
 }
 
 int	player_movement(int keycode, t_data *cub)

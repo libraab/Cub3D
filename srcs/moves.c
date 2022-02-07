@@ -1,5 +1,45 @@
 #include "../headers/cub3d.h"
 
+int	check_horizontal_wall(t_coordinates position, t_direction direction, char **map)
+{
+	int	coord_x;
+	int	coord_y;
+
+	coord_x = floor(position.x);
+	coord_y = floor(position.y);
+	if (direction.y <= 0 && coord_y > 0)
+	{
+		if (map[coord_y - 1][coord_x] == '1')
+			return (wall_above);
+	}
+	else if (direction.y >= 0 && coord_y < get_map_height(map))
+	{
+		if (map[coord_y + 1][coord_x] == '1')
+			return (wall_below);
+	}
+	return (no_wall);
+}
+
+int	check_vertical_wall(t_coordinates position, t_direction direction, char **map)
+{
+	int	coord_x;
+	int	coord_y;
+
+	coord_x = floor(position.x);
+	coord_y = floor(position.y);
+	if (direction.x <= 0 && coord_x > 0)
+	{
+		if (map[coord_y][coord_x - 1] == '1')
+			return (wall_left);
+	}
+	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y]))
+	{
+		if (map[coord_y][coord_x + 1] == '1')
+			return (wall_right);
+	}
+	return (no_wall);
+}
+
 void	move(t_direction movement_direction, t_player *player, char **map)
 {
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)

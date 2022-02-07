@@ -1,20 +1,5 @@
 #include "../headers/cub3d.h"
 
-void	draw_fov(t_ray rays[WIN_WIDTH], t_data *cub, int colour)
-{
-	t_direction	center;
-	int			i;
-
-	center.x = cub->player.position.x;
-	center.y = cub->player.position.y;
-	i = 0;
-	while (i < WIN_WIDTH)
-	{
-		mlx_pixel_put(cub->mlx_ptr, cub->win_ptr, center.x + rays[i].direction.x * 50, center.y + rays[i].direction.y * 50, colour);
-		i++;
-	}
-}
-
 void	draw_floor(t_data *cub)
 {
 	int	i;

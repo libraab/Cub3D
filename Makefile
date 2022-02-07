@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/07 10:56:54 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/07 23:06:13 by bleotard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,13 @@ SRCS				=	check_textures.c \
 						hooks.c \
 						init_data.c \
 					 	main.c \
-						math.c \
 						memory.c \
 						mini_map.c \
 						moves.c \
 						parsing.c \
 						print_texture.c \
+						raycasting.c \
+						rotations.c \
 						stock_data.c \
 						utils.c
 

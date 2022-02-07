@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/07 22:32:23 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/07 23:09:03 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ float			calc_projected_wall_height(float distance_to_wall);
 //============================================================================//
 //								* D R A W *									  //
 //============================================================================//
-void			draw_fov(t_ray ray[WIN_WIDTH], t_data *cub, int colour);
 void			draw_floor(t_data *cub);
 void			draw_ceiling(t_data *cub);
 void			ft_draw_all(t_data *cub);
@@ -204,8 +203,6 @@ float			distance_to_x_axis(t_coordinates position, t_direction direction);
 float			distance_to_y_axis(t_coordinates position, t_direction direction);
 void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
 int				in_map(char **map, int x, int y);
-int				ray_ver_wall(int coord_y, int coord_x, t_direction direction, char **map);
-int				ray_hor_wall(int coord_y, int coord_x, t_direction direction, char **map);
 //============================================================================//
 //								* M E M O R Y *								  //
 //============================================================================//
@@ -214,7 +211,6 @@ void			ft_free_double(char **tab);
 //============================================================================//
 //						* M I N I _ M A P *									  //
 //============================================================================//
-void			ft_update_map(t_data *cub, int x, int y);
 void			ft_draw_frame(t_data *cub);
 int				is_inside_map(char c);
 void			ft_draw_minimap(t_data *cub);

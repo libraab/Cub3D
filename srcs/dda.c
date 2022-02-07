@@ -1,21 +1,21 @@
 #include "../headers/cub3d.h"
 
-float	ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y)
+float	ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x)
 {
 	int	wall_hit;
 
 	wall_hit = 0;
-	ray->distance = *travelled_on_y;
-	*travelled_on_y += ray->step_y;
-	if (ray->direction.y > 0)
+	ray->distance = *travelled_on_x;
+	*travelled_on_x += ray->step_x;
+	if (ray->direction.x > 0)
 	{
-		map->y += 1;
+		map->x += 1;
 		if (map->map[map->y][map->x] == '1')
 			wall_hit = wall_above;
 	}
 	else
 	{
-		map->y -= 1;
+		map->x -= 1;
 		if (map->map[map->y][map->x] == '1')
 			wall_hit = wall_below;
 	}
@@ -42,6 +42,23 @@ float	ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y)
 			wall_hit = wall_below;
 	}
 	return (wall_hit);
+}
+
+void	get_impact_coordinates(t_ray *ray, t_coordinates player_position)
+{
+	float	delta_x;
+	float	delta_y;
+
+	if (ray->direction.x > 0)
+		delta_x = ray->distance / ray->step_x;
+	else
+		delta_x = -ray->distance / ray->step_x;
+	if (ray->direction.y > 0)
+		delta_y = ray->distance / ray->step_y;
+	else
+		delta_y = -ray->distance / ray->step_y;
+	ray->impact.x = player_position.x + delta_x;
+	ray->impact.y = player_position.y + delta_y;
 }
 
 int	dda_algorithm(t_player player, t_ray *ray, t_map map)
@@ -58,38 +75,11 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 	while (wall_hit == no_wall)
 	{
 		if (travelled_on_x < travelled_on_y)
-		{
-			ray->distance = travelled_on_x;
-			travelled_on_x += ray->step_x;
-			if (ray->direction.x > 0)
-			{
-				map.x += 1;
-				if (map.map[map.y][map.x] == '1')
-					wall_hit = wall_left;
-			}
-			else
-			{
-				map.x -= 1;
-				if (map.map[map.y][map.x] == '1')
-					wall_hit = wall_right;
-			}
-		}
+			wall_hit = ride_along_x(ray, &map, &travelled_on_x);
 		else
 			wall_hit = ride_along_y(ray, &map, &travelled_on_y);
 	}
-	float	delta_x;
-	float	delta_y;
-
-	if (ray->direction.x > 0)
-		delta_x = ray->distance / ray->step_x;
-	else
-		delta_x = -ray->distance / ray->step_x;
-	if (ray->direction.y > 0)
-		delta_y = ray->distance / ray->step_y;
-	else
-		delta_y = -ray->distance / ray->step_y;
-	ray->impact.x = player.position.x + delta_x;
-	ray->impact.y = player.position.y + delta_y;
+	get_impact_coordinates(ray, player.position);
 	return (wall_hit);
 }
 
