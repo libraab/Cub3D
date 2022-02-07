@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/06 02:18:59 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/07 02:26:17 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,8 @@ int				ft_get_height(char *file);
 //======================================================//
 float			calc_step_x(t_vector ray_direction, float x_component);
 float			calc_step_y(t_vector ray_direction, float y_component);
-float			distance_to_y_axis(int on_y, t_coordinates position, t_vector direction);
-float			distance_to_x_axis(int on_x, t_coordinates position, t_vector direction);
+float			distance_to_y_axis(t_coordinates position, t_vector direction);
+float			distance_to_x_axis(t_coordinates position, t_vector direction);
 t_vector		starting_direction(char player_character);
 t_vector		rotate_vector(t_vector to_rotate, float angle);
 void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
