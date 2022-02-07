@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/07 22:11:29 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:32:23 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 600
 # define TILE_SIZE 50
-# define FOV (4 * M_PI) / 18
+# define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
 # define PLAYER_SPEED 0.3
@@ -101,8 +101,7 @@ typedef struct s_ray
 	t_direction		direction;
 	t_coordinates	impact;
 	int				wall_hit;
-	float			travelled_on_x;
-	float			travelled_on_y;
+	float			distance;
 	float			step_x;
 	float			step_y;
 }					t_ray;
