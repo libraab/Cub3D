@@ -86,13 +86,13 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 int	start_dda(t_data *cub)
 {
 	int	i;
+	float	wall_height;
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		 dda_algorithm(cub->player, &cub->ray[i], cub->map);
+		dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[i].impact.y * 10, cub->ray[i].impact.x * 10);
-	//	wall_height = calc_projected_wall_height(fmax(cub->ray[i].travelled_on_y, cub->ray[i].travelled_on_x));
-	//	printf("height for ray %d: %f\n", i, wall_height);
+		wall_height = calc_projected_wall_height(cub->ray[i].distance);
 		//ft_print_texture(cub, dda_algorithm(cub->player, &cub->ray[i], cub->map));
 		i++;
 	}
