@@ -22,8 +22,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player.position.y = i * TILE_SIZE;
-				player.position.x = j * TILE_SIZE;
+				player.position.y = i;
+				player.position.x = j;
 				player.direction = starting_direction(map[i][j]);
 			}
 			j++;
@@ -158,21 +158,21 @@ t_vector	starting_direction(char player_character)
 	if (player_character == 'N')
 	{
 		direction.x = 0;
-		direction.y = -TILE_SIZE;
+		direction.y = -1;
 	}
 	else if (player_character == 'E')
 	{
-		direction.x = TILE_SIZE;
+		direction.x = 1;
 		direction.y = 0;
 	}
 	else if (player_character == 'S')
 	{
 		direction.x = 0;
-		direction.y = TILE_SIZE;
+		direction.y = 1;
 	}
 	else if (player_character == 'W')
 	{
-		direction.x = -TILE_SIZE;
+		direction.x = -1;
 		direction.y = 0;
 	}
 	return (direction);

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/06 23:16:57 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/06 02:18:59 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGHT 600
-# define TILE_SIZE 64
+# define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
 # define ROTATION_ANGLE M_PI / 12 
-# define PLAYER_STEP 20 
+# define PLAYER_SPEED 0.3
+//segfault when PLAYER_STEP > TILE_SIZE
 
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -71,8 +72,8 @@ typedef struct s_vector
 
 typedef struct s_coordinates
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }			t_coordinates;
 
 typedef struct s_info
