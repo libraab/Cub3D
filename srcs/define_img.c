@@ -5,7 +5,7 @@ void	ft_define_img(t_data *cub)
 	cub->wall.img = mlx_xpm_file_to_image(cub->mlx_ptr,
 			"textures/minimap/blue.xpm", &cub->wall.width, &cub->wall.height);
 	cub->frame.img = mlx_xpm_file_to_image(cub->mlx_ptr,
-			"textures/minimap/yellow.xpm", &cub->frame.width,
+			"textures/minimap/brown.xpm", &cub->frame.width,
 			&cub->frame.height);
 	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr,
 			"textures/minimap/red.xpm", &cub->player.img.width,

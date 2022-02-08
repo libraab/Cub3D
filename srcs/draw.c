@@ -37,5 +37,6 @@ void	ft_draw_all(t_data *cub)
 	draw_floor(cub);
 	draw_ceiling(cub);
 	ft_draw_minimap(cub);
+	ft_draw_frame(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 }
