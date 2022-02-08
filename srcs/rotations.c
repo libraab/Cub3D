@@ -9,9 +9,9 @@ int	rotate_player(int keycode, t_data *cub)
 	return (0);
 }
 
-t_direction	rotate_vector(t_direction to_rotate, float angle)
+t_vector	rotate_vector(t_vector to_rotate, float angle)
 {
-	t_direction	rotated;
+	t_vector	rotated;
 
 	rotated.x = to_rotate.x * cos(angle) - to_rotate.y * sin(angle);
 	rotated.y = to_rotate.x * sin(angle) + to_rotate.y * cos(angle);

@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-float	calc_step_x(t_direction ray_direction, float x_component)
+float	calc_step_x(t_vector ray_direction, float x_component)
 {
 	float	step;
 
@@ -11,7 +11,7 @@ float	calc_step_x(t_direction ray_direction, float x_component)
 	return (step);
 }
 
-float	calc_step_y(t_direction ray_direction, float y_component)
+float	calc_step_y(t_vector ray_direction, float y_component)
 {
 	float	step;
 
@@ -22,7 +22,7 @@ float	calc_step_y(t_direction ray_direction, float y_component)
 	return (step);
 }
 
-float	distance_to_x_axis(t_coordinates position, t_direction direction)
+float	distance_to_x_axis(t_vector position, t_vector direction)
 {
 	float	offset;
 	float	first_step;
@@ -37,7 +37,7 @@ float	distance_to_x_axis(t_coordinates position, t_direction direction)
 	return (first_step);
 }
 
-float	distance_to_y_axis(t_coordinates position, t_direction direction)
+float	distance_to_y_axis(t_vector position, t_vector direction)
 {
 	float	offset;
 	float	first_step;

@@ -33,22 +33,23 @@ void	get_wall_textures(t_data *cub, char *texture_name, t_walls *walls)
 {
 		if (texture_name[0] == 'N')
 		{
-			texture_name = ft_strtrim(ft_strdup(texture_name), "SONWEA ");
+			texture_name = "textures/minimap/blue.xpm";
+			//texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
 			walls->north.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, &walls->north.width, &walls->north.height);
 		}
 		else if (texture_name[0] == 'S')
 		{
-			texture_name = ft_strtrim(ft_strdup(texture_name), "SONWEA ");
+			texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
 			walls->south.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, &walls->south.width, &walls->south.height);
 		}
 		else if (texture_name[0] == 'E')
 		{
-			texture_name = ft_strtrim(ft_strdup(texture_name), "SONWEA ");
+			texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
 			walls->east.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, &walls->east.width, &walls->east.height);
 		}
-		else if (texture_name[0] == 'W')
+		else
 		{
-			texture_name = ft_strtrim(ft_strdup(texture_name), "SONWEA ");
+			texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
 			walls->west.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, &walls->west.width, &walls->west.height);
 		}
 }
@@ -80,6 +81,7 @@ void	ft_stock_texture(t_data *cub, char *file)
 		}
 		free (line);
 	}
+	cub->tex[i] = NULL;
 	close (fd);
 	ft_check_double_texture(cub, -1, 0);
 }

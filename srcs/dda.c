@@ -11,13 +11,13 @@ float	ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x)
 	{
 		map->x += 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_above;
+			wall_hit = wall_right;
 	}
 	else
 	{
 		map->x -= 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_below;
+			wall_hit = wall_left;
 	}
 	return (wall_hit);
 }
@@ -44,7 +44,7 @@ float	ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y)
 	return (wall_hit);
 }
 
-void	get_impact_coordinates(t_ray *ray, t_coordinates player_position)
+void	get_impact_coordinates(t_ray *ray, t_vector player_position)
 {
 	float	delta_x;
 	float	delta_y;
@@ -95,7 +95,7 @@ int	start_dda(t_data *cub)
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[i].impact.y * 10, cub->ray[i].impact.x * 10);
 		wall_height = calc_projected_wall_height(cub->ray[i].distance);
-//		ft_print_texture(cub, wall_height, wall_type, cub->ray[i]);
+		//ft_print_texture(cub, wall_height, wall_type, cub->ray[i]);
 		i++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);

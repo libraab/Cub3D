@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-int	check_horizontal_wall(t_coordinates position, t_direction direction, char **map)
+int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;
@@ -20,7 +20,7 @@ int	check_horizontal_wall(t_coordinates position, t_direction direction, char **
 	return (no_wall);
 }
 
-int	check_vertical_wall(t_coordinates position, t_direction direction, char **map)
+int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 {
 	int	coord_x;
 	int	coord_y;
@@ -40,7 +40,7 @@ int	check_vertical_wall(t_coordinates position, t_direction direction, char **ma
 	return (no_wall);
 }
 
-void	move(t_direction movement_direction, t_player *player, char **map)
+void	move(t_vector movement_direction, t_player *player, char **map)
 {
 	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
 		player->position.x += movement_direction.x * PLAYER_SPEED;
@@ -50,7 +50,7 @@ void	move(t_direction movement_direction, t_player *player, char **map)
 
 int	move_player(int keycode, t_data *cub)
 {
-	t_direction	movement_direction;
+	t_vector	movement_direction;
 
 	if (keycode == KEY_W)
 		movement_direction = cub->player.direction;

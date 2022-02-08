@@ -70,9 +70,9 @@ void	fill_blanks(char **map)
 	}
 }
 
-t_direction	starting_direction(char player_character)
+t_vector	starting_direction(char player_character)
 {
-	t_direction	direction;
+	t_vector	direction;
 
 	direction.x = 0;
 	direction.y = 0;
