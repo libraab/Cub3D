@@ -63,7 +63,7 @@ void	get_impact_coordinates(t_ray *ray, t_coordinates player_position)
 
 int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 {
-	int		wall_hit;
+	int		wall_type;
 	float	travelled_on_y;
 	float	travelled_on_x;
 
@@ -71,29 +71,31 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 	travelled_on_x = distance_to_y_axis(player.position, ray->direction);
 	map.x = (int)player.position.x;
 	map.y = (int)player.position.y;
-	wall_hit = no_wall;
-	while (wall_hit == no_wall)
+	wall_type = no_wall;
+	while (wall_type == no_wall)
 	{
 		if (travelled_on_x < travelled_on_y)
-			wall_hit = ride_along_x(ray, &map, &travelled_on_x);
+			wall_type = ride_along_x(ray, &map, &travelled_on_x);
 		else
-			wall_hit = ride_along_y(ray, &map, &travelled_on_y);
+			wall_type = ride_along_y(ray, &map, &travelled_on_y);
 	}
 	get_impact_coordinates(ray, player.position);
-	return (wall_hit);
+	return (wall_type);
 }
 
 int	start_dda(t_data *cub)
 {
-	int	i;
+	int		i;
+	int		wall_type;
 	float	wall_height;
+
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		dda_algorithm(cub->player, &cub->ray[i], cub->map);
+		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[i].impact.y * 10, cub->ray[i].impact.x * 10);
 		wall_height = calc_projected_wall_height(cub->ray[i].distance);
-		//ft_print_texture(cub, dda_algorithm(cub->player, &cub->ray[i], cub->map));
+//		ft_print_texture(cub, wall_height, wall_type, cub->ray[i]);
 		i++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);

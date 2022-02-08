@@ -2,17 +2,14 @@
 
 void	ft_define_img(t_data *cub)
 {
-	cub->wall.img = mlx_xpm_file_to_image(cub->mlx_ptr,
-			"textures/minimap/blue.xpm", &cub->wall.width, &cub->wall.height);
+	cub->mini_wall.img = mlx_xpm_file_to_image(cub->mlx_ptr,
+			"textures/minimap/blue.xpm", &cub->mini_wall.width, &cub->mini_wall.height);
 	cub->frame.img = mlx_xpm_file_to_image(cub->mlx_ptr,
 			"textures/minimap/brown.xpm", &cub->frame.width,
 			&cub->frame.height);
 	cub->player.img.img = mlx_xpm_file_to_image(cub->mlx_ptr,
 			"textures/minimap/red.xpm", &cub->player.img.width,
 			&cub->player.img.height);
-	cub->north_wall.img = mlx_xpm_file_to_image(cub->mlx_ptr,
-			"textures/mur3.xpm", &cub->north_wall.width,
-			&cub->north_wall.height);
 }
 
 void	ft_pixel_put(t_info *data, int x, int y, int color)

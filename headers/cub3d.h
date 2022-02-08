@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/07 23:09:03 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:20:59 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,24 @@ typedef struct s_map
 	char	**map;
 }			t_map;
 
+typedef struct s_walls
+{
+	t_img	north;
+	t_img	south;
+	t_img	west;
+	t_img	east;
+}			t_walls;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_map		map;
 	char		**tex;
-	t_img		wall;
 	t_img		sheet;
 	t_img		frame;
-	t_img		north_wall;
+	t_img		mini_wall;
+	t_walls		walls;
 	int			floor;
 	int			ceiling;
 	int			mouse_x;

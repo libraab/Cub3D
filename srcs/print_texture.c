@@ -1,8 +1,26 @@
 #include "../headers/cub3d.h"
 
-void	ft_print_texture(t_data *cub, int wall)
+/*void	ft_print_texture(t_data *cub, int wall_height, int wall_type, t_ray ray)
 {
-	wall = 0;
+	int	texture_column;
+	t_img	texture;
+
+	cub->map.x = (int)ray->impact.x;
+	cub->map.y = (int)ray->impact.y;
+	if (wall_type == wall_above)
+		;
+}
+	
+	
+
+
+
+
+
+
+
+
+
 	// int	i = 50;
 	// int	j = 0;
 	// int	k = 0;
@@ -51,5 +69,5 @@ void	ft_print_texture(t_data *cub, int wall)
 	// 	while (++k < m)
 	// 		ft_put_img2(&cub->sheet, RED, i, l + k);
 	// }
-	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
-}
+	//	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
+}*/
