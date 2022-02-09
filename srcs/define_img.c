@@ -7,7 +7,7 @@ void	ft_define_img(t_data *cub)
 	cub->mini_wall.info.addr = mlx_get_data_addr(cub->mini_wall.img, &cub->mini_wall.info.bits_per_pixel,
 			&cub->mini_wall.info.line_len, &cub->mini_wall.info.endian);
 	cub->frame.img = mlx_xpm_file_to_image(cub->mlx_ptr,
-			"textures/minimap/brown.xpm", &cub->frame.width,
+			"textures/minimap/yellow.xpm", &cub->frame.width,
 			&cub->frame.height);
 	cub->frame.info.addr = mlx_get_data_addr(cub->frame.img, &cub->frame.info.bits_per_pixel,
 			&cub->frame.info.line_len, &cub->frame.info.endian);
