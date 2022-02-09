@@ -84,7 +84,7 @@ int	get_surface(char *surface)
 	int		colour;
 
 	tab = ft_split(surface, ',');
-	colour = create_rgb(ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+	colour = create_rgb(ft_atoi(tab[0] + 1), ft_atoi(tab[1]), ft_atoi(tab[2]));
 	ft_free_double(tab);
 	return (colour);
 }

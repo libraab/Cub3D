@@ -48,30 +48,6 @@ int	is_inside_map(char c)
 		return (1);
 	return (0);
 }
-
-/*void	ft_draw_minimap(t_data *c)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (c->map.map[++y])
-	{
-		x = -1;
-		while (c->map.map[y][++x])
-		{
-			if (c->map.map[y][x] == '1')
-				ft_put_img(&c->sheet, &c->mini_wall, (float)x * 10, (float)y * 10);
-			else if ((x != (int)floor(c->player.position.x)
-					|| (y != (int)floor(c->player.position.y)
-						&& is_inside_map(c->map.map[y][x]))))
-				ft_put_img(&c->sheet, &c->frame, (float)x * 10, (float)y * 10);
-			else if (is_inside_map(c->map.map[y][x]))
-				ft_put_img(&c->sheet, &c->player.img, (float)x * 10, (float)y * 10);
-		}
-	}
-}*/
-
 void	ft_draw_minimap(t_data *c)
 {
 	char **movinmap;
@@ -90,8 +66,6 @@ void	ft_draw_minimap(t_data *c)
 	int start_x = 0;
 	int end_y = 0;
 	int end_x = 0;
-	//printf("player [%c] is at[%d][%d]\n", c->map.map[y][x], y, x);
-	
 	if (y - 7 >= 0)
 	{
 		start_y = y - 7;
@@ -137,17 +111,6 @@ void	ft_draw_minimap(t_data *c)
 		else
 			end_x = width;
 	}
-	// printf("[%d]", start_y);
-	// printf("[%d]\n", end_y);
-	// printf("[%d]", start_x);
-	// printf("[%d]\n", end_x);
-
-	// for (int k = start_y; k < end_y; k++)
-	// {
-	// 	for (int l = start_x; l < end_x; l++)
-	// 		printf("%c", c->map.map[k][l]);
-	// 	printf("\n");
-	// }
 	int j = 0;
 	i = 0;
 	while (start_y <= end_y && c->map.map[start_y])
