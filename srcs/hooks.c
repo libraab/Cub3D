@@ -41,7 +41,7 @@ int	mouse_move(int x, int y, t_data *cub)
 	}
 	print_green_dot(cub, (cub->player.position.y * 10) + cub->player.direction.y * 10, (cub->player.position.x * 10) + cub->player.direction.x * 10);
 	cast_ray(cub->ray, cub->player);
-//	start_dda(cub);
+	start_dda(cub);
 	return (0);
 }
 

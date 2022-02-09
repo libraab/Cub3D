@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/08 22:57:09 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/09 03:16:07 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <limits.h>
 # include <float.h>
 
-# define WIN_WIDTH 900
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 # define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
@@ -81,6 +81,7 @@ typedef struct s_img
 	void	*img;
 	int		width;
 	int		height;
+	t_info	info;
 }			t_img;
 
 typedef struct s_player
@@ -117,19 +118,19 @@ typedef struct s_walls
 
 typedef struct s_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		map;
 	char		**tex;
+	int			ceiling;
+	int			floor;
+	int			mouse_x;
 	t_img		sheet;
 	t_img		frame;
 	t_img		mini_wall;
-	t_walls		walls;
-	int			floor;
-	int			ceiling;
-	int			mouse_x;
+	t_map		map;
 	t_player	player;
 	t_ray		ray[WIN_WIDTH];
+	t_walls		walls;
+	void		*mlx_ptr;
+	void		*win_ptr;
 }				t_data;
 
 //============================================================================//
@@ -233,7 +234,7 @@ void			ft_check_digits(char *str);
 //============================================================================//
 //					* P R I N T _ T E X T U R E *							  //
 //============================================================================//
-void			ft_print_texture(t_data *cub, int wall_height, int wall_type, t_ray ray);
+void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
 //============================================================================//
 //						* S T O C K _ D A T A *								  //
 //============================================================================//

@@ -95,7 +95,17 @@ int	start_dda(t_data *cub)
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[i].impact.y * 10, cub->ray[i].impact.x * 10);
 		wall_height = calc_projected_wall_height(cub->ray[i].distance);
-		//ft_print_texture(cub, wall_height, wall_type, cub->ray[i]);
+		if (i == 0)
+		{
+			draw_floor(cub);
+			draw_ceiling(cub);
+		}
+		ft_print_texture(cub, wall_height, wall_type, i);
+		if (i == WIN_WIDTH - 1)
+		{
+			ft_draw_minimap(cub);
+			ft_draw_frame(cub);
+		}
 		i++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
