@@ -5,7 +5,6 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	//int	texture_column;
 	//t_img	texture;
 	int		i;
-	int		j;
 
 	(void)wall_height;
 	cub->map.x = (int)cub->ray[column].impact.x;
@@ -15,12 +14,8 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 		i = 0;
 		while (i < cub->walls.south.height)
 		{
-			j = WIN_HEIGHT / 2 - wall_height / 2;
-			while (j < WIN_HEIGHT / 2 + wall_height / 2)
-			{
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, j, i), j, column);
-				j++;
-			}
+			if (i < WIN_HEIGHT)
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, cub->map.x, i), i, column);
 			i++;
 		}
 	}
