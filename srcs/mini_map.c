@@ -163,8 +163,8 @@ void	ft_draw_minimap(t_data *c)
 		i++;
 		start_y++;
 	}
-	// for (int k = 0; movinmap[k]; k++)
-	// 	printf("[%s]\n", movinmap[k]);
+	for (int k = 0; movinmap[k]; k++)
+		printf("[%s]\n", movinmap[k]);
 	
 	int count1 =0;
 	int count2 =0;
@@ -173,12 +173,15 @@ void	ft_draw_minimap(t_data *c)
 		count2 = 0;
 		while(movinmap[count1][count2])
 		{
-			if (c->map.map[count1][count2] == '1')
+			if (movinmap[count1][count2] == '1')
 				ft_put_img(&c->sheet, &c->mini_wall, (float)count2 * 10, (float)count1 * 10);
-			else if (c->map.map[count1][count2] != ' ')
+			else if (movinmap[count1][count2] != ' ')
 				ft_put_img(&c->sheet, &c->frame, (float)count2 * 10, (float)count1 * 10);
 			if (count2 == (int)c->player.position.x && count1 == (int)c->player.position.y)
+			{
+
 				ft_put_img(&c->sheet, &c->player.img, (float)count2 * 10, (float)count1 * 10);
+			}
 			count2++;
 		}
 		count1++;
