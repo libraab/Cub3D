@@ -5,49 +5,56 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	//int	texture_column;
 	//t_img	texture;
 	int		i;
+	float	ratio_x;
+	float	ratio_y;
 
-	(void)wall_height;
 	cub->map.x = (int)cub->ray[column].impact.x;
 	cub->map.y = (int)cub->ray[column].impact.y;
+	ratio_x = cub->ray[column].impact.x - cub->map.x;
+	ratio_y = cub->ray[column].impact.y - cub->map.y;
+	printf("ratio_x: %f, texture width: %d, printed column: %f\n", ratio_x, cub->walls.north.width, ratio_x * cub->walls.north.width);
 	if (wall_type == wall_above)
 	{
 		i = WIN_HEIGHT / 2 - wall_height / 2;
-			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
-			{
-				if (i > 0)
+		while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+		{
+			if (i > 0)
 				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, 30, 30), i, column);
 			i++;
-			}
+		}
 	}
 	if (wall_type == wall_below)
 	{
 		i = WIN_HEIGHT / 2 - wall_height / 2;
-			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+		while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+		{
+			if (i > 0)
 			{
-				if (i > 0)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, 30, 30), i, column);
+				//printf("texture height: %d, height ratio: %f, line printed: %f\n", i / cub->walls.north.height);
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, 30, (int)(ratio_x * cub->walls.north.width)), i, column);
+				}
 			i++;
-			}
+		}
 	}
 	if (wall_type == wall_left)
 	{
 		i = WIN_HEIGHT / 2 - wall_height / 2;
-			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
-			{
-				if (i > 0)
+		while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+		{
+			if (i > 0)
 				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, 30, 30), i, column);
 			i++;
-			}
+		}
 	}
 	if (wall_type == wall_right)
 	{
 		i = WIN_HEIGHT / 2 - wall_height / 2;
-			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
-			{
-				if (i > 0)
+		while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+		{
+			if (i > 0)
 				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, 30, 30), i, column);
 			i++;
-			}
+		}
 	}
 }	
 
