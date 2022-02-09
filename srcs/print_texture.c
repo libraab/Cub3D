@@ -11,43 +11,43 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	cub->map.y = (int)cub->ray[column].impact.y;
 	if (wall_type == wall_above)
 	{
-		i = 0;
-		while (i < cub->walls.south.height)
-		{
-			if (i > WIN_HEIGHT / 2 - wall_height / 2 && i < WIN_HEIGHT / 2 + wall_height / 2)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, cub->map.x, i), i, column);
+		i = WIN_HEIGHT / 2 - wall_height / 2;
+			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+			{
+				if (i > 0)
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, 10, 10), i, column);
 			i++;
-		}
+			}
 	}
 	if (wall_type == wall_below)
 	{
-		i = 0;
-		while (i < cub->walls.north.height)
-		{
-			if (i > WIN_HEIGHT / 2 - wall_height / 2 && i < WIN_HEIGHT / 2 + wall_height / 2)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, cub->map.x, i), i, column);
+		i = WIN_HEIGHT / 2 - wall_height / 2;
+			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+			{
+				if (i > 0)
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, 10, 10), i, column);
 			i++;
-		}
+			}
 	}
 	if (wall_type == wall_left)
 	{
-		i = 0;
-		while (i < cub->walls.east.height)
-		{
-			if (i > WIN_HEIGHT / 2 - wall_height / 2 && i < WIN_HEIGHT / 2 + wall_height / 2)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, cub->map.x, i), i, column);
+		i = WIN_HEIGHT / 2 - wall_height / 2;
+			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+			{
+				if (i > 0)
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, 10, 10), i, column);
 			i++;
-		}
+			}
 	}
 	if (wall_type == wall_right)
 	{
-		i = 0;
-		while (i < cub->walls.west.height)
-		{
-			if (i > WIN_HEIGHT / 2 - wall_height / 2 && i < WIN_HEIGHT / 2 + wall_height / 2)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, cub->map.x, i), i, column);
+		i = WIN_HEIGHT / 2 - wall_height / 2;
+			while (i < WIN_HEIGHT / 2 + wall_height / 2 && i < WIN_HEIGHT)
+			{
+				if (i > 0)
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, 10, 10), i, column);
 			i++;
-		}
+			}
 	}
 }	
 

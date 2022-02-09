@@ -93,7 +93,6 @@ int	start_dda(t_data *cub)
 	while (i < WIN_WIDTH)
 	{
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
-		ft_put_img2(&cub->sheet, DEEP_PINK, cub->ray[i].impact.y * 10, cub->ray[i].impact.x * 10);
 		wall_height = calc_projected_wall_height(cub->ray[i].distance);
 		if (i == 0)
 		{
