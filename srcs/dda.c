@@ -86,14 +86,23 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 int	start_dda(t_data *cub)
 {
 	int		i;
+	int		j;
 	int		wall_type;
 	float	wall_height;
 
 	i = 0;
+	j = 0;
 	while (i < WIN_WIDTH)
 	{
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
-		wall_height = calc_projected_wall_height(cub->ray[i].distance);
+		if (i < WIN_WIDTH / 2)
+			wall_height = calc_projected_wall_height(cub->ray[i].distance, ((FOV / 2) - (i * ANGLE_PER_PIXEL)));
+		else
+		{
+			//printf("current angle to end: %f, distortion angle: %f\n", FOV - i * ANGLE_PER_PIXEL, j * ANGLE_PER_PIXEL);
+			wall_height = calc_projected_wall_height(cub->ray[i].distance, (j * ANGLE_PER_PIXEL));
+			j++;
+		}
 		if (i == 0)
 		{
 			draw_floor(cub);

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/09 03:16:07 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:44:39 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
+# define NBR_OF_RAYS WIN_WIDTH / 2
 # define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
-# define ROTATION_ANGLE M_PI / 12 
+# define ROTATION_ANGLE M_PI / 30 
 # define PLAYER_SPEED 0.3
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -165,7 +166,7 @@ void			ft_put_img2(t_img *dest, int color, int x, int y);
 //							* D I S T A N C E *								  //
 //============================================================================//
 float			calc_dist_to_screen(void);
-float			calc_projected_wall_height(float distance_to_wall);
+float			calc_projected_wall_height(float distance_to_wall, float angle);
 //============================================================================//
 //								* D R A W *									  //
 //============================================================================//
