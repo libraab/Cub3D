@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/10 03:25:04 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/10 03:40:09 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define NBR_OF_RAYS WIN_WIDTH / 2
 # define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH

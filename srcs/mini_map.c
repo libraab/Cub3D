@@ -76,49 +76,30 @@ void	ft_print_minimap(t_data *cub)
 }
 // int		*ft_stock_tab(int *tab, int height, int width)
 // {
-// 	if (y - 7 >= 0)
+// 	tab[0] = y - 7;
+// 	tab[1] = y + 7;
+// 	if (tab[0] < 0)
 // 	{
-// 		tab[0] = y - 7;
-// 		if (y + 7 <= height)
-// 			tab[1] = y + 7;
-// 		else if (y + 7 > height)
-// 		{
-// 			tab[1] = height - 1;
-// 			if (tab[0] - y + 7 - tab[1] > 0)
-// 				tab[0] -= (y + 7 - tab[1]);
-// 			else
-// 				tab[0] = 0;
-// 		}
-// 	}
-// 	else if (y - 7 < 0)
-// 	{
+// 		tab[1] += (tab[0] * -1);
 // 		tab[0] = 0;
-// 		if(y + 7 + ((y -7) * -1) < height)
-// 			tab[1] = y + 7 + ((y - 7) * -1);
-// 		else
-// 			tab[1] = height;
 // 	}
-// 	if (x - 7 >= 0)
+// 	if (tab[1] > height)
 // 	{
-// 		tab[2] = x - 7;
-// 		if (x + 7 <= width)
-// 			tab[3] = x + 7;
-// 		else if (x + 7 > width)
-// 		{
-// 			tab[3] = width - 1;
-// 			if (tab[2] - (x + 7 - tab[3]) > 0)
-// 				tab[2] -= (x + 7 - tab[3]);
-// 			else
-// 				tab[2] = 0;
-// 		}
+// 		tab[0] -= (tab[1] - height);
+// 		tab[1] = height;
 // 	}
-// 	else if (x - 7 < 0)
+	
+// 	tab[2] = x - 7;
+// 	tab[3] = x + 7;
+// 	if (tab[2] < 0)
 // 	{
+// 		tab[3] += (tab[2] * -1);
 // 		tab[2] = 0;
-// 		if(x + 7 + ((x - 7) * -1) < width)
-// 			tab[3] = x + 7 + ((x - 7) * -1);
-// 		else
-// 			tab[3] = width;
+// 	}
+// 	if (tab[3] > width)
+// 	{
+// 		tab[2] -= (tab[3] - width);
+// 		tab[3] = width;
 // 	}
 // }
 
@@ -134,51 +115,33 @@ void	ft_draw_minimap(t_data *cub)
 	tab[2] = 0;
 	tab[1] = 0;
 	tab[3] = 0;
-	//ft_stock_tab(tab, height, width);
-	if (y - 7 >= 0)
+	tab[0] = y - 7;
+	tab[1] = y + 7;
+	if (tab[0] < 0)
 	{
-		tab[0] = y - 7;
-		if (y + 7 <= height)
-			tab[1] = y + 7;
-		else if (y + 7 > height)
-		{
-			tab[1] = height - 1;
-			if (tab[0] - y + 7 - tab[1] > 0)
-				tab[0] -= (y + 7 - tab[1]);
-			else
-				tab[0] = 0;
-		}
-	}
-	else if (y - 7 < 0)
-	{
+		tab[1] += (tab[0] * -1);
 		tab[0] = 0;
-		if (y + 7 + ((y -7) * -1) < height)
-			tab[1] = y + 7 + ((y - 7) * -1);
-		else
-			tab[1] = height;
 	}
-	if (x - 7 >= 0)
+	if (tab[1] > height)
 	{
-		tab[2] = x - 7;
-		if (x + 7 <= width)
-			tab[3] = x + 7;
-		else if (x + 7 > width)
-		{
-			tab[3] = width - 1;
-			if (tab[2] - (x + 7 - tab[3]) > 0)
-				tab[2] -= (x + 7 - tab[3]);
-			else
-				tab[2] = 0;
-		}
+		tab[0] -= (tab[1] - height);
+		tab[1] = height;
 	}
-	else if (x - 7 < 0)
+	
+	tab[2] = x - 7;
+	tab[3] = x + 7;
+	if (tab[2] < 0)
 	{
+		tab[3] += (tab[2] * -1);
 		tab[2] = 0;
-		if (x + 7 + ((x - 7) * -1) < width)
-			tab[3] = x + 7 + ((x - 7) * -1);
-		else
-			tab[3] = width;
 	}
+	if (tab[3] > width)
+	{
+		tab[2] -= (tab[3] - width);
+		tab[3] = width;
+	}
+	printf("[%d][%d][%d][%d]\n", tab[0], tab[1], tab[2], tab[3]);
+	//ft_stock_tab(tab, height, width);
 	ft_stock_minimap(cub, tab);
 	ft_print_minimap(cub);
 }
