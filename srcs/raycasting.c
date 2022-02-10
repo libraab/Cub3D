@@ -55,14 +55,18 @@ float	distance_to_y_axis(t_vector position, t_vector direction)
 void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 {
 	int	i;
+	float	fov;
+	float	app;
 
 	i = 0;
+	fov = (FOV * M_PI) / 180;
+	app = fov / WIN_WIDTH;
 	while (i < WIN_WIDTH)
 	{
 		if (i == 0)
-			ray[i].direction = rotate_vector(player.direction, -(FOV / 2));
+			ray[i].direction = rotate_vector(player.direction, -(fov / 2));
 		else if (i != WIN_WIDTH / 2)
-			ray[i].direction = rotate_vector(ray[i - 1].direction, ANGLE_PER_PIXEL);
+			ray[i].direction = rotate_vector(ray[i - 1].direction, app);
 		else
 			ray[i].direction = player.direction;
 		ray[i].step_x = calc_step_x(ray[i].direction, 1);
