@@ -68,13 +68,16 @@ void	ft_print_minimap(t_data *cub)
 					10 + ((float)i * 10));
 			if (j == (int)cub->player.pos.x && i == (int)cub->player.pos.y)
 			{
-				ft_put_img(&cub->sheet, &cub->player.img, 10 + ((float)j * 10),
-					10 + ((float)i * 10));
+				ft_put_img(&cub->sheet, &cub->player.img, ((float)j * 10) - 60,
+					((float)i * 10));
 			}
 			j++;
 		}
 		i++;
 	}
+	j = (int)cub->player.pos.x;
+	i = (int)cub->player.pos.y;
+	ft_put_img(&cub->sheet, &cub->player.img, ((float)j * 10) - 150, ((float)i * 10) + 5);
 }
 
 int	*ft_stock_tab(t_data *cub, int *tab)
