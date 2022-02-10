@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/10 03:40:09 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/10 04:16:51 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 # define TILE_SIZE 50
-# define FOV (4 * M_PI) / 9
-# define ANGLE_PER_PIXEL FOV / WIN_WIDTH
-# define ROTATION_ANGLE M_PI / 30 
+# define FOV 80
 # define PLAYER_SPEED 0.3
 # define RED 0xFF0000
 # define GREEN 0x00FF00
