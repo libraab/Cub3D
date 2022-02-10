@@ -98,7 +98,7 @@ int	*ft_stock_tab(t_data *cub, int *tab)
 		tab[3] += (tab[2] * -1);
 		tab[2] = 0;
 	}
-	if (tab[3] > cub->map_width)
+	else if (tab[3] > cub->map_width)
 	{
 		tab[2] -= (tab[3] - cub->map_width);
 		tab[3] = cub->map_width;

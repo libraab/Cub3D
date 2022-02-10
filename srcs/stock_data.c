@@ -68,24 +68,3 @@ void	ft_stock_texture(t_data *cub, char *file, int i, int ret)
 	close (fd);
 	ft_check_double_texture(cub, -1, 0);
 }
-
-void	ft_update_map(t_data *cub, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (cub->map.map[++i])
-	{
-		j = -1;
-		while (cub->map.map[i][++j])
-		{
-			if (ft_is_direction(cub->map.map[i][j]))
-			{
-				cub->map.map[i + x][j + y] = cub->map.map[i][j];
-				cub->map.map[i][j] = '0';
-				j++;
-			}
-		}
-	}
-}

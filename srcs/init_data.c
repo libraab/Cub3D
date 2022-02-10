@@ -44,13 +44,14 @@ void	ft_init_data(t_data *cub, char **av)
 			&cub->sheet.info.endian);
 	ft_stock_map(cub, av[1]);
 	ft_stock_texture(cub, av[1], 0, 1);
-	ft_init_img(&cub->mini_wall);
-	ft_init_img(&cub->frame);
-	cub->minimap = NULL;
+	// ft_init_img(&cub->mini_wall);
+	// ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map.map);
+	ft_draw_minimap(cub);
 	cast_ray(cub->ray, cub->player);
-	start_dda(cub);
+	ft_define_img(cub);
 	cub->mouse_x = 0;
 	cub->map_width = get_map_width(cub->map.map);
 	cub->map_height = get_map_height(cub->map.map);
+	start_dda(cub);
 }

@@ -65,6 +65,5 @@ int	move_player(int keycode, t_data *cub)
 	else
 		movement_direction = rotate_vector(cub->player.direction, M_PI / 2);
 	move(movement_direction, &cub->player, cub->map.map);
-	ft_draw_minimap(cub);
 	return (0);
 }
