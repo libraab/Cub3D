@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/09 17:44:39 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/10 01:33:35 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_walls
 typedef struct s_data
 {
 	char		**tex;
+	char		**minimap;
 	int			ceiling;
 	int			floor;
 	int			mouse_x;
