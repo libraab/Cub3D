@@ -1,7 +1,7 @@
-NO ./textures/pillar3.xpm
-SO ./textures/mur2.xpm
-WE ./textures/pillar1.xpm                                  
-EA ./textures/pillar2.xpm
+NO ./textures/pillar1.xpm
+SO ./textures/pillar2.xpm
+WE ./textures/pillar3.xpm                                  
+EA ./textures/pillar_door.xpm
 
 F 222, 184, 135
 C 0, 191, 255

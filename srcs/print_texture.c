@@ -23,8 +23,9 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	{
 		while (i < wall_end && i < WIN_HEIGHT)
 		{
+			wall_ratio = (i - wall_start) / wall_height;
 			if (i > 0)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, 30, 30), i, column);
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, (int)(ratio_x * cub->walls.south.width), wall_ratio * cub->walls.south.height), i, column);
 			i++;
 		}
 	}
@@ -33,8 +34,6 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 		while (i < wall_end && i < WIN_HEIGHT)
 		{
 			wall_ratio = (i - wall_start) / wall_height;
-			if (column == 450)
-				printf("i: %d, wall height: %d, wall ratio: %f, printed line: %f\n", i, wall_height, wall_ratio, wall_ratio * cub->walls.north.height); 
 			if (i > 0)
 				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, (int)(ratio_x * cub->walls.north.width), wall_ratio * cub->walls.north.height), i, column);
 			i++;
@@ -44,8 +43,9 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	{
 		while (i < wall_end && i < WIN_HEIGHT)
 		{
+			wall_ratio = (i - wall_start) / wall_height;
 			if (i > 0)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, 30, 30), i, column);
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, (int)(ratio_y * cub->walls.west.width), wall_ratio * cub->walls.west.height), i, column);
 			i++;
 		}
 	}
@@ -53,8 +53,9 @@ void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column)
 	{
 		while (i < wall_end && i < WIN_HEIGHT)
 		{
+			wall_ratio = (i - wall_start) / wall_height;
 			if (i > 0)
-				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, 30, 30), i, column);
+				ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, (int)(ratio_y * cub->walls.east.width), wall_ratio * cub->walls.east.height), i, column);
 			i++;
 		}
 	}
