@@ -40,9 +40,8 @@ void	ft_stock_minimap(t_data *cub, int *tab)
 		j = 0;
 		while (x <= tab[3] && cub->map.map[tab[0]][x])
 		{
-			cub->minimap[i][j] = cub->map.map[tab[0]][x];
+			cub->minimap[i][j] = cub->map.map[tab[0]][x++];
 			cub->minimap[i][++j] = 0;
-			x++;
 		}
 		i++;
 		tab[0]++;
@@ -62,19 +61,23 @@ void	ft_print_minimap(t_data *cub)
 		while (cub->minimap[i][j])
 		{
 			if (cub->minimap[i][j] == '1')
-				ft_put_img(&cub->sheet, &cub->mini_wall, 10 + ((float)j * 10), 10 + ((float)i * 10));
+				ft_put_img(&cub->sheet, &cub->mini_wall, 10 + ((float)j * 10),
+					10 + ((float)i * 10));
 			else if (cub->minimap[i][j] != ' ')
-				ft_put_img(&cub->sheet, &cub->frame, 10 + ((float)j * 10), 10 + ((float)i * 10));
+				ft_put_img(&cub->sheet, &cub->frame, 10 + ((float)j * 10),
+					10 + ((float)i * 10));
 			if (j == (int)cub->player.position.x && i == (int)cub->player.position.y)
 			{
-				ft_put_img(&cub->sheet, &cub->player.img, 10 + ((float)j * 10), 10 + ((float)i * 10));
+				ft_put_img(&cub->sheet, &cub->player.img, 10 + ((float)j * 10),
+					10 + ((float)i * 10));
 			}
 			j++;
 		}
 		i++;
 	}
 }
-int		*ft_stock_tab(t_data *cub, int *tab)
+
+int	*ft_stock_tab(t_data *cub, int *tab)
 {
 	tab[0] = (int)cub->player.position.y - 7;
 	tab[1] = (int)cub->player.position.y + 7;
@@ -105,7 +108,9 @@ int		*ft_stock_tab(t_data *cub, int *tab)
 
 void	ft_draw_minimap(t_data *cub)
 {
-	int	*tab = ft_calloc(sizeof(int), 4);
+	int	*tab;
+
+	tab = ft_calloc(sizeof(int), 4);
 	tab = ft_stock_tab(cub, tab);
 	ft_stock_minimap(cub, tab);
 	ft_print_minimap(cub);
