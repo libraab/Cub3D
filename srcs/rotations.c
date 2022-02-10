@@ -6,9 +6,11 @@ int	rotate_player(int keycode, t_data *cub)
 
 	rotation_angle = M_PI / 20;
 	if (keycode == KEY_ARROW_LEFT)
-		cub->player.direction = rotate_vector(cub->player.direction, -rotation_angle);
+		cub->player.direction = rotate_vector(cub->player.direction,
+				-rotation_angle);
 	if (keycode == KEY_ARROW_RIGHT)
-		cub->player.direction = rotate_vector(cub->player.direction, rotation_angle);
+		cub->player.direction = rotate_vector(cub->player.direction,
+				rotation_angle);
 	return (0);
 }
 

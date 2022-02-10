@@ -22,8 +22,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player.position.y = i;
-				player.position.x = j;
+				player.pos.y = i;
+				player.pos.x = j;
 				player.direction = starting_direction(map[i][j]);
 			}
 			j++;
@@ -39,10 +39,11 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->mlx_ptr = mlx_init();
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	cub->sheet.img = mlx_new_image(cub->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	cub->sheet.info.addr = mlx_get_data_addr(cub->sheet.img, &cub->sheet.info.bits_per_pixel,
-			&cub->sheet.info.line_len, &cub->sheet.info.endian);
+	cub->sheet.info.addr = mlx_get_data_addr(cub->sheet.img,
+			&cub->sheet.info.bits_per_pixel, &cub->sheet.info.line_len,
+			&cub->sheet.info.endian);
 	ft_stock_map(cub, av[1]);
-	ft_stock_texture(cub, av[1]);
+	ft_stock_texture(cub, av[1], 0, 1);
 	ft_init_img(&cub->mini_wall);
 	ft_init_img(&cub->frame);
 	cub->minimap = NULL;

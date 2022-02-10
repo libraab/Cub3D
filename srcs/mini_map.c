@@ -66,7 +66,7 @@ void	ft_print_minimap(t_data *cub)
 			else if (cub->minimap[i][j] != ' ')
 				ft_put_img(&cub->sheet, &cub->frame, 10 + ((float)j * 10),
 					10 + ((float)i * 10));
-			if (j == (int)cub->player.position.x && i == (int)cub->player.position.y)
+			if (j == (int)cub->player.pos.x && i == (int)cub->player.pos.y)
 			{
 				ft_put_img(&cub->sheet, &cub->player.img, 10 + ((float)j * 10),
 					10 + ((float)i * 10));
@@ -79,10 +79,10 @@ void	ft_print_minimap(t_data *cub)
 
 int	*ft_stock_tab(t_data *cub, int *tab)
 {
-	tab[0] = (int)cub->player.position.y - 7;
-	tab[1] = (int)cub->player.position.y + 7;
-	tab[2] = (int)cub->player.position.x - 7;
-	tab[3] = (int)cub->player.position.x + 7;
+	tab[0] = (int)cub->player.pos.y - 7;
+	tab[1] = (int)cub->player.pos.y + 7;
+	tab[2] = (int)cub->player.pos.x - 7;
+	tab[3] = (int)cub->player.pos.x + 7;
 	if (tab[0] < 0)
 	{
 		tab[1] += (tab[0] * -1);
@@ -114,12 +114,4 @@ void	ft_draw_minimap(t_data *cub)
 	tab = ft_stock_tab(cub, tab);
 	ft_stock_minimap(cub, tab);
 	ft_print_minimap(cub);
-}
-
-void	print_green_dot(t_data *cub, int x, int y)
-{
-	ft_put_img2(&cub->sheet, GREEN, x, y);
-	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
-	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
-	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
 }

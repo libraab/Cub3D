@@ -9,10 +9,12 @@ int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 	coord_y = floor(position.y);
 	if (direction.y <= 0 && coord_y > 0)
 	{
-		if (map[coord_y - 1][coord_x] == '1' && position.y - floorf(position.y) < PLAYER_SPEED)
+		if (map[coord_y - 1][coord_x] == '1'
+				&& position.y - floorf(position.y) < PLAYER_SPEED)
 			return (wall_above);
 	}
-	else if (direction.y >= 0 && coord_y < get_map_height(map) && (1 - (position.y - floorf(position.y)) < PLAYER_SPEED))
+	else if (direction.y >= 0 && coord_y < get_map_height(map)
+		&& (1 - (position.y - floorf(position.y)) < PLAYER_SPEED))
 	{
 		if (map[coord_y + 1][coord_x] == '1')
 			return (wall_below);
@@ -29,10 +31,12 @@ int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 	coord_y = floor(position.y);
 	if (direction.x <= 0 && coord_x > 0)
 	{
-		if (map[coord_y][coord_x - 1] == '1' && position.x - floorf(position.x) < PLAYER_SPEED)
+		if (map[coord_y][coord_x - 1] == '1'
+				&& position.x - floorf(position.x) < PLAYER_SPEED)
 			return (wall_left);
 	}
-	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y]) && (1 - (position.x - floorf(position.x)) < PLAYER_SPEED))
+	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y])
+		&& (1 - (position.x - floorf(position.x)) < PLAYER_SPEED))
 	{
 		if (map[coord_y][coord_x + 1] == '1')
 			return (wall_right);
@@ -40,12 +44,12 @@ int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 	return (no_wall);
 }
 
-void	move(t_vector movement_direction, t_player *player, char **map)
+void	move(t_vector mov_direction, t_player *player, char **map)
 {
-	if (check_vertical_wall(player->position, movement_direction, map) == no_wall)
-		player->position.x += movement_direction.x * PLAYER_SPEED;
-	if (check_horizontal_wall(player->position, movement_direction, map) == no_wall)
-		player->position.y += movement_direction.y * PLAYER_SPEED;
+	if (check_vertical_wall(player->pos, mov_direction, map) == no_wall)
+		player->pos.x += mov_direction.x * PLAYER_SPEED;
+	if (check_horizontal_wall(player->pos, mov_direction, map) == no_wall)
+		player->pos.y += mov_direction.y * PLAYER_SPEED;
 }
 
 int	move_player(int keycode, t_data *cub)

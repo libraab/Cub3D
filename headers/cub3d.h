@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/10 04:26:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:09:55 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	t_vector		position;
+	t_vector		pos;
 	t_vector		direction;
 	t_img			img;
 }					t_player;
@@ -199,6 +199,7 @@ void			ft_init_data(t_data *cub, char **av);
 //								* M A I N *									  //
 //============================================================================//
 int				ft_get_height(char *file);
+void			print_green_dot(t_data *cub, int x, int y);
 int				get_map_height(char **tab);
 int				get_map_width(char **map);
 //============================================================================//
@@ -213,13 +214,12 @@ void			ft_draw_frame(t_data *cub);
 void			ft_stock_minimap(t_data *cub, int *tab);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
-void			print_green_dot(t_data *cub, int x, int y);
 //============================================================================//
 //								* M O V E S *								  //
 //============================================================================//
 int				check_horizontal_wall(t_vector position, t_vector direction, char **map);
 int				check_vertical_wall(t_vector position, t_vector direction, char **map);
-void			move(t_vector movement_vector, t_player *player, char **map);
+void			move(t_vector mov_direction, t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
 //============================================================================//
 //							* P A R S I N G *								  //
@@ -233,6 +233,8 @@ void			ft_check_digits(char *str);
 //					* P R I N T _ T E X T U R E *							  //
 //============================================================================//
 void			ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
+void			init_tex_ns(t_data *cub, char *texture_name, t_walls *walls, int x);
+void			init_tex_ew(t_data *cub, char *texture_name, t_walls *walls, int x);
 //============================================================================//
 //						*  R A Y C A S T I N G  *							  //
 //============================================================================//
@@ -251,7 +253,7 @@ t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 void			ft_stock_map(t_data *cub, char *file);
 void			get_wall_textures(t_data *cub, char *texture_name, t_walls *walls);
-void			ft_stock_texture(t_data *cub, char *file);
+void			ft_stock_texture(t_data *cub, char *file, int i, int ret);
 void			ft_update_map(t_data *cub, int x, int y);
 //============================================================================//
 //								* U T I L S *								  //

@@ -29,6 +29,14 @@ int	ft_get_height(char *file)
 	return (i);
 }
 
+void	print_green_dot(t_data *cub, int x, int y)
+{
+	ft_put_img2(&cub->sheet, GREEN, x, y);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y);
+	ft_put_img2(&cub->sheet, GREEN, x, y + 1);
+	ft_put_img2(&cub->sheet, GREEN, x + 1, y + 1);
+}
+
 int	get_map_height(char **tab)
 {
 	int	i;

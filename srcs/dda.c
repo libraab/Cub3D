@@ -67,10 +67,10 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 	float	travelled_on_y;
 	float	travelled_on_x;
 
-	travelled_on_y = distance_to_x_axis(player.position, ray->direction);
-	travelled_on_x = distance_to_y_axis(player.position, ray->direction);
-	map.x = (int)player.position.x;
-	map.y = (int)player.position.y;
+	travelled_on_y = distance_to_x_axis(player.pos, ray->direction);
+	travelled_on_x = distance_to_y_axis(player.pos, ray->direction);
+	map.x = (int)player.pos.x;
+	map.y = (int)player.pos.y;
 	wall_type = no_wall;
 	while (wall_type == no_wall)
 	{
@@ -79,7 +79,7 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 		else
 			wall_type = ride_along_y(ray, &map, &travelled_on_y);
 	}
-	get_impact_coordinates(ray, player.position);
+	get_impact_coordinates(ray, player.pos);
 	return (wall_type);
 }
 
@@ -94,9 +94,9 @@ int	start_dda(t_data *cub)
 
 	fov = (FOV * M_PI) / 180;
 	app = fov / WIN_WIDTH;
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < WIN_WIDTH)
+	while (++i < WIN_WIDTH)
 	{
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		if (i < WIN_WIDTH / 2)
@@ -117,7 +117,6 @@ int	start_dda(t_data *cub)
 			ft_draw_minimap(cub);
 			ft_draw_frame(cub);
 		}
-		i++;
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);

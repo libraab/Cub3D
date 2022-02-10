@@ -5,7 +5,8 @@ float	calc_step_x(t_vector ray_direction, float x_component)
 	float	step;
 
 	if (ray_direction.x != 0)
-		step = x_component * sqrt(1 + (ray_direction.y * ray_direction.y) / (ray_direction.x * ray_direction.x));
+		step = x_component * sqrt(1 + (ray_direction.y * ray_direction.y)
+				/ (ray_direction.x * ray_direction.x));
 	else
 		step = FLT_MAX;
 	return (step);
@@ -16,7 +17,8 @@ float	calc_step_y(t_vector ray_direction, float y_component)
 	float	step;
 
 	if (ray_direction.y != 0)
-		step = y_component * sqrt(1 + (ray_direction.x * ray_direction.x) / (ray_direction.y * ray_direction.y));
+		step = y_component * sqrt(1 + (ray_direction.x * ray_direction.x)
+				/ (ray_direction.y * ray_direction.y));
 	else
 		step = FLT_MAX;
 	return (step);
@@ -54,7 +56,7 @@ float	distance_to_y_axis(t_vector position, t_vector direction)
 
 void	cast_ray(t_ray ray[WIN_WIDTH], t_player player)
 {
-	int	i;
+	int		i;
 	float	fov;
 	float	app;
 
