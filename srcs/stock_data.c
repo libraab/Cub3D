@@ -15,7 +15,7 @@ void	ft_stock_map(t_data *cub, char *file)
 	{
 		ret = get_next_line(fd, &line);
 		if (ft_is_direction(line[0]) || line[0] == 'F' || line[0] == 'C'
-				|| line[0] == '\n' || line[0] == '\0')
+			|| line[0] == '\n' || line[0] == '\0')
 		{
 			free (line);
 			continue ;
@@ -81,7 +81,7 @@ void	ft_stock_texture(t_data *cub, char *file)
 			break ;
 		}
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E'
-				|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
+			|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
 		{
 			cub->tex[i++] = ft_strtrim(ft_strdup(line), " ");
 			get_wall_textures(cub, line, &cub->walls);
@@ -91,4 +91,25 @@ void	ft_stock_texture(t_data *cub, char *file)
 	cub->tex[i] = NULL;
 	close (fd);
 	ft_check_double_texture(cub, -1, 0);
+}
+
+void	ft_update_map(t_data *cub, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (cub->map.map[++i])
+	{
+		j = -1;
+		while (cub->map.map[i][++j])
+		{
+			if (ft_is_direction(cub->map.map[i][j]))
+			{
+				cub->map.map[i + x][j + y] = cub->map.map[i][j];
+				cub->map.map[i][j] = '0';
+				j++;
+			}
+		}
+	}
 }

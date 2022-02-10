@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/09 17:44:39 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/10 03:40:09 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
-# define NBR_OF_RAYS WIN_WIDTH / 2
 # define TILE_SIZE 50
 # define FOV (4 * M_PI) / 9
 # define ANGLE_PER_PIXEL FOV / WIN_WIDTH
@@ -120,6 +119,7 @@ typedef struct s_walls
 typedef struct s_data
 {
 	char		**tex;
+	char		**minimap;
 	int			ceiling;
 	int			floor;
 	int			mouse_x;
@@ -152,6 +152,9 @@ int				ft_west_wall(char **map, int i, int j);
 //============================================================================//
 //								* D D A *									  //
 //============================================================================//
+float			ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x);
+float			ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y);
+void			get_impact_coordinates(t_ray *ray, t_vector player_position);
 int				dda_algorithm(t_player player, t_ray *ray, t_map map);
 int				start_dda(t_data *cub);
 //============================================================================//
@@ -177,16 +180,14 @@ void			ft_draw_all(t_data *cub);
 //								* E R R O R S *								  //
 //============================================================================//
 void			ft_error(int x);
+int				ft_exit(void);
 //============================================================================//
 //								* H O O K S *								  //
 //============================================================================//
 int				key_release(int keycode);
-int				rotate_player(int keycode, t_data *cub);
 int				rotation_key(int keycode);
 int				movement_key(int keycode);
 int				mouse_move(int x, int y, t_data *cub);
-int				check_horizontal_wall(t_vector position, t_vector direction, char **map);
-int				check_vertical_wall(t_vector position, t_vector direction, char **map);
 int				player_movement(int keycode, t_data *cub);
 //============================================================================//
 //							* I N I T _ D A T A *							  //
@@ -198,15 +199,8 @@ void			ft_init_data(t_data *cub, char **av);
 //								* M A I N *									  //
 //============================================================================//
 int				ft_get_height(char *file);
-//============================================================================//
-//								* M A T H *									  //
-//============================================================================//
-float			calc_step_x(t_vector ray_direction, float x_component);
-float			calc_step_y(t_vector ray_direction, float y_component);
-float			distance_to_x_axis(t_vector position, t_vector direction);
-float			distance_to_y_axis(t_vector position, t_vector direction);
-void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
-int				in_map(char **map, int x, int y);
+int				get_map_height(char **tab);
+int				get_map_width(char **map);
 //============================================================================//
 //								* M E M O R Y *								  //
 //============================================================================//
@@ -216,12 +210,15 @@ void			ft_free_double(char **tab);
 //						* M I N I _ M A P *									  //
 //============================================================================//
 void			ft_draw_frame(t_data *cub);
-int				is_inside_map(char c);
+void			ft_stock_minimap(t_data *cub, int *tab);
+void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 void			print_green_dot(t_data *cub, int x, int y);
 //============================================================================//
 //								* M O V E S *								  //
 //============================================================================//
+int				check_horizontal_wall(t_vector position, t_vector direction, char **map);
+int				check_vertical_wall(t_vector position, t_vector direction, char **map);
 void			move(t_vector movement_vector, t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
 //============================================================================//
@@ -235,24 +232,37 @@ void			ft_check_digits(char *str);
 //============================================================================//
 //					* P R I N T _ T E X T U R E *							  //
 //============================================================================//
-void	ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
+void			ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
+//============================================================================//
+//						*  R A Y C A S T I N G  *							  //
+//============================================================================//
+float			calc_step_x(t_vector ray_direction, float x_component);
+float			calc_step_y(t_vector ray_direction, float y_component);
+float			distance_to_x_axis(t_vector position, t_vector direction);
+float			distance_to_y_axis(t_vector position, t_vector direction);
+void			cast_ray(t_ray ray[WIN_WIDTH], t_player player);
+//============================================================================//
+//						* R O T A T I O N S *								  //
+//============================================================================//
+int				rotate_player(int keycode, t_data *cub);
+t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 //						* S T O C K _ D A T A *								  //
 //============================================================================//
 void			ft_stock_map(t_data *cub, char *file);
+void			get_wall_textures(t_data *cub, char *texture_name, t_walls *walls);
 void			ft_stock_texture(t_data *cub, char *file);
+void			ft_update_map(t_data *cub, int x, int y);
 //============================================================================//
 //								* U T I L S *								  //
 //============================================================================//
-int				ft_exit(void);
+int				is_inside_map(char c);
 int				ft_is_direction(char c);
 int				create_rgb(int r, int g, int b);
-int				get_map_height(char **tab);
-int				get_map_width(char **map);
 void			fill_blanks(char **map);
 t_vector		starting_direction(char player_character);
-t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 //						* U N C L A S S I F I E D *							  //
 //============================================================================//
+
 #endif

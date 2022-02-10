@@ -45,6 +45,7 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_stock_texture(cub, av[1]);
 	ft_init_img(&cub->mini_wall);
 	ft_init_img(&cub->frame);
+	cub->minimap = NULL;
 	cub->player = init_player(cub->map.map);
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);

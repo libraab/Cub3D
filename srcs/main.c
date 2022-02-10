@@ -29,6 +29,32 @@ int	ft_get_height(char *file)
 	return (i);
 }
 
+int	get_map_height(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int	get_map_width(char **map)
+{
+	int	i;
+	int	width;
+
+	width = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (width <= (int)ft_strlen(map[i]))
+			width = (int)ft_strlen(map[i]);
+		i++;
+	}
+	return (width);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	cub;
