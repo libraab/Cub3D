@@ -45,7 +45,6 @@ void	ft_put_img(t_img *dest, t_img *src, float x, float y)
 		while (++xx < src->width)
 			ft_pixel_put(&dest->info, xx + x, yy + y,
 				ft_pixel_get(&src->info, xx, yy));
-			;
 	}
 }
 

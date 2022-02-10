@@ -15,7 +15,7 @@ void	ft_stock_map(t_data *cub, char *file)
 	{
 		ret = get_next_line(fd, &line);
 		if (ft_is_direction(line[0]) || line[0] == 'F' || line[0] == 'C'
-				|| line[0] == '\n' || line[0] == '\0')
+			|| line[0] == '\n' || line[0] == '\0')
 		{
 			free (line);
 			continue ;
@@ -81,7 +81,7 @@ void	ft_stock_texture(t_data *cub, char *file)
 			break ;
 		}
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E'
-				|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
+			|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
 		{
 			cub->tex[i++] = ft_strtrim(ft_strdup(line), " ");
 			get_wall_textures(cub, line, &cub->walls);

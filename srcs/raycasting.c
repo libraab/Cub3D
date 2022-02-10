@@ -45,7 +45,7 @@ float	distance_to_y_axis(t_vector position, t_vector direction)
 	if (direction.x == 0)
 		return (FLT_MAX);
 	else if (direction.x < 0)
-		offset = position.x - (int)position.x;                     
+		offset = position.x - (int)position.x;
 	else
 		offset = (int)position.x + 1 - position.x;
 	first_step = calc_step_x(direction, offset);
