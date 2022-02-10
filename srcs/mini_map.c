@@ -1,26 +1,5 @@
 #include "../headers/cub3d.h"
 
-void	ft_update_map(t_data *cub, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (cub->map.map[++i])
-	{
-		j = -1;
-		while (cub->map.map[i][++j])
-		{
-			if (ft_is_direction(cub->map.map[i][j]))
-			{
-				cub->map.map[i + x][j + y] = cub->map.map[i][j];
-				cub->map.map[i][j] = '0';
-				j++;
-			}
-		}
-	}
-}
-
 void	ft_draw_frame(t_data *cub)
 {
 	int	i;
@@ -38,15 +17,6 @@ void	ft_draw_frame(t_data *cub)
 		ft_put_img(&cub->sheet, &cub->player.img, 0.0, (float)j * 10);
 		ft_put_img(&cub->sheet, &cub->player.img, 150.0, (float)j * 10);
 	}
-}
-
-int	is_inside_map(char c)
-{
-	if (!c)
-		return (0);
-	else if (c == '0' || ft_is_direction(c))
-		return (1);
-	return (0);
 }
 
 void	ft_stock_minimap(t_data *cub, int *tab)

@@ -1,9 +1,12 @@
 #include "../headers/cub3d.h"
 
-int	ft_exit(void)
+int	is_inside_map(char c)
 {
-	write(1, "Bye Bye!\n", 9);
-	exit(0);
+	if (!c)
+		return (0);
+	else if (c == '0' || ft_is_direction(c))
+		return (1);
+	return (0);
 }
 
 int	ft_is_direction(char c)
@@ -16,32 +19,6 @@ int	ft_is_direction(char c)
 int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
-}
-
-int	get_map_height(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-int	get_map_width(char **map)
-{
-	int	i;
-	int	width;
-
-	width = 0;
-	i = 0;
-	while (map[i])
-	{
-		if (width <= (int)ft_strlen(map[i]))
-			width = (int)ft_strlen(map[i]);
-		i++;
-	}
-	return (width);
 }
 
 void	fill_blanks(char **map)

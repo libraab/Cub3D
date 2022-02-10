@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/10 03:09:01 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/10 03:25:04 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void			ft_draw_all(t_data *cub);
 //								* E R R O R S *								  //
 //============================================================================//
 void			ft_error(int x);
+int				ft_exit(void);
 //============================================================================//
 //								* H O O K S *								  //
 //============================================================================//
@@ -199,6 +200,8 @@ void			ft_init_data(t_data *cub, char **av);
 //								* M A I N *									  //
 //============================================================================//
 int				ft_get_height(char *file);
+int				get_map_height(char **tab);
+int				get_map_width(char **map);
 //============================================================================//
 //								* M E M O R Y *								  //
 //============================================================================//
@@ -207,9 +210,7 @@ void			ft_free_double(char **tab);
 //============================================================================//
 //						* M I N I _ M A P *									  //
 //============================================================================//
-void			ft_update_map(t_data *cub, int x, int y);
 void			ft_draw_frame(t_data *cub);
-int				is_inside_map(char c);
 void			ft_stock_minimap(t_data *cub, int *tab);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
@@ -252,14 +253,13 @@ t_vector		rotate_vector(t_vector to_rotate, float angle);
 void			ft_stock_map(t_data *cub, char *file);
 void			get_wall_textures(t_data *cub, char *texture_name, t_walls *walls);
 void			ft_stock_texture(t_data *cub, char *file);
+void			ft_update_map(t_data *cub, int x, int y);
 //============================================================================//
 //								* U T I L S *								  //
 //============================================================================//
-int				ft_exit(void);
+int				is_inside_map(char c);
 int				ft_is_direction(char c);
 int				create_rgb(int r, int g, int b);
-int				get_map_height(char **tab);
-int				get_map_width(char **map);
 void			fill_blanks(char **map);
 t_vector		starting_direction(char player_character);
 //============================================================================//

@@ -22,3 +22,9 @@ void	ft_error(int x)
 		write(2, "Error : Wrong parameter\n", 24);
 	exit(EXIT_FAILURE);
 }
+
+int	ft_exit(void)
+{
+	write(1, "Bye Bye!\n", 9);
+	exit(0);
+}
