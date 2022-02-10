@@ -2,7 +2,10 @@
 
 float	calc_dist_to_screen(void)
 {
-	return (WIN_WIDTH / tan(FOV));
+	float	fov;
+
+	fov = (FOV * M_PI) / 180;
+	return (WIN_WIDTH / tan(fov));
 }
 
 float	calc_projected_wall_height(float distance_to_wall, float angle)

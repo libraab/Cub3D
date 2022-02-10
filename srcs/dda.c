@@ -89,18 +89,21 @@ int	start_dda(t_data *cub)
 	int		j;
 	int		wall_type;
 	float	wall_height;
+	float	fov;
+	float	app;
 
+	fov = (FOV * M_PI) / 180;
+	app = fov / WIN_WIDTH;
 	i = 0;
 	j = 0;
 	while (i < WIN_WIDTH)
 	{
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
 		if (i < WIN_WIDTH / 2)
-			wall_height = calc_projected_wall_height(cub->ray[i].distance, ((FOV / 2) - (i * ANGLE_PER_PIXEL)));
+			wall_height = calc_projected_wall_height(cub->ray[i].distance, ((fov / 2) - (i * app)));
 		else
 		{
-			//printf("current angle to end: %f, distortion angle: %f\n", FOV - i * ANGLE_PER_PIXEL, j * ANGLE_PER_PIXEL);
-			wall_height = calc_projected_wall_height(cub->ray[i].distance, (j * ANGLE_PER_PIXEL));
+			wall_height = calc_projected_wall_height(cub->ray[i].distance, (j * app));
 			j++;
 		}
 		if (i == 0)
