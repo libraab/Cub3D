@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/10 04:16:51 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/10 04:26:15 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_data
 	int			ceiling;
 	int			floor;
 	int			mouse_x;
+	int			map_width;
+	int			map_height;
 	t_img		sheet;
 	t_img		frame;
 	t_img		mini_wall;

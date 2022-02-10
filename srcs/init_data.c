@@ -50,4 +50,6 @@ void	ft_init_data(t_data *cub, char **av)
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 	cub->mouse_x = 0;
+	cub->map_width = get_map_width(cub->map.map);
+	cub->map_height = get_map_height(cub->map.map);
 }

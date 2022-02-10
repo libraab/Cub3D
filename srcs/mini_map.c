@@ -74,74 +74,39 @@ void	ft_print_minimap(t_data *cub)
 		i++;
 	}
 }
-// int		*ft_stock_tab(int *tab, int height, int width)
-// {
-// 	tab[0] = y - 7;
-// 	tab[1] = y + 7;
-// 	if (tab[0] < 0)
-// 	{
-// 		tab[1] += (tab[0] * -1);
-// 		tab[0] = 0;
-// 	}
-// 	if (tab[1] > height)
-// 	{
-// 		tab[0] -= (tab[1] - height);
-// 		tab[1] = height;
-// 	}
-	
-// 	tab[2] = x - 7;
-// 	tab[3] = x + 7;
-// 	if (tab[2] < 0)
-// 	{
-// 		tab[3] += (tab[2] * -1);
-// 		tab[2] = 0;
-// 	}
-// 	if (tab[3] > width)
-// 	{
-// 		tab[2] -= (tab[3] - width);
-// 		tab[3] = width;
-// 	}
-// }
-
-void	ft_draw_minimap(t_data *cub)
+int		*ft_stock_tab(t_data *cub, int *tab)
 {
-	int	width = get_map_width(cub->map.map);
-	int	height = get_map_height(cub->map.map);
-	int	x = (int)cub->player.position.x;
-	int	y = (int)cub->player.position.y;
-	int	*tab = ft_calloc(sizeof(int), 4);
-
-	tab[0] = 0;
-	tab[2] = 0;
-	tab[1] = 0;
-	tab[3] = 0;
-	tab[0] = y - 7;
-	tab[1] = y + 7;
+	tab[0] = (int)cub->player.position.y - 7;
+	tab[1] = (int)cub->player.position.y + 7;
+	tab[2] = (int)cub->player.position.x - 7;
+	tab[3] = (int)cub->player.position.x + 7;
 	if (tab[0] < 0)
 	{
 		tab[1] += (tab[0] * -1);
 		tab[0] = 0;
 	}
-	if (tab[1] > height)
+	if (tab[1] > cub->map_height)
 	{
-		tab[0] -= (tab[1] - height);
-		tab[1] = height;
+		tab[0] -= (tab[1] - cub->map_height);
+		tab[1] = cub->map_height;
 	}
-	
-	tab[2] = x - 7;
-	tab[3] = x + 7;
 	if (tab[2] < 0)
 	{
 		tab[3] += (tab[2] * -1);
 		tab[2] = 0;
 	}
-	if (tab[3] > width)
+	if (tab[3] > cub->map_width)
 	{
-		tab[2] -= (tab[3] - width);
-		tab[3] = width;
+		tab[2] -= (tab[3] - cub->map_width);
+		tab[3] = cub->map_width;
 	}
-	printf("[%d][%d][%d][%d]\n", tab[0], tab[1], tab[2], tab[3]);
-	//ft_stock_tab(tab, height, width);
+	return (tab);
+}
+
+void	ft_draw_minimap(t_data *cub)
+{
+	int	*tab = ft_calloc(sizeof(int), 4);
+	tab = ft_stock_tab(cub, tab);
 	ft_stock_minimap(cub, tab);
 	ft_print_minimap(cub);
 }
