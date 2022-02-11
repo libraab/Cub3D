@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/11 01:48:42 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/11 02:28:58 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 # include <limits.h>
 # include <float.h>
 
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 900
-# define TILE_SIZE 50
-# define FOV 80
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 760
+# define TILE_SIZE 64
+# define FOV 66
 # define PLAYER_SPEED 0.3
 # define RED 0xFF0000
 # define GREEN 0x00FF00
@@ -210,7 +210,8 @@ void			ft_free_double(char **tab);
 //						* M I N I _ M A P *									  //
 //============================================================================//
 void			ft_draw_frame(t_data *cub);
-void			ft_stock_minimap(t_data *cub, int *tab, int i, int j);
+// void			ft_stock_minimap(t_data *cub, int *tab, int i, int j);
+void			ft_stock_minimap(t_data *cub, int *tab);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 //============================================================================//
