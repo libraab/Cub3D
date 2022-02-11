@@ -47,11 +47,11 @@ void	ft_init_data(t_data *cub, char **av)
 	ft_init_img(&cub->mini_wall);
 	ft_init_img(&cub->frame);
 	cub->player = init_player(cub->map.map);
+	cub->map_width = get_map_width(cub->map.map);
+	cub->map_height = get_map_height(cub->map.map);
 	ft_draw_minimap(cub);
 	cast_ray(cub->ray, cub->player);
 	ft_define_img(cub);
 	cub->mouse_x = 0;
-	cub->map_width = get_map_width(cub->map.map);
-	cub->map_height = get_map_height(cub->map.map);
 	start_dda(cub);
 }

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/11 02:28:58 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/11 02:34:02 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,7 @@ void			ft_free_double(char **tab);
 //						* M I N I _ M A P *									  //
 //============================================================================//
 void			ft_draw_frame(t_data *cub);
-// void			ft_stock_minimap(t_data *cub, int *tab, int i, int j);
-void			ft_stock_minimap(t_data *cub, int *tab);
+void			ft_stock_minimap(t_data *cub, int *tab, int i, int j);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 //============================================================================//
