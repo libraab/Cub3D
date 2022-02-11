@@ -19,14 +19,10 @@ void	ft_draw_frame(t_data *cub)
 	}
 }
 
-void	ft_stock_minimap(t_data *cub, int *tab)
+void	ft_stock_minimap(t_data *cub, int *tab, int i, int j)
 {
-	int	i;
-	int	j;
 	int	x;
 
-	i = -1;
-	j = 0;
 	x = 0;
 	if (cub->minimap != NULL)
 		ft_free_double(cub->minimap);
@@ -41,13 +37,11 @@ void	ft_stock_minimap(t_data *cub, int *tab)
 		while (x <= tab[3] && cub->map.map[tab[0]][x])
 		{
 			if (tab[0] == (int)cub->player.pos.y && x == (int)cub->player.pos.x)
-			{
 				cub->minimap[i][j] = 'P';
-				x++;
-			}
 			else
-				cub->minimap[i][j] = cub->map.map[tab[0]][x++];
+				cub->minimap[i][j] = cub->map.map[tab[0]][x];
 			cub->minimap[i][++j] = 0;
+			x++;
 		}
 		i++;
 		tab[0]++;
@@ -118,6 +112,23 @@ void	ft_draw_minimap(t_data *cub)
 
 	tab = ft_calloc(sizeof(int), 4);
 	tab = ft_stock_tab(cub, tab);
-	ft_stock_minimap(cub, tab);
+	if (cub->map_height < 15 && cub->map_width >= 15)
+	{
+		tab[0] = 0;
+		tab[1] = get_map_height(cub->map.map);
+	}
+	if (cub->map_height >= 15 && cub->map_width < 15)
+	{
+		tab[2] = 0;
+		tab[3] = get_map_width(cub->map.map);
+	}
+	if (cub->map_height < 15 && cub->map_width < 15)
+	{
+		tab[0] = 0;
+		tab[1] = get_map_height(cub->map.map);
+		tab[2] = 0;
+		tab[3] = get_map_width(cub->map.map);
+	}
+	ft_stock_minimap(cub, tab, -1, 0);
 	ft_print_minimap(cub);
 }
