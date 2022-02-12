@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/12 02:55:33 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/12 03:33:52 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@
 # include "../headers/mlx_keycode.h"
 # include "../libft/libft.h"
 # include "mlx.h"
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include <limits.h>
 # include <float.h>
 
 # define WIN_WIDTH 1280
@@ -34,11 +26,6 @@
 # define TILE_SIZE 64
 # define FOV 66
 # define PLAYER_SPEED 0.3
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define GOLD 0xFFD700
-# define DEEP_PINK 0xFF1493
 
 enum
 {
@@ -84,56 +71,56 @@ typedef struct s_info
 
 typedef struct s_img
 {
-	void	*img;
-	int		width;
 	int		height;
+	int		width;
 	t_info	info;
+	void	*img;
 }			t_img;
 
 typedef struct s_player
 {
-	t_vector		pos;
-	t_vector		direction;
 	t_img			img;
+	t_vector		direction;
+	t_vector		pos;
 }					t_player;
 
 typedef struct s_ray
 {
-	t_vector		direction;
-	t_vector		impact;
-	int				wall_hit;
 	float			distance;
 	float			step_x;
 	float			step_y;
+	int				wall_hit;
+	t_vector		direction;
+	t_vector		impact;
 }					t_ray;
 
 typedef struct s_map
 {
+	char	**map;
 	int		x;
 	int		y;
-	char	**map;
 }			t_map;
 
 typedef struct s_walls
 {
+	t_img	east;
 	t_img	north;
 	t_img	south;
 	t_img	west;
-	t_img	east;
 }			t_walls;
 
 typedef struct s_data
 {
-	char		**tex;
 	char		**minimap;
+	char		**tex;
 	int			ceiling;
 	int			floor;
-	int			mouse_x;
-	int			map_width;
 	int			map_height;
-	t_img		sheet;
+	int			map_width;
+	int			mouse_x;
 	t_img		frame;
 	t_img		mini_wall;
+	t_img		sheet;
 	t_map		map;
 	t_player	player;
 	t_ray		ray[WIN_WIDTH];
@@ -178,6 +165,7 @@ void			ft_put_img2(t_img *dest, int color, int x, int y);
 //============================================================================//
 float			calc_dist_to_screen(void);
 float			calc_wall_height(float distance_to_wall, float angle);
+float			get_wall_height(float distance, int ray_number);
 //============================================================================//
 //								* D R A W *									  //
 //============================================================================//
@@ -194,19 +182,16 @@ int				ft_exit(void);
 int				key_release(int keycode);
 int				rotation_key(int keycode);
 int				movement_key(int keycode);
-int				mouse_move(int x, int y, t_data *cub);
 int				player_movement(int keycode, t_data *cub);
 //============================================================================//
 //							* I N I T _ D A T A *							  //
 //============================================================================//
-void			ft_init_img(t_img *img);
 t_player		init_player(char **map);
 void			ft_init_data(t_data *cub, char **av);
 //============================================================================//
-//								* M A I N *									  //
+//							* M A P _ U T I L S *							  //
 //============================================================================//
 int				ft_get_height(char *file);
-void			print_green_dot(t_data *cub, int x, int y);
 int				get_map_height(char **tab);
 int				get_map_width(char **map);
 //============================================================================//
@@ -215,17 +200,25 @@ int				get_map_width(char **map);
 void			ft_free(char **str);
 void			ft_free_double(char **tab);
 //============================================================================//
-//						* M I N I _ M A P *									  //
+//							* M I N I _ M A P *								  //
 //============================================================================//
 void			ft_draw_frame(t_data *cub);
+void			fill_minimap_characters(t_data *cub, int *boundaries, int i);
 void			ft_stock_minimap(t_data *cub, int *tab);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 //============================================================================//
+//						* M I N I _ M A P _ L I M I T S *					  //
+//============================================================================//
+void			center_on_player(t_player player, int *minimap_boundaries);
+void			protect_out_of_map_limits(t_data *cub, int *minimap_boundaries);
+void			protect_map_too_small(t_data *cub, int *minimap_boundaries);
+void			ft_get_minimap_boundaries(t_data *cub, int *minimap_boundaries);
+//============================================================================//
 //								* M O V E S *								  //
 //============================================================================//
-int				check_horizontal_wall(t_vector position, t_vector direction, char **map);
-int				check_vertical_wall(t_vector position, t_vector direction, char **map);
+int				check_horizontal_wall(t_vector pos, t_vector dir, char **map);
+int				check_vertical_wall(t_vector pos, t_vector dir, char **map);
 void			move(t_vector mov_direction, t_player *player, char **map);
 int				move_player(int keycode, t_data *cub);
 //============================================================================//
@@ -239,11 +232,15 @@ void			ft_check_digits(char *str);
 //============================================================================//
 //					* P R I N T _ T E X T U R E *							  //
 //============================================================================//
-void			ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
-void			north_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void			south_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void			east_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void			west_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void			print_north_wall(t_data *cub, int wall_height, \
+				int column, float ratio_x);
+void			print_south_wall(t_data *cub, int wall_height, \
+				int column, float ratio_x);
+void			print_east_wall(t_data *cub, int wall_height, \
+				int column, float ratio_y);
+void			print_west_wall(t_data *cub, int wall_height, \
+				int column, float ratio_y);
+void			ft_print_texture(t_data *cub, int height, int type, int column);
 //============================================================================//
 //						*  R A Y C A S T I N G  *							  //
 //============================================================================//
@@ -262,26 +259,28 @@ t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 void			stock_map(t_data *cub, int fd);
 void			ft_get_map(t_data *cub, char *file);
-void			get_wall_textures(t_data *cub, char *texture_name, t_walls *walls);
+void			get_wall_textures(t_data *cub, char *name, t_walls *walls);
 void			stock_texture(t_data *cub, int fd);
 void			ft_get_texture(t_data *cub, char *file);
-void			ft_update_map(t_data *cub, int x, int y);
 //============================================================================//
 //								* U T I L S *								  //
 //============================================================================//
-int				is_inside_map(char c);
 int				ft_is_direction(char c);
 int				create_rgb(int r, int g, int b);
 void			fill_blanks(char **map);
 t_vector		starting_direction(char player_character);
 //============================================================================//
-//						* U N C L A S S I F I E D *							  //
+//							* W A L L _ H E I G H T *						  //
 //============================================================================//
+float			calc_dist_to_screen(void);
+float			calc_wall_height(float distance_to_wall, float angle);
+float			get_wall_height(float distance, int ray_number);
+//============================================================================//
+//						* W A L L _ T E X T U R E S *						  //
+//============================================================================//
+void			north_wall_texture(t_data *cub, char *name, t_walls *walls);
+void			south_wall_texture(t_data *cub, char *name, t_walls *walls);
+void			east_wall_texture(t_data *cub, char *name, t_walls *walls);
+void			west_wall_texture(t_data *cub, char *name, t_walls *walls);
 
-float	get_wall_height(float distance, int ray_number);
-void	ft_get_minimap_boundaries(t_data *cub, int *minimap_boundaries);
-void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void	south_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void	east_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
-void	west_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
 #endif
