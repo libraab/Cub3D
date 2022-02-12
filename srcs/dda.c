@@ -101,10 +101,7 @@ int	start_dda(t_data *cub)
 		}
 		ft_print_texture(cub, wall_height, wall_type, i);
 		if (i == WIN_WIDTH - 1)
-		{
 			ft_draw_minimap(cub);
-			ft_draw_frame(cub);
-		}
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);

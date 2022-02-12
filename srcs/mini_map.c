@@ -1,24 +1,5 @@
 #include "../headers/cub3d.h"
 
-void	ft_draw_frame(t_data *cub)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 16)
-	{
-		ft_put_img(&cub->sheet, &cub->player.img, i * 10, 0.0);
-		ft_put_img(&cub->sheet, &cub->player.img, i * 10, 150.0);
-	}
-	j = -1;
-	while (++j < 15)
-	{
-		ft_put_img(&cub->sheet, &cub->player.img, 0.0, j * 10);
-		ft_put_img(&cub->sheet, &cub->player.img, 150.0, j * 10);
-	}
-}
-
 void	fill_minimap_characters(t_data *cub, int *minimap_boundaries, int i)
 {
 	int	j;

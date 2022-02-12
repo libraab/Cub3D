@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/12 03:33:52 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/12 22:59:03 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int				ft_exit(void);
 //								* H O O K S *								  //
 //============================================================================//
 int				key_release(int keycode);
+int				mouse_move(int x, int y, t_data *cub);
 int				rotation_key(int keycode);
 int				movement_key(int keycode);
 int				player_movement(int keycode, t_data *cub);

@@ -15,8 +15,8 @@ t_player	init_player(char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S' \
 					|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				player.pos.y = i;
-				player.pos.x = j;
+				player.pos.y = i + 0.5;
+				player.pos.x = j + 0.5;
 				player.direction = starting_direction(map[i][j]);
 			}
 			j++;
