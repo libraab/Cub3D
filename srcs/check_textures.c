@@ -50,7 +50,7 @@ void	ft_valid_texture_file(char *str)
 		ft_error(7);
 }
 
-void	ft_check_fc(t_data *cub)
+void	ft_check_floor_ceiling(t_data *cub)
 {
 	if ((cub->tex[4][0] == 'F' && cub->tex[5][0] != 'C')
 			|| (cub->tex[4][0] == 'C' && cub->tex[5][0] != 'F'))
@@ -88,5 +88,5 @@ void	ft_valid_texture(t_data *cub)
 			ft_error(8);
 		ft_valid_texture_file(cub->tex[i]);
 	}
-	ft_check_fc(cub);
+	ft_check_floor_ceiling(cub);
 }

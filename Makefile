@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/11 02:52:31 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/12 02:56:00 by bleotard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,21 +28,24 @@ SRCS				=	check_textures.c \
 						check_walls.c \
 						dda.c \
 						define_img.c \
-						distance.c \
 						draw.c \
 						errors.c \
 						hooks.c \
 						init_data.c \
 					 	main.c \
+						map_utils.c \
 						memory.c \
 						mini_map.c \
+						minimap_limits.c \
 						moves.c \
 						parsing.c \
 						print_texture.c \
 						raycasting.c \
 						rotations.c \
 						stock_data.c \
-						utils.c
+						utils.c \
+						wall_height.c \
+						wall_textures.c
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})
@@ -57,7 +60,7 @@ OBJS				= ${SRC:.c=.o}
 #  ╚═════╝     ╚═════╝     ╚═╝     ╚═╝    ╚═╝         ╚═╝    ╚══════╝
 
 CC					= gcc
-CFLAGS  			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS  			= -Wall -Wextra -Werror #-g -fsanitize=address
 RM					= rm -rf
 MAKE_EXT			= @make -s --no-print-directory -C
 

@@ -11,13 +11,13 @@ float	ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x)
 	{
 		map->x += 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_right;
+			wall_hit = east_wall;
 	}
 	else
 	{
 		map->x -= 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_left;
+			wall_hit = west_wall;
 	}
 	return (wall_hit);
 }
@@ -33,13 +33,13 @@ float	ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y)
 	{
 		map->y += 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_above;
+			wall_hit = north_wall;
 	}
 	else
 	{
 		map->y -= 1;
 		if (map->map[map->y][map->x] == '1')
-			wall_hit = wall_below;
+			wall_hit = south_wall;
 	}
 	return (wall_hit);
 }
@@ -86,26 +86,14 @@ int	dda_algorithm(t_player player, t_ray *ray, t_map map)
 int	start_dda(t_data *cub)
 {
 	int		i;
-	int		j;
 	int		wall_type;
 	float	wall_height;
-	float	fov;
-	float	app;
 
-	fov = (FOV * M_PI) / 180;
-	app = fov / WIN_WIDTH;
 	i = -1;
-	j = 0;
 	while (++i < WIN_WIDTH)
 	{
 		wall_type = dda_algorithm(cub->player, &cub->ray[i], cub->map);
-		if (i < WIN_WIDTH / 2)
-			wall_height = calc_projected_wall_height(cub->ray[i].distance, ((fov / 2) - (i * app)));
-		else
-		{
-			wall_height = calc_projected_wall_height(cub->ray[i].distance, (j * app));
-			j++;
-		}
+		wall_height = get_wall_height(cub->ray[i].distance, i);
 		if (i == 0)
 		{
 			draw_floor(cub);

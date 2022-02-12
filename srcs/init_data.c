@@ -1,12 +1,5 @@
 #include "../headers/cub3d.h"
 
-void	ft_init_img(t_img *img)
-{
-	img->img = NULL;
-	img->width = 0;
-	img->height = 0;
-}
-
 t_player	init_player(char **map)
 {
 	int			i;
@@ -30,7 +23,6 @@ t_player	init_player(char **map)
 		}
 		i++;
 	}
-	ft_init_img(&player.img);
 	return (player);
 }
 
@@ -42,16 +34,13 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->sheet.info.addr = mlx_get_data_addr(cub->sheet.img,
 			&cub->sheet.info.bits_per_pixel, &cub->sheet.info.line_len,
 			&cub->sheet.info.endian);
-	ft_stock_map(cub, av[1]);
-	ft_stock_texture(cub, av[1], 0, 1);
-	ft_init_img(&cub->mini_wall);
-	ft_init_img(&cub->frame);
-	cub->player = init_player(cub->map.map);
+	ft_get_map(cub, av[1]);
+	ft_get_texture(cub, av[1]);
 	cub->map_width = get_map_width(cub->map.map);
 	cub->map_height = get_map_height(cub->map.map);
+	cub->player = init_player(cub->map.map);
+	get_minimap_images(cub);
 	ft_draw_minimap(cub);
 	cast_ray(cub->ray, cub->player);
-	ft_define_img(cub);
-	cub->mouse_x = 0;
 	start_dda(cub);
 }

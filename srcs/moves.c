@@ -11,13 +11,13 @@ int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 	{
 		if (map[coord_y - 1][coord_x] == '1'
 				&& position.y - floorf(position.y) < PLAYER_SPEED)
-			return (wall_above);
+			return (north_wall);
 	}
 	else if (direction.y >= 0 && coord_y < get_map_height(map)
 		&& (1 - (position.y - floorf(position.y)) < PLAYER_SPEED))
 	{
 		if (map[coord_y + 1][coord_x] == '1')
-			return (wall_below);
+			return (south_wall);
 	}
 	return (no_wall);
 }
@@ -33,13 +33,13 @@ int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 	{
 		if (map[coord_y][coord_x - 1] == '1'
 				&& position.x - floorf(position.x) < PLAYER_SPEED)
-			return (wall_left);
+			return (west_wall);
 	}
 	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y])
 		&& (1 - (position.x - floorf(position.x)) < PLAYER_SPEED))
 	{
 		if (map[coord_y][coord_x + 1] == '1')
-			return (wall_right);
+			return (east_wall);
 	}
 	return (no_wall);
 }

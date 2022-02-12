@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-void	ft_define_img(t_data *cub)
+void	get_minimap_images(t_data *cub)
 {
 	cub->mini_wall.img = mlx_xpm_file_to_image(cub->mlx_ptr,
 			"textures/minimap/blue.xpm", &cub->mini_wall.width,
@@ -37,7 +37,7 @@ unsigned int	ft_pixel_get(t_info *data, int x, int y)
 			+ x * (data->bits_per_pixel / 8))));
 }
 
-void	ft_put_img(t_img *dest, t_img *src, float x, float y)
+void	ft_put_img(t_img *dest, t_img *src, int x, int y)
 {
 	int		xx;
 	int		yy;

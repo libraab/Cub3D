@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/11 02:34:02 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/12 02:55:33 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,18 @@ enum
 enum
 {
 	no_wall,
-	wall_right,
-	wall_above,
-	wall_below,
-	wall_left,
+	east_wall,
+	north_wall,
+	south_wall,
+	west_wall
+};
+
+enum
+{
+	left,
+	right,
+	up,
+	down
 };
 
 typedef struct s_vector
@@ -140,7 +148,7 @@ typedef struct s_data
 int				ft_skip_spaces(char *str, int i, int reverse);
 int				ft_end_of_texture(char *line);
 void			ft_valid_texture_file(char *str);
-void			ft_check_fc(t_data *cub);
+void			ft_check_floor_ceiling(t_data *cub);
 void			ft_valid_texture(t_data *cub);
 //============================================================================//
 //						* C H E C K _ W A L L S *							  //
@@ -160,16 +168,16 @@ int				start_dda(t_data *cub);
 //============================================================================//
 //							* D E F I N E _ I M G *							  //
 //============================================================================//
-void			ft_define_img(t_data *cub);
+void			get_minimap_images(t_data *cub);
 void			ft_pixel_put(t_info *data, int x, int y, int color);
 unsigned int	ft_pixel_get(t_info *data, int x, int y);
-void			ft_put_img(t_img *dest, t_img *src, float x, float y);
+void			ft_put_img(t_img *dest, t_img *src, int x, int y);
 void			ft_put_img2(t_img *dest, int color, int x, int y);
 //============================================================================//
 //							* D I S T A N C E *								  //
 //============================================================================//
 float			calc_dist_to_screen(void);
-float			calc_projected_wall_height(float distance_to_wall, float angle);
+float			calc_wall_height(float distance_to_wall, float angle);
 //============================================================================//
 //								* D R A W *									  //
 //============================================================================//
@@ -210,7 +218,7 @@ void			ft_free_double(char **tab);
 //						* M I N I _ M A P *									  //
 //============================================================================//
 void			ft_draw_frame(t_data *cub);
-void			ft_stock_minimap(t_data *cub, int *tab, int i, int j);
+void			ft_stock_minimap(t_data *cub, int *tab);
 void			ft_print_minimap(t_data *cub);
 void			ft_draw_minimap(t_data *cub);
 //============================================================================//
@@ -232,8 +240,10 @@ void			ft_check_digits(char *str);
 //					* P R I N T _ T E X T U R E *							  //
 //============================================================================//
 void			ft_print_texture(t_data *cub, int wall_height, int wall_type, int column);
-void			init_tex_ns(t_data *cub, char *texture_name, t_walls *walls, int x);
-void			init_tex_ew(t_data *cub, char *texture_name, t_walls *walls, int x);
+void			north_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void			south_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void			east_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void			west_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
 //============================================================================//
 //						*  R A Y C A S T I N G  *							  //
 //============================================================================//
@@ -250,9 +260,11 @@ t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 //						* S T O C K _ D A T A *								  //
 //============================================================================//
-void			ft_stock_map(t_data *cub, char *file);
+void			stock_map(t_data *cub, int fd);
+void			ft_get_map(t_data *cub, char *file);
 void			get_wall_textures(t_data *cub, char *texture_name, t_walls *walls);
-void			ft_stock_texture(t_data *cub, char *file, int i, int ret);
+void			stock_texture(t_data *cub, int fd);
+void			ft_get_texture(t_data *cub, char *file);
 void			ft_update_map(t_data *cub, int x, int y);
 //============================================================================//
 //								* U T I L S *								  //
@@ -266,4 +278,10 @@ t_vector		starting_direction(char player_character);
 //						* U N C L A S S I F I E D *							  //
 //============================================================================//
 
+float	get_wall_height(float distance, int ray_number);
+void	ft_get_minimap_boundaries(t_data *cub, int *minimap_boundaries);
+void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void	south_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void	east_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
+void	west_wall_texture(t_data *cub, char *texture_name, t_walls *walls);
 #endif

@@ -1,16 +1,13 @@
 #include "../headers/cub3d.h"
 
-void	ft_stock_map(t_data *cub, char *file)
+void	stock_map(t_data *cub, int fd)
 {
 	int		i;
-	int		fd;
 	int		ret;
 	char	*line;
 
 	i = 0;
 	ret = 1;
-	cub->map.map = ft_calloc(sizeof(char *), ft_get_height(file) + 1);
-	fd = open(file, O_RDONLY);
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
@@ -24,6 +21,17 @@ void	ft_stock_map(t_data *cub, char *file)
 		free (line);
 	}
 	cub->map.map[i] = NULL;
+}
+
+void	ft_get_map(t_data *cub, char *file)
+{
+	int		fd;
+
+	cub->map.map = ft_calloc(sizeof(char *), ft_get_height(file) + 1);
+	if (!cub->map.map)
+		return ;
+	fd = open(file, O_RDONLY);
+	stock_map(cub, fd);
 	fill_blanks(cub->map.map);
 	ft_valid_chars(cub);
 	close (fd);
@@ -32,22 +40,23 @@ void	ft_stock_map(t_data *cub, char *file)
 void	get_wall_textures(t_data *cub, char *texture_name, t_walls *walls)
 {
 	if (texture_name[0] == 'N')
-		init_tex_ns(cub, texture_name, walls, 0);
+		north_wall_texture(cub, texture_name, walls);
 	else if (texture_name[0] == 'S')
-		init_tex_ns(cub, texture_name, walls, 1);
+		south_wall_texture(cub, texture_name, walls);
 	else if (texture_name[0] == 'E')
-		init_tex_ew(cub, texture_name, walls, 0);
+		east_wall_texture(cub, texture_name, walls);
 	else if (texture_name[0] == 'W')
-		init_tex_ew(cub, texture_name, walls, 1);
+		west_wall_texture(cub, texture_name, walls);
 }
 
-void	ft_stock_texture(t_data *cub, char *file, int i, int ret)
+void	stock_texture(t_data *cub, int fd)
 {
-	int		fd;
+	int		i;
+	int		ret;
 	char	*line;
 
-	fd = open(file, O_RDONLY);
-	cub->tex = ft_calloc(sizeof(char *), 7);
+	i = 0;
+	ret = 1;
 	while (ret > 0)
 	{
 		ret = get_next_line(fd, &line);
@@ -65,6 +74,17 @@ void	ft_stock_texture(t_data *cub, char *file, int i, int ret)
 		free (line);
 	}
 	cub->tex[i] = NULL;
+}
+
+void	ft_get_texture(t_data *cub, char *file)
+{
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	cub->tex = ft_calloc(sizeof(char *), 7);
+	if (!cub->tex)
+		return ;
+	stock_texture(cub, fd);
 	close (fd);
 	ft_check_double_texture(cub, -1, 0);
 }

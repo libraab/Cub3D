@@ -1,14 +1,5 @@
 #include "../headers/cub3d.h"
 
-int	is_inside_map(char c)
-{
-	if (!c)
-		return (0);
-	else if (c == '0' || ft_is_direction(c))
-		return (1);
-	return (0);
-}
-
 int	ft_is_direction(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
