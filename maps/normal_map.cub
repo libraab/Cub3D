@@ -1,7 +1,7 @@
 NO ./textures/piltover_victor.xpm
 SO ./textures/zaunwall.xpm
 WE ./textures/pillar3.xpm                                  
-EA ./textures/pilpil.xpm
+EA ./textures/caitlyn_wall.xpm
 
 F 222, 184, 135
 C 0, 191, 255
