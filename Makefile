@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/13 02:06:30 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/13 05:15:50 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ NAME				= cub3D
 
 FOLDER_HEADER		= headers/
 FOLDER				= srcs/
+FOLDER_BONUS		= srcs/bonus/
 
 HEADER_FILE 		= cub3d.h
 
 SRCS				=	check_textures.c \
-						animation.c \
 						check_walls.c \
 						dda.c \
 						define_img.c \
@@ -47,11 +47,38 @@ SRCS				=	check_textures.c \
 						utils.c \
 						wall_height.c \
 						wall_textures.c
+						
+SRCS_BONUS 				= 	animation.c \
+							main_bonus.c \
+							check_walls.c \
+							dda.c \
+							define_img.c \
+							draw.c \
+							errors.c \
+							hooks.c \
+							init_data.c \
+					 		main.c \
+							map_utils.c \
+							memory.c \
+							mini_map.c \
+							minimap_limits.c \
+							moves.c \
+							parsing.c \
+							print_texture.c \
+							raycasting.c \
+							rotations.c \
+							stock_data.c \
+							utils.c \
+							wall_height.c \
+							wall_textures.c\
+							check_textures.c 
 
 SRC					= $(addprefix ${FOLDER},${SRCS})
+SRC_B				= $(addprefix ${FOLDER_BONUS},${SRCS_BONUS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})
 
 OBJS				= ${SRC:.c=.o}
+OBJS_B				= ${SRC_B:.c=.o}
 
 #  ██████╗     ██████╗     ███╗   ███╗    ██████╗     ██╗    ██╗
 # ██╔════╝    ██╔═══██╗    ████╗ ████║    ██╔══██╗    ██║    ██║
@@ -66,6 +93,7 @@ RM					= rm -rf
 MAKE_EXT			= @make -s --no-print-directory -C
 
 OBJ					= ${OBJS}
+OBJ_B				= ${OBJS}
 
 UNAME_S				= $(shell uname -s)
 
@@ -76,7 +104,8 @@ ifeq ($(UNAME_S),Darwin)
 	LIBS 			= -L ./libft -lft -lmlx -framework OpenGL -framework AppKit -lz
 endif
 
-COMPIL	= $(CC) $(CFLAGS) ${OBJ} $(LIBS) -o $(NAME)
+COMPIL		= $(CC) $(CFLAGS) ${OBJ} $(LIBS) -o $(NAME)
+COMPIL_B	= $(CC) $(CFLAGS) ${OBJ_B} $(LIBS) -o $(NAME)
 
 # ██████╗     ██╗   ██╗    ██╗         ███████╗    ███████╗
 # ██╔══██╗    ██║   ██║    ██║         ██╔════╝    ██╔════╝
@@ -105,11 +134,22 @@ all:		${NAME}
 				@$(CC) -c $(CFLAGS) -o $@ $<
 				@printf $(reset)
 
+bonus:		${OBJ_B}
+			@printf $(blue)
+			@printf " Generating bonus objects... %-33.33s                                 \r" $@
+			@printf $(magenta)
+			$(MAKE_EXT) ./libft
+			@$(COMPIL_B)
+			@printf "➖➖➖➖➖➖➖➖➖➖➖➖                         \n"
+			@printf "💎 ENJOY THE BONUS 💎\n"
+			@printf "➖➖➖➖➖➖➖➖➖➖➖➖\n"
+			@printf $(reset)
+
 re: 		fclean all
 
 clean:
 			$(MAKE_EXT) ./libft clean
-			@${RM} ${OBJ}
+			@${RM} ${OBJ} ${OBJ_B}
 			@printf $(yellow)
 			@printf "Object files have been deleted   ✅\n"
 			@printf $(reset)
@@ -123,7 +163,7 @@ fclean:		clean
 			@printf "✨✨ Your folder is now clean ✨✨\n"
 			@printf $(reset)
 
-.PHONY: 	all clean fclean re
+.PHONY: 	all clean fclean re bonus
 
 
 #  ██████╗     ██████╗     ██╗          ██████╗     ██████╗

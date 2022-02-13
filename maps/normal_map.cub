@@ -1,7 +1,7 @@
-NO ./textures/victor_wall.xpm
-SO ./textures/zaunwall.xpm
-WE ./textures/pillar3.xpm                                  
-EA ./textures/caitlyn_wall.xpm
+NO ./textures/wall55.xpm
+SO ./textures/wall55.xpm
+WE ./textures/wall55.xpm                                  
+EA ./textures/wall55.xpm
 
 F 222, 184, 135
 C 0, 191, 255
