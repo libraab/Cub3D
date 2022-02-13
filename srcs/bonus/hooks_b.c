@@ -29,12 +29,12 @@ int	mouse_move(int x, int y, t_data *cub)
 	(void)y;
 	if (cub->mouse_x == 0)
 		cub->mouse_x = x;
-	if (x > cub->mouse_x + 10)
+	if (x > cub->mouse_x + 10 || x == 1819)
 	{
 		rotate_player(KEY_ARROW_RIGHT, cub);
 		cub->mouse_x = x;
 	}
-	else if (x < cub->mouse_x - 10)
+	else if (x < cub->mouse_x - 10 || x == -100)
 	{
 		rotate_player(KEY_ARROW_LEFT, cub);
 		cub->mouse_x = x;
