@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/13 01:51:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/13 02:32:36 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ t_vector		rotate_vector(t_vector to_rotate, float angle);
 //============================================================================//
 void			stock_map(t_data *cub, int fd);
 void			ft_get_map(t_data *cub, char *file);
-void			get_wall_textures(t_data *cub, char *name, t_walls *walls);
+void			get_wall_textures(t_data *cub, char **texture_files, t_walls *walls);
 void			stock_texture(t_data *cub, int fd);
 void			ft_get_texture(t_data *cub, char *file);
 //============================================================================//

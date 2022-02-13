@@ -37,16 +37,23 @@ void	ft_get_map(t_data *cub, char *file)
 	close (fd);
 }
 
-void	get_wall_textures(t_data *cub, char *texture_name, t_walls *walls)
+void	get_wall_textures(t_data *cub, char **texture_files, t_walls *walls)
 {
-	if (texture_name[0] == 'N')
-		north_wall_texture(cub, texture_name, walls);
-	else if (texture_name[0] == 'S')
-		south_wall_texture(cub, texture_name, walls);
-	else if (texture_name[0] == 'E')
-		east_wall_texture(cub, texture_name, walls);
-	else if (texture_name[0] == 'W')
-		west_wall_texture(cub, texture_name, walls);
+	int	i;
+
+	i = 0;
+	while (texture_files[i])
+	{
+	if (texture_files[i][0] == 'N')
+		north_wall_texture(cub, texture_files[i], walls);
+	else if (texture_files[i][0] == 'S')
+		south_wall_texture(cub, texture_files[i], walls);
+	else if (texture_files[i][0] == 'E')
+		east_wall_texture(cub, texture_files[i], walls);
+	else if (texture_files[i][0] == 'W')
+		west_wall_texture(cub, texture_files[i], walls);
+	i++;
+	}
 }
 
 void	stock_texture(t_data *cub, int fd)
@@ -67,10 +74,7 @@ void	stock_texture(t_data *cub, int fd)
 		}
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E'
 			|| line[0] == 'W' || line[0] == 'F' || line[0] == 'C')
-		{
 			cub->tex[i++] = ft_strtrim(ft_strdup(line), " ");
-			get_wall_textures(cub, line, &cub->walls);
-		}
 		free (line);
 	}
 	cub->tex[i] = NULL;
@@ -85,6 +89,6 @@ void	ft_get_texture(t_data *cub, char *file)
 	if (!cub->tex)
 		return ;
 	stock_texture(cub, fd);
-	close (fd);
 	ft_check_double_texture(cub, -1, 0);
+	get_wall_textures(cub, cub->tex, &cub->walls);
 }
