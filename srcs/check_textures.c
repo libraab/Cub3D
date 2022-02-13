@@ -48,6 +48,7 @@ void	ft_valid_texture_file(char *str)
 	fd = open(&str[i], O_RDONLY);
 	if (fd < 0)
 		ft_error(7);
+	close (fd);
 }
 
 void	ft_check_floor_ceiling(t_data *cub)

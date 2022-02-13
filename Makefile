@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/12 02:56:00 by bleotard         ###   ########.fr        #
+#    Updated: 2022/02/13 01:22:17 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FOLDER				= srcs/
 HEADER_FILE 		= cub3d.h
 
 SRCS				=	check_textures.c \
+						animation.c \
 						check_walls.c \
 						dda.c \
 						define_img.c \

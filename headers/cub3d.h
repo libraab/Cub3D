@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/12 22:59:03 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/13 01:51:15 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <float.h>
+# include <stdio.h>
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 760
@@ -118,6 +119,10 @@ typedef struct s_data
 	int			map_height;
 	int			map_width;
 	int			mouse_x;
+	t_img		vi1;
+	t_img		vi2;
+	t_img		vi3;
+	t_img		vi4;
 	t_img		frame;
 	t_img		mini_wall;
 	t_img		sheet;
@@ -283,5 +288,8 @@ void			north_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			south_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			east_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			west_wall_texture(t_data *cub, char *name, t_walls *walls);
+void			print_vi(int i, t_data *cub);
+int				ft_animation(t_data *cub);
+void			get_vi_images(t_data *cub);
 
 #endif
