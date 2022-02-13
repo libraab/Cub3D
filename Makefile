@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/13 05:15:50 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/13 22:11:44 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,64 +20,65 @@ NAME				= cub3D
 # ╚═╝         ╚═╝    ╚══════╝    ╚══════╝    ╚══════╝
 
 FOLDER_HEADER		= headers/
-FOLDER				= srcs/
+
+FOLDER_MANDA		= srcs/mandatory/
+
 FOLDER_BONUS		= srcs/bonus/
 
 HEADER_FILE 		= cub3d.h
 
-SRCS				=	check_textures.c \
-						check_walls.c \
+SRCS				=	check_walls.c \
 						dda.c \
+						init_data.c \
+					 	main.c \
+						moves.c \
+						parsing.c \
+						stock_data.c \
+						check_textures.c \
 						define_img.c \
 						draw.c \
 						errors.c \
 						hooks.c \
-						init_data.c \
-					 	main.c \
 						map_utils.c \
 						memory.c \
 						mini_map.c \
 						minimap_limits.c \
-						moves.c \
-						parsing.c \
 						print_texture.c \
 						raycasting.c \
 						rotations.c \
-						stock_data.c \
 						utils.c \
 						wall_height.c \
-						wall_textures.c
+						wall_textures.c 
 						
-SRCS_BONUS 				= 	animation.c \
-							main_bonus.c \
-							check_walls.c \
-							dda.c \
-							define_img.c \
-							draw.c \
-							errors.c \
-							hooks.c \
-							init_data.c \
-					 		main.c \
-							map_utils.c \
-							memory.c \
-							mini_map.c \
-							minimap_limits.c \
-							moves.c \
-							parsing.c \
-							print_texture.c \
-							raycasting.c \
-							rotations.c \
-							stock_data.c \
-							utils.c \
-							wall_height.c \
-							wall_textures.c\
-							check_textures.c 
-
-SRC					= $(addprefix ${FOLDER},${SRCS})
+SRCS_BONUS 			= 	animation.c \
+						check_walls_b.c \
+						main_bonus.c \
+						dda_b.c \
+						init_data_b.c \
+						moves_b.c \
+						parsing_b.c \
+						stock_data_b.c \
+						check_textures_b.c \
+						define_img_b.c \
+						draw_b.c \
+						errors_b.c \
+						hooks_b.c \
+						map_utils_b.c \
+						memory_b.c \
+						mini_map_b.c \
+						minimap_limits_b.c \
+						print_texture_b.c \
+						raycasting_b.c \
+						rotations_b.c \
+						utils_b.c \
+						wall_height_b.c \
+						wall_textures_b.c 
+						
+SRC_M				= $(addprefix ${FOLDER_MANDA},${SRCS})
 SRC_B				= $(addprefix ${FOLDER_BONUS},${SRCS_BONUS})
 HEADERS				= $(addprefix ${FOLDER_HEADER},${HEADER_FILE})
 
-OBJS				= ${SRC:.c=.o}
+OBJS				= ${SRC_M:.c=.o}
 OBJS_B				= ${SRC_B:.c=.o}
 
 #  ██████╗     ██████╗     ███╗   ███╗    ██████╗     ██╗    ██╗
@@ -93,7 +94,7 @@ RM					= rm -rf
 MAKE_EXT			= @make -s --no-print-directory -C
 
 OBJ					= ${OBJS}
-OBJ_B				= ${OBJS}
+OBJ_B				= ${OBJS_B}
 
 UNAME_S				= $(shell uname -s)
 

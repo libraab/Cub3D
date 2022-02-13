@@ -1,4 +1,4 @@
-#include "../headers/cub3d.h"
+#include "../../headers/cub3d.h"
 
 void	get_vi_images(t_data *cub)
 {
