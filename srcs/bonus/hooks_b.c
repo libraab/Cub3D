@@ -31,12 +31,12 @@ int	mouse_move(int x, int y, t_data *cub)
 		cub->mouse_x = x;
 	if (x > cub->mouse_x + 10 || x == 1819)
 	{
-		rotate_player(KEY_ARROW_RIGHT, cub);
+		rotate_player(100, cub);
 		cub->mouse_x = x;
 	}
 	else if (x < cub->mouse_x - 10 || x == -100)
 	{
-		rotate_player(KEY_ARROW_LEFT, cub);
+		rotate_player(101, cub);
 		cub->mouse_x = x;
 	}
 	cast_ray(cub->ray, cub->player);
