@@ -81,10 +81,12 @@ void	ft_get_texture(t_data *cub, char *file)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		ft_error(7);
 	cub->tex = ft_calloc(sizeof(char *), 7);
 	if (!cub->tex)
 		return ;
+	ft_check_double_texture(cub, -1, 0);
 	stock_texture(cub, fd);
 	close (fd);
-	ft_check_double_texture(cub, -1, 0);
 }
