@@ -15,9 +15,9 @@ void	print_north_wall(t_data *cub, int wall_height, \
 	{
 		wall_ratio = (i - wall_start) / wall_height;
 		if (i > 0)
-			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north.info, \
-						(int)(ratio_x * cub->walls.north.width), \
-						wall_ratio * cub->walls.north.height), i, column);
+			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.north1.info, \
+						(int)(ratio_x * cub->walls.north1.width), \
+						wall_ratio * cub->walls.north1.height), i, column);
 		i++;
 	}
 }
@@ -37,9 +37,9 @@ void	print_south_wall(t_data *cub, int wall_height, \
 	{
 		wall_ratio = (i - wall_start) / wall_height;
 		if (i > 0)
-			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south.info, \
-						(int)(ratio_x * cub->walls.south.width), \
-						wall_ratio * cub->walls.south.height), i, column);
+			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.south1.info, \
+						(int)(ratio_x * cub->walls.south1.width), \
+						wall_ratio * cub->walls.south1.height), i, column);
 		i++;
 	}
 }
@@ -54,13 +54,27 @@ void	print_east_wall(t_data *cub, int wall_height, int column, float ratio_y)
 	wall_end = WIN_HEIGHT / 2 + wall_height / 2;
 	wall_start = WIN_HEIGHT / 2 - wall_height / 2;
 	i = wall_start;
+	if (column == 640)
+	printf("impact at: %d\n", (int)cub->ray->impact.x);
 	while (i < wall_end && i < WIN_HEIGHT)
 	{
 		wall_ratio = (i - wall_start) / wall_height;
-		if (i > 0)
-			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east.info, \
-						(int)(ratio_y * cub->walls.east.width), \
-						wall_ratio * cub->walls.east.height), i, column);
+		if (i > 0 && (int)cub->ray->impact.x < cub->map_width / 2)
+		{
+	if (column == 1240 && i == wall_start)
+			printf("printed 2\n");
+			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east2.info, \
+						(int)(ratio_y * cub->walls.east2.width), \
+						wall_ratio * cub->walls.east2.height), i, column);
+		}
+		else if (i > 0)
+		{
+	if (column == 640 && i == wall_start)
+			printf("printed 1\n");
+			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.east1.info, \
+						(int)(ratio_y * cub->walls.east1.width), \
+						wall_ratio * cub->walls.east1.height), i, column);
+		}
 		i++;
 	}
 }
@@ -79,9 +93,9 @@ void	print_west_wall(t_data *cub, int wall_height, int column, float ratio_y)
 	{
 		wall_ratio = (i - wall_start) / wall_height;
 		if (i > 0)
-			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west.info, \
-						(int)(ratio_y * cub->walls.west.width), \
-						wall_ratio * cub->walls.west.height), i, column);
+			ft_put_img2(&cub->sheet, ft_pixel_get(&cub->walls.west1.info, \
+						(int)(ratio_y * cub->walls.west1.width), \
+						wall_ratio * cub->walls.west1.height), i, column);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/13 02:43:30 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/13 05:32:08 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,14 @@ typedef struct s_map
 
 typedef struct s_walls
 {
-	t_img	east;
-	t_img	north;
-	t_img	south;
-	t_img	west;
-}			t_walls;
+	t_img	east1;
+	t_img	east2;
+	t_img	north1;
+	t_img	north2;
+	t_img	south1;
+	t_img	south2;
+	t_img	west1;
+	t_img	west2; }			t_walls;
 
 typedef struct s_data
 {
