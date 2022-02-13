@@ -97,11 +97,11 @@ void	ft_print_texture(t_data *cub, int wall_height, \
 	ratio_x = cub->ray[column].impact.x - cub->map.x;
 	ratio_y = cub->ray[column].impact.y - cub->map.y;
 	if (wall_type == north_wall)
-		print_north_wall(cub, wall_height, column, (1 - ratio_x));
+		print_north_wall(cub, wall_height, column, ratio_x);
 	if (wall_type == south_wall)
 		print_south_wall(cub, wall_height, column, ratio_x);
 	if (wall_type == west_wall)
-		print_west_wall(cub, wall_height, column, (1 - ratio_y));
+		print_west_wall(cub, wall_height, column, ratio_y);
 	if (wall_type == east_wall)
 		print_east_wall(cub, wall_height, column, ratio_y);
 }	
