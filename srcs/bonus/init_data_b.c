@@ -39,6 +39,7 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->map_width = get_map_width(cub->map.map);
 	cub->map_height = get_map_height(cub->map.map);
 	cub->player = init_player(cub->map.map);
+	cub->mouse_x = 750;
 	get_minimap_images(cub);
 	ft_draw_minimap(cub);
 	cast_ray(cub->ray, cub->player);
