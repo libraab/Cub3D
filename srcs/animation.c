@@ -2,22 +2,22 @@
 
 void	get_vi_images(t_data *cub)
 {
-	cub->vi1.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi1.xpm",
+	cub->vi1.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi/vi1.xpm",
 			&cub->vi1.width, &cub->vi1.height);
 	cub->vi1.info.addr = mlx_get_data_addr(cub->vi1.img,
 			&cub->vi1.info.bits_per_pixel, &cub->vi1.info.line_len,
 			&cub->vi1.info.endian);
-	cub->vi2.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi2.xpm",
+	cub->vi2.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi/vi2.xpm",
 			&cub->vi2.width, &cub->vi2.height);
 	cub->vi2.info.addr = mlx_get_data_addr(cub->vi2.img,
 			&cub->vi2.info.bits_per_pixel, &cub->vi2.info.line_len,
 			&cub->vi2.info.endian);
-	cub->vi3.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi3.xpm",
+	cub->vi3.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi/vi3.xpm",
 			&cub->vi3.width, &cub->vi3.height);
 	cub->vi3.info.addr = mlx_get_data_addr(cub->vi3.img,
 			&cub->vi3.info.bits_per_pixel, &cub->vi3.info.line_len,
 			&cub->vi3.info.endian);
-	cub->vi4.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi4.xpm",
+	cub->vi4.img = mlx_xpm_file_to_image(cub->mlx_ptr, "textures/vi/vi4.xpm",
 			&cub->vi4.width, &cub->vi4.height);
 	cub->vi4.info.addr = mlx_get_data_addr(cub->vi4.img,
 			&cub->vi4.info.bits_per_pixel, &cub->vi4.info.line_len,

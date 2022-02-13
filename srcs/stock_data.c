@@ -37,22 +37,22 @@ void	ft_get_map(t_data *cub, char *file)
 	close (fd);
 }
 
-void	get_wall_textures(t_data *cub, char **texture_files, t_walls *walls)
+void	get_wall_textures(t_data *cub, char **texfiles, t_walls *walls)
 {
 	int	i;
 
 	i = 0;
-	while (texture_files[i])
+	while (texfiles[i])
 	{
-	if (texture_files[i][0] == 'N')
-		north_wall_texture(cub, texture_files[i], walls);
-	else if (texture_files[i][0] == 'S')
-		south_wall_texture(cub, texture_files[i], walls);
-	else if (texture_files[i][0] == 'E')
-		east_wall_texture(cub, texture_files[i], walls);
-	else if (texture_files[i][0] == 'W')
-		west_wall_texture(cub, texture_files[i], walls);
-	i++;
+		if (texfiles[i][0] == 'N')
+			north_wall_texture(cub, texfiles[i], walls);
+		else if (texfiles[i][0] == 'S')
+			south_wall_texture(cub, texfiles[i], walls);
+		else if (texfiles[i][0] == 'E')
+			east_wall_texture(cub, texfiles[i], walls);
+		else if (texfiles[i][0] == 'W')
+			west_wall_texture(cub, texfiles[i], walls);
+		i++;
 	}
 }
 
