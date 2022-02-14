@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:25:25 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:25:26 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:39:57 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,4 @@ void	ft_print_texture(t_data *cub, int wall_height, \
 		print_west_wall(cub, wall_height, column, (1 - ratio_y));
 	if (wall_type == east_wall)
 		print_east_wall(cub, wall_height, column, ratio_y);
-}	
+}

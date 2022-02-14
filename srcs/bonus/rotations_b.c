@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:23:53 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:23:54 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:18:25 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	rotate_player(int keycode, t_data *cub)
 	float	rotation_angle_mouse;
 
 	rotation_angle_keyboard = M_PI / 20;
-	rotation_angle_mouse = M_PI / 100;
+	rotation_angle_mouse = M_PI / 30;
 	if (keycode == KEY_ARROW_LEFT)
 		cub->player.direction = rotate_vector(cub->player.direction,
 				-rotation_angle_keyboard);

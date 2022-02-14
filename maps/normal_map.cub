@@ -1,7 +1,7 @@
-NO ./tex/piltover.xpm
-SO ./tex/caitlyn_wall.xpm
-WE ./tex/wall.xpm                                  
-EA ./tex/zaun.xpm
+NO ./tex/zaun.xpm
+SO ./tex/piltover.xpm
+WE ./tex/caitlyn_wall.xpm                                  
+EA ./tex/wall.xpm
 
 F 222, 184, 135
 C 0, 191, 255

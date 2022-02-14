@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 02:35:33 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:59:45 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	t_img			img;
 	t_vector		direction;
 	t_vector		pos;
 }					t_player;
@@ -132,6 +131,7 @@ typedef struct s_data
 	t_img		frame;
 	t_img		mini_wall;
 	t_img		mini_door;
+	t_img		mini_player;
 	t_img		sheet;
 	t_img		door;
 	t_map		map;
@@ -292,6 +292,7 @@ float			get_wall_height(float distance, int ray_number);
 //============================================================================//
 //						* W A L L _ T E X T U R E S *						  //
 //============================================================================//
+void			get_image(t_data *cub, t_img *image, char *texture_name);
 void			north_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			south_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			east_wall_texture(t_data *cub, char *name, t_walls *walls);

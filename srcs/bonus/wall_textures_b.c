@@ -6,34 +6,19 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:24:14 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:24:15 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:53:31 by bleotard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/cub3d.h"
 
-void	ft_define_wall(t_data *cub, char *texture_name, t_walls *walls)
+void	get_image(t_data *cub, t_img *image, char *texture_name)
 {
-	walls->north1.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, \
-			&walls->north1.width, &walls->north1.height);
-	walls->north1.info.addr = mlx_get_data_addr(walls->north1.img, \
-			&walls->north1.info.bits_per_pixel, &walls->north1.info.line_len, \
-			&walls->north1.info.endian);
-	walls->south1.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, \
-			&walls->south1.width, &walls->south1.height);
-	walls->south1.info.addr = mlx_get_data_addr(walls->south1.img, \
-			&walls->south1.info.bits_per_pixel, &walls->south1.info.line_len, \
-			&walls->south1.info.endian);
-	walls->east1.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, \
-			&walls->east1.width, &walls->east1.height);
-	walls->east1.info.addr = mlx_get_data_addr(walls->east1.img, \
-			&walls->east1.info.bits_per_pixel, &walls->east1.info.line_len, \
-			&walls->east1.info.endian);
-	walls->west1.img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, \
-			&walls->west1.width, &walls->west1.height);
-	walls->west1.info.addr = mlx_get_data_addr(walls->west1.img, \
-			&walls->west1.info.bits_per_pixel, &walls->west1.info.line_len, \
-			&walls->west1.info.endian);
+	image->img = mlx_xpm_file_to_image(cub->mlx_ptr, texture_name, \
+			&image->width, &image->height);
+	image->info.addr = mlx_get_data_addr(image->img, \
+			&image->info.bits_per_pixel, &image->info.line_len, \
+			&image->info.endian);
 }
 
 void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
@@ -43,7 +28,7 @@ void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	char	*tmp;
 
 	texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
-	ft_define_wall(cub, texture_name, walls);
+	get_image(cub, &walls->north1, texture_name);
 	opposite_side = ft_strtrim(texture_name, ".xpm");
 	tmp = ft_strjoin(opposite_side, "2");
 	free(opposite_side);
@@ -55,7 +40,7 @@ void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	if (fd < 0)
 		walls->north2 = walls->north1;
 	else
-		ft_define_wall2(cub, walls, opposite_side);
+		get_image(cub, &walls->north2, opposite_side);
 	close(fd);
 	free(opposite_side);
 }
@@ -67,7 +52,7 @@ void	south_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	char	*tmp;
 
 	texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
-	ft_define_wall(cub, texture_name, walls);
+	get_image(cub, &walls->south1, texture_name);
 	opposite_side = ft_strtrim(texture_name, ".xpm");
 	tmp = ft_strjoin(opposite_side, "2");
 	free(opposite_side);
@@ -79,7 +64,7 @@ void	south_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	if (fd < 0)
 		walls->south2 = walls->south1;
 	else
-		ft_define_wall2(cub, walls, opposite_side);
+		get_image(cub, &walls->south2, opposite_side);
 	close(fd);
 	free(opposite_side);
 }
@@ -91,7 +76,7 @@ void	east_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	int		fd;
 
 	texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
-	ft_define_wall(cub, texture_name, walls);
+	get_image(cub, &walls->east1, texture_name);
 	opposite_side = ft_strtrim(texture_name, ".xpm");
 	tmp = ft_strjoin(opposite_side, "2");
 	free(opposite_side);
@@ -103,7 +88,7 @@ void	east_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	if (fd < 0)
 		walls->east2 = walls->east1;
 	else
-		ft_define_wall2(cub, walls, opposite_side);
+		get_image(cub, &walls->east2, opposite_side);
 	close(fd);
 	free(opposite_side);
 }
@@ -115,7 +100,7 @@ void	west_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	char	*tmp;
 
 	texture_name = ft_strtrim(ft_strdup(texture_name), "./SONWEA ");
-	ft_define_wall(cub, texture_name, walls);
+	get_image(cub, &walls->west1, texture_name);
 	opposite_side = ft_strtrim(texture_name, ".xpm");
 	tmp = ft_strjoin(opposite_side, "2");
 	free(opposite_side);
@@ -127,7 +112,7 @@ void	west_wall_texture(t_data *cub, char *texture_name, t_walls *walls)
 	if (fd < 0)
 		walls->west2 = walls->west1;
 	else
-		ft_define_wall2(cub, walls, opposite_side);
+		get_image(cub, &walls->west2, opposite_side);
 	close(fd);
 	free(opposite_side);
 }
