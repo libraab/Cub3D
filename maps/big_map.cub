@@ -1,7 +1,7 @@
-NO ./tex/wall5.xpm
-SO ./tex/wall6.xpm
-WE ./tex/wall7.xpm
-EA ./tex/wall8.xpm
+NO ./tex/north_wall.xpm
+SO ./tex/south_wall.xpm
+WE ./tex/west_wall.xpm
+EA ./tex/east_wall.xpm
 
 F 188, 143, 143
 C 176, 196, 222

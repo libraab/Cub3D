@@ -1,7 +1,7 @@
-NO ./tex/caitlyn_wall.xpm
-SO ./tex/caitlyn_wall.xpm
-WE ./tex/victor_wall.xpm
-EA ./tex/victor_wall.xpm
+NO ./tex/north_wall.xpm
+SO ./tex/south_wall.xpm
+WE ./tex/west_wall.xpm
+EA ./tex/east_wall.xpm
 
 F 255 , 100 , 0
 C 225 , 255, 255
@@ -10,7 +10,7 @@ C 225 , 255, 255
 100000000001
 100000000001
 100000000001
-10000W000001
-111111111111
+10100N000101
+100000000001
 100000000001
 111111111111

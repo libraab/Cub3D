@@ -1,7 +1,7 @@
-NO ./tex/zaun1.xpm
-SO ./tex/zaun2.xpm
-WE ./tex/zaun3.xpm
-EA ./tex/zaun1.xpm
+NO ./tex/north_wall.xpm
+SO ./tex/south_wall.xpm
+WE ./tex/west_wall.xpm
+EA ./tex/east_wall.xpm
 
 F 143, 188, 139
 C 210, 180, 140

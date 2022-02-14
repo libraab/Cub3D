@@ -1,10 +1,10 @@
-NO ./tex/wall4.xpm
-SO ./tex/wall4.xpm
-WE ./tex/wall4.xpm                                  
-EA ./tex/wall4.xpm
+NO ./tex/north_wall.xpm
+SO ./tex/south_wall.xpm
+WE ./tex/west_wall.xpm
+EA ./tex/east_wall.xpm
 
-F 222, 184, 135
-C 0, 191, 255
+F 255 , 100 , 0
+C 225 , 255, 255
 
 1111111111111111111111111111111111111111111111111
 1000000000000000000000000000000000000000000000001
