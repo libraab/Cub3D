@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:24:45 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:24:46 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:18:36 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	ft_init_data(t_data *cub, char **av)
 	cub->map_height = get_map_height(cub->map.map);
 	cub->player = init_player(cub->map.map);
 	cub->mouse_x = 750;
-	get_minimap_images(cub);
-	ft_draw_minimap(cub);
 	cast_ray(cub->ray, cub->player);
 	start_dda(cub);
 }

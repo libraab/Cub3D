@@ -6,7 +6,7 @@
 #    By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/10 17:44:09 by abouhlel          #+#    #+#              #
-#    Updated: 2022/02/13 22:11:44 by abouhlel         ###   ########.fr        #
+#    Updated: 2022/02/14 15:22:22 by abouhlel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,6 @@ SRCS				=	check_walls.c \
 						hooks.c \
 						map_utils.c \
 						memory.c \
-						mini_map.c \
-						minimap_limits.c \
 						print_texture.c \
 						raycasting.c \
 						rotations.c \

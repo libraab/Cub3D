@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:25:49 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:25:50 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:19:19 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,30 @@ void	ft_define_wall(t_data *cub, char *texture_name, t_walls *walls)
 	walls->west1.info.addr = mlx_get_data_addr(walls->west1.img, \
 			&walls->west1.info.bits_per_pixel, &walls->west1.info.line_len, \
 			&walls->west1.info.endian);
+}
+
+void	ft_define_wall2(t_data *cub, t_walls *walls, char *opposite_side)
+{
+	walls->north2.img = mlx_xpm_file_to_image(cub->mlx_ptr, opposite_side, \
+			&walls->north2.width, &walls->north2.height);
+	walls->north2.info.addr = mlx_get_data_addr(walls->north2.img, \
+			&walls->north2.info.bits_per_pixel, &walls->north2.info.line_len, \
+			&walls->north2.info.endian);
+	walls->south2.img = mlx_xpm_file_to_image(cub->mlx_ptr, opposite_side,
+			&walls->south2.width, &walls->south2.height);
+	walls->south2.info.addr = mlx_get_data_addr(walls->south2.img, \
+			&walls->south2.info.bits_per_pixel, &walls->south2.info.line_len, \
+			&walls->south2.info.endian);
+	walls->east2.img = mlx_xpm_file_to_image(cub->mlx_ptr, opposite_side, \
+			&walls->east2.width, &walls->east2.height);
+	walls->east2.info.addr = mlx_get_data_addr(walls->east2.img, \
+			&walls->east2.info.bits_per_pixel, &walls->east2.info.line_len, \
+			&walls->east2.info.endian);
+	walls->west2.img = mlx_xpm_file_to_image(cub->mlx_ptr, opposite_side, \
+			&walls->west2.width, &walls->west2.height);
+	walls->west2.info.addr = mlx_get_data_addr(walls->west2.img, \
+			&walls->west2.info.bits_per_pixel, &walls->west2.info.line_len, \
+			&walls->west2.info.endian);
 }
 
 void	north_wall_texture(t_data *cub, char *texture_name, t_walls *walls)

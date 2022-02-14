@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:24:29 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 04:24:30 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:23:13 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int	start_dda(t_data *cub)
 			draw_ceiling(cub);
 		}
 		ft_print_texture(cub, wall_height, wall_type, i);
-		if (i == WIN_WIDTH - 1)
-			ft_draw_minimap(cub);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->sheet.img, 0, 0);
 	return (0);
