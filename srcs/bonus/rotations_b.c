@@ -14,15 +14,23 @@
 
 int	rotate_player(int keycode, t_data *cub)
 {
-	float	rotation_angle;
+	float	rotation_angle_keyboard;
+	float	rotation_angle_mouse;
 
-	rotation_angle = M_PI / 20;
+	rotation_angle_keyboard = M_PI / 20;
+	rotation_angle_mouse = M_PI / 100;
 	if (keycode == KEY_ARROW_LEFT)
 		cub->player.direction = rotate_vector(cub->player.direction,
-				-rotation_angle);
+				-rotation_angle_keyboard);
 	if (keycode == KEY_ARROW_RIGHT)
 		cub->player.direction = rotate_vector(cub->player.direction,
-				rotation_angle);
+				rotation_angle_keyboard);
+	if (keycode == 100)
+		cub->player.direction = rotate_vector(cub->player.direction,
+				rotation_angle_mouse);
+	if (keycode == 101)
+		cub->player.direction = rotate_vector(cub->player.direction,
+				-rotation_angle_mouse);
 	return (0);
 }
 
