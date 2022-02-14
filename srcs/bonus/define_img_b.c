@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 04:22:53 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 16:02:40 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:18:51 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	get_minimap_images(t_data *cub)
 	get_image(cub, &cub->frame, "tex/map/yellow.xpm");
 	get_image(cub, &cub->mini_player, "tex/map/red.xpm");
 	get_image(cub, &cub->mini_door, "tex/map/pink.xpm");
+	get_image(cub, &cub->door, "tex/door.xpm");
 }
 
 void	ft_pixel_put(t_info *data, int x, int y, int color)
