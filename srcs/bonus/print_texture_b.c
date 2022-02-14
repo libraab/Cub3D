@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_texture_b.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 04:23:45 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/14 04:23:46 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/cub3d.h"
 
 void	print_north_wall(t_data *cub, int wall_height, \
@@ -136,4 +148,8 @@ void	ft_print_texture(t_data *cub, int wall_height, \
 		print_west_wall(cub, wall_height, column, (1 - ratio_y));
 	if (wall_type == east_wall)
 		print_east_wall(cub, wall_height, column, ratio_y);
+	if (wall_type == door_vert)
+		print_door_vert(cub, wall_height, column, (ratio_y));
+	if (wall_type == door_hor)
+		print_door_hor(cub, wall_height, column, (ratio_x));
 }	

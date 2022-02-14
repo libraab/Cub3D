@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 04:25:21 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/14 04:25:22 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/cub3d.h"
 
 void	ft_valid_chars(t_data *cub)
@@ -16,10 +28,7 @@ void	ft_valid_chars(t_data *cub)
 			if (cub->map.map[i][j] != ' ' && cub->map.map[i][j] != '0'
 				&& cub->map.map[i][j] != '1'
 				&& !ft_is_direction(cub->map.map[i][j]))
-				{
-					printf("normal parsing\n");
-					ft_error(3);
-				}
+				ft_error(3);
 			if (ft_is_direction(cub->map.map[i][j]))
 				count++;
 		}
@@ -96,9 +105,18 @@ void	ft_check_digits(char *str)
 {
 	char	**tab;
 	int		i;
+	int		j;
 
 	i = ft_skip_spaces(str, 1, 0);
 	tab = ft_split(&str[i], ',');
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		while (tab[i][++j])
+			if (!ft_isdigit(tab[i][j]) && tab[i][j] != ' ')
+				ft_error(8);
+	}
 	i = -1;
 	while (tab[++i])
 	{

@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves_b.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 04:23:37 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/14 04:23:38 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/cub3d.h"
 
 int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 {
-	int	coord_x;
-	int	coord_y;
+	int	x;
+	int	y;
 
-	coord_x = floor(position.x);
-	coord_y = floor(position.y);
-	if (direction.y <= 0 && coord_y > 0)
+	x = floor(position.x);
+	y = floor(position.y);
+	if (direction.y <= 0 && y > 0)
 	{
-		if ((map[coord_y - 1][coord_x] == '1' || map[coord_y - 1][coord_x] == '2')
+		if ((map[y - 1][x] == '1' || map[y - 1][x] == '2')
 				&& position.y - floorf(position.y) < PLAYER_SPEED)
 			return (north_wall);
 	}
-	else if (direction.y >= 0 && coord_y < get_map_height(map)
+	else if (direction.y >= 0 && y < get_map_height(map)
 		&& (1 - (position.y - floorf(position.y)) < PLAYER_SPEED))
 	{
-		if (map[coord_y + 1][coord_x] == '1' || map[coord_y + 1][coord_x] == '2')
+		if (map[y + 1][x] == '1' || map[y + 1][x] == '2')
 			return (south_wall);
 	}
 	return (no_wall);
@@ -24,21 +36,21 @@ int	check_horizontal_wall(t_vector position, t_vector direction, char **map)
 
 int	check_vertical_wall(t_vector position, t_vector direction, char **map)
 {
-	int	coord_x;
-	int	coord_y;
+	int	x;
+	int	y;
 
-	coord_x = floor(position.x);
-	coord_y = floor(position.y);
-	if (direction.x <= 0 && coord_x > 0)
+	x = floor(position.x);
+	y = floor(position.y);
+	if (direction.x <= 0 && x > 0)
 	{
-		if ((map[coord_y][coord_x - 1] == '1'  || map[coord_y][coord_x - 1] == '2')
+		if ((map[y][x - 1] == '1' || map[y][x - 1] == '2')
 				&& position.x - floorf(position.x) < PLAYER_SPEED)
 			return (west_wall);
 	}
-	else if (direction.x >= 0 && coord_x < (int)ft_strlen(map[coord_y])
+	else if (direction.x >= 0 && x < (int)ft_strlen(map[y])
 		&& (1 - (position.x - floorf(position.x)) < PLAYER_SPEED))
 	{
-		if (map[coord_y][coord_x + 1] == '1' || map[coord_y][coord_x + 1] == '2')
+		if (map[y][x + 1] == '1' || map[y][x + 1] == '2')
 			return (east_wall);
 	}
 	return (no_wall);

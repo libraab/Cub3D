@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/13 05:32:08 by bleotard         ###   ########.fr       */
+/*   Updated: 2022/02/14 02:35:33 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ enum
 	east_wall,
 	north_wall,
 	south_wall,
-	west_wall
+	west_wall,
+	door_vert,
+	door_hor
 };
 
 enum
@@ -111,7 +113,8 @@ typedef struct s_walls
 	t_img	south1;
 	t_img	south2;
 	t_img	west1;
-	t_img	west2; }			t_walls;
+	t_img	west2;
+}	t_walls;
 
 typedef struct s_data
 {
@@ -128,7 +131,9 @@ typedef struct s_data
 	t_img		vi4;
 	t_img		frame;
 	t_img		mini_wall;
+	t_img		mini_door;
 	t_img		sheet;
+	t_img		door;
 	t_map		map;
 	t_player	player;
 	t_ray		ray[WIN_WIDTH];
@@ -294,5 +299,11 @@ void			west_wall_texture(t_data *cub, char *name, t_walls *walls);
 void			print_vi(int i, t_data *cub);
 int				ft_animation(t_data *cub);
 void			get_vi_images(t_data *cub);
+void			ft_define_wall2(t_data *cub, t_walls *walls, \
+				char *opposite_side);
+void			print_door_hor(t_data *cub, int wall_height, int column, \
+				float ratio_x);
+void			print_door_vert(t_data *cub, int wall_height, int column, \
+				float ratio_y);
 
 #endif

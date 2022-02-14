@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda_b.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 04:22:48 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/14 04:22:49 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/cub3d.h"
 
 float	ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x)
@@ -10,14 +22,18 @@ float	ride_along_x(t_ray *ray, t_map *map, float *travelled_on_x)
 	if (ray->direction.x > 0)
 	{
 		map->x += 1;
-		if (map->map[map->y][map->x] == '1' || map->map[map->y][map->x] == '2')
+		if (map->map[map->y][map->x] == '1')
 			wall_hit = east_wall;
+		if (map->map[map->y][map->x] == '2')
+			wall_hit = door_vert;
 	}
 	else
 	{
 		map->x -= 1;
-		if (map->map[map->y][map->x] == '1' || map->map[map->y][map->x] == '2')
+		if (map->map[map->y][map->x] == '1')
 			wall_hit = west_wall;
+		if (map->map[map->y][map->x] == '2')
+			wall_hit = door_vert;
 	}
 	return (wall_hit);
 }
@@ -32,14 +48,18 @@ float	ride_along_y(t_ray *ray, t_map *map, float *travelled_on_y)
 	if (ray->direction.y > 0)
 	{
 		map->y += 1;
-		if (map->map[map->y][map->x] == '1' || map->map[map->y][map->x] == '2')
+		if (map->map[map->y][map->x] == '1')
 			wall_hit = north_wall;
+		if (map->map[map->y][map->x] == '2')
+			wall_hit = door_hor;
 	}
 	else
 	{
 		map->y -= 1;
-		if (map->map[map->y][map->x] == '1' || map->map[map->y][map->x] == '2')
+		if (map->map[map->y][map->x] == '1')
 			wall_hit = south_wall;
+		if (map->map[map->y][map->x] == '2')
+			wall_hit = door_hor;
 	}
 	return (wall_hit);
 }

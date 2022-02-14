@@ -1,10 +1,10 @@
-NO ./textures/mur1.xpm
-SO ./textures/mur2.xpm
-WE ./textures/pillar1.xpm
-EA ./textures/pillar2.xpm
+NO ./tex/zaun1.xpm
+SO ./tex/zaun2.xpm
+WE ./tex/zaun3.xpm
+EA ./tex/zaun1.xpm
 
-F 255, 100, 0
-C 64, 224, 208
+F 143, 188, 139
+C 210, 180, 140
 
 111111111111111
 100000000000001

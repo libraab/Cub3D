@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stock_data.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 04:25:35 by abouhlel          #+#    #+#             */
+/*   Updated: 2022/02/14 04:25:36 by abouhlel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/cub3d.h"
 
 void	stock_map(t_data *cub, int fd)
@@ -20,7 +32,9 @@ void	stock_map(t_data *cub, int fd)
 		cub->map.map[i++] = ft_strdup(line);
 		free (line);
 	}
-	cub->map.map[i] = NULL;
+	if (i == 0)
+		ft_error(7);
+	cub->map.map[i] = ft_calloc(sizeof(char), get_map_width(cub->map.map));
 }
 
 void	ft_get_map(t_data *cub, char *file)
@@ -34,6 +48,7 @@ void	ft_get_map(t_data *cub, char *file)
 	stock_map(cub, fd);
 	fill_blanks(cub->map.map);
 	ft_valid_chars(cub);
+	ft_valid_walls(cub);
 	close (fd);
 }
 

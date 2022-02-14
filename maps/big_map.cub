@@ -1,10 +1,10 @@
-NO ./textures/mur1.xpm
-SO ./textures/mur2.xpm
-WE ./textures/pillar1.xpm
-EA ./textures/pillar2.xpm
+NO ./tex/wall5.xpm
+SO ./tex/wall6.xpm
+WE ./tex/wall7.xpm
+EA ./tex/wall8.xpm
 
-F 154, 205, 50
-C 0, 191, 255
+F 188, 143, 143
+C 176, 196, 222
 
         1111111111111111111111111111111111111111111111111111111111111111111111111111
           10000000001100000000000000000000000001110000000000000000000000000111111101111
