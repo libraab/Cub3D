@@ -6,7 +6,7 @@
 /*   By: abouhlel <abouhlel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 18:50:28 by abouhlel          #+#    #+#             */
-/*   Updated: 2022/02/14 17:32:40 by abouhlel         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:34:56 by abouhlel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ typedef struct s_walls
 	t_img	west1;
 	t_img	west2;
 }	t_walls;
-
-
 
 typedef struct s_data
 {
