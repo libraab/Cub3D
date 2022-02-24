@@ -1,5 +1,5 @@
 # Cub3D
-My first RayCaster with the minilibX
+Our first RayCaster with the minilibX
 
 ![screenshot2](https://user-images.githubusercontent.com/81954460/155559456-8b7e9beb-8005-46b0-a437-8d0a8db9cd03.png)
 ![screenshot0](https://user-images.githubusercontent.com/81954460/155559474-d3df5bbd-6092-4292-871c-72878f3b7fa7.png)
